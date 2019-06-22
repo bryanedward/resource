@@ -1,0 +1,36 @@
+{
+  "name": "resource",
+  "version": "1.0.0",
+  "description": "first comment",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js --exec babel-node",
+    "build": "babel src --out-dir dist",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryanedward/resource.git"
+  },
+  "author": "edwardbrian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bryanedward/resource/issues"
+  },
+  "homepage": "https://github.com/bryanedward/resource#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "pg": "^7.11.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.8.11"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "nodemon": "^1.19.1"
+  }
+}
