@@ -26,7 +26,7 @@ function _main() {
             return _app["default"].listen(1000);
 
           case 2:
-            console.log('server on port 1000 ok');
+            console.log('server on port 1000');
 
           case 3:
           case "end":
