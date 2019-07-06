@@ -23,10 +23,10 @@ function _main() {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return _app["default"].listen(3000);
+            return _app["default"].listen(1000);
 
           case 2:
-            console.log('server on port 3000');
+            console.log('server on port 1000 ok');
 
           case 3:
           case "end":

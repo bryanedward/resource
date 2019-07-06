@@ -9,9 +9,9 @@ var _express = _interopRequireWildcard(require("express"));
 
 var _morgan = _interopRequireDefault(require("morgan"));
 
-var _projects = _interopRequireDefault(require("./routes/projects"));
+var _ClientRouter = _interopRequireDefault(require("./routes/ClientRouter"));
 
-var _tasks = _interopRequireDefault(require("./routes/tasks"));
+var _ProductRouter = _interopRequireDefault(require("./routes/ProductRouter"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -24,7 +24,7 @@ var app = (0, _express["default"])(); //middlewares
 app.use((0, _morgan["default"])('dev'));
 app.use((0, _express.json)()); //routers
 
-app.use('/api/project', _projects["default"]);
-app.use('/api/tasks', _tasks["default"]);
+app.use('/barther/client', _ClientRouter["default"]);
+app.use('/barther/product', _ProductRouter["default"]);
 var _default = app;
 exports["default"] = _default;
