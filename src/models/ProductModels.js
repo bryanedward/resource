@@ -1,22 +1,25 @@
 import Sequelize, { INTEGER } from 'sequelize';
 import { sequelize } from '../database/database';
 
-const Task = sequelize.define('task', {
+const Product = sequelize.define('product', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true
     },
-    name: {
+    nameproduct: {
         type: Sequelize.TEXT
     },
-    done: {
-        type: Sequelize.BOOLEAN
+    description: {
+        type: Sequelize.TEXT
     },
-    projectid: {
+    clientid: {
         type: Sequelize.INTEGER
+    },
+    urlimg: {
+        type: Sequelize.TEXT
     }
 }, {
         timestamps: false
     });
 
-export default Task;
+export default Product;

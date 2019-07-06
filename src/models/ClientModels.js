@@ -1,9 +1,9 @@
 import Sequelize from 'sequelize';
 import { sequelize } from '../database/database';
 
-import Task from './Tasks';
+import product from './ProductModels';
 
-const Project = sequelize.define('projects', {
+const Client = sequelize.define('client', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true
@@ -11,20 +11,20 @@ const Project = sequelize.define('projects', {
     name: {
         type: Sequelize.TEXT
     },
-    priority: {
+    phone: {
         type: Sequelize.INTEGER
     },
-    description: {
+    email: {
         type: Sequelize.TEXT
     },
-    deliverydate: {
-        type: Sequelize.DATE
+    city: {
+        type: Sequelize.TEXT
     }
 }, {
         timestamps: false
     });
 
-Project.hasMany(Task, { foreingKey: 'projectid', sourceKey: 'id' });
-Task.belongsTo(Project, { foreingKey: 'projectid', sourceKey: 'id' });
+Client.hasMany(product, { foreingKey: 'clientid', sourceKey: 'id' });
+product.belongsTo(Client, { foreingKey: 'clientid', sourceKey: 'id' });
 
-export default Project;
+export default Client;

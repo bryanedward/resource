@@ -3,8 +3,8 @@ import morgan from 'morgan';
 
 
 //importing routes
-import projectRoutes from './routes/projects';
-import taskRoutes from './routes/tasks';
+import cliente from './routes/ClientRouter';
+import producto from './routes/ProductRouter';
 
 //initialization
 const app = express();
@@ -15,8 +15,8 @@ app.use(json());
 
 
 //routers
-app.use('/api/project',projectRoutes);
-app.use('/api/tasks',taskRoutes);
+app.use('/barther/client',cliente);
+app.use('/barther/product',producto);
 
 
 

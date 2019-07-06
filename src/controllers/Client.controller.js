@@ -1,9 +1,10 @@
-import Project from '../models/Project';
+import Client from '../models/ClientModels';
 
 
-export async function getProjects(req, res) {
+export async function getClients(req, res) {
+    //OBTENER TODOS LOS CLIENTES
     try {
-        const projects = await Project.findAll();
+        const projects = await Client.findAll();
         res.json({
             data: projects
         });
@@ -13,21 +14,22 @@ export async function getProjects(req, res) {
 };
 
 
-export async function createProject(req, res) {
-    const { name, priority, description, deliverydate } = req.body;
+export async function createClients(req, res) {
+    //CREAR UN CLIENTE
+    const { name, phone, email, city } = req.body;
     try {
-        let newProject = await Project.create({
+        let newProject = await Client.create({
             name,
-            priority,
-            description,
-            deliverydate
+            phone,
+            email,
+            city
         }, {
-                fields: ['name', 'priority', 'description', 'deliverydate']
+                fields: ['name', 'phone', 'email', 'city']
             });
 
         if (newProject) {
             res.json({
-                message: "Project created successsfully",
+                message: "client created successsfully !!",
                 data: newProject
             });
             return
@@ -43,9 +45,10 @@ export async function createProject(req, res) {
 };
 
 
-export async function getOneProject(req, res) {
+export async function getOneClient(req, res) {
+    //OBTENER UN CLIENTE
     const { id } = req.params;
-    const project = await Project.findOne({
+    const project = await Client.findOne({
         where: {
             id
         }
@@ -54,10 +57,11 @@ export async function getOneProject(req, res) {
 };
 
 
-export async function deleteProject(req, res) {
+export async function deleteClient(req, res) {
+    //BORRAR UN CLIENTE
     try {
         const { id } = req.params;
-        const deleteRowCount = await Project.destroy({
+        const deleteRowCount = await Client.destroy({
             where: {
                 id
             }
@@ -70,12 +74,13 @@ export async function deleteProject(req, res) {
 
 
 
-export async function updateProject(req, res) {
+export async function updateClient(req, res) {
+    //ACTUALIZAR UN CLIENTE
     const { id } = req.params;
-    const { name, priority, description, deliverydate } = req.body;
+    const { name, phone, email, city } = req.body;
 
-    const projects = await Project.findAll({
-        attributes: ['id', 'name', 'priority', 'description', 'deliverydate'],
+    const projects = await Client.findAll({
+        attributes: ['id', 'name', 'phone', 'email', 'city'],
         where: {
             id
         }
@@ -85,9 +90,9 @@ export async function updateProject(req, res) {
         projects.forEach(async element => {
             await element.update({
                 name,
-                priority,
-                description,
-                deliverydate
+                phone,
+                email,
+                city
             });
         });
     }
