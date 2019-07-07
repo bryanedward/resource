@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getClients = getClients;
-exports.createClients = createClients;
+exports.updatemethod = updatemethod;
 exports.getOneClient = getOneClient;
 exports.deleteClient = deleteClient;
 exports.updateClient = updateClient;
@@ -59,71 +59,127 @@ function _getClients() {
 
 ;
 
-function createClients(_x3, _x4) {
-  return _createClients.apply(this, arguments);
+function updatemethod(_x3, _x4) {
+  return _updatemethod.apply(this, arguments);
 }
+/*
+export async function createClients(req, res) {
+    //CREAR UN CLIENTE
+    const { name, phone, email, city } = req.body;
 
-function _createClients() {
-  _createClients = _asyncToGenerator(
+    try {
+        let newProject = await Client.create({
+            name,
+            phone,
+            email,
+            city
+        }, {
+                fields: ['name', 'phone', 'email', 'city']
+            });
+
+        if (newProject) {
+            res.json({
+                message: "client created successsfully !!",
+                data: newProject
+            });
+            return
+        }
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: "Something goes wrong",
+            data: {}
+        });
+    }
+};
+*/
+
+
+function _updatemethod() {
+  _updatemethod = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(req, res) {
-    var _req$body, name, phone, email, city, newProject;
+    var email, data, _req$body, name, phone, _email, city, newProject;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            //CREAR UN CLIENTE
-            _req$body = req.body, name = _req$body.name, phone = _req$body.phone, email = _req$body.email, city = _req$body.city;
-            _context2.prev = 1;
-            _context2.next = 4;
+            //NUEVO FUNCION PARA VERIFICAR UN USUARIO Y CREAR UN CLIENTE
+            email = req.body.email;
+            _context2.next = 3;
+            return _ClientModels["default"].findOne({
+              where: {
+                email: email
+              }
+            });
+
+          case 3:
+            data = _context2.sent;
+
+            if (!(data == null)) {
+              _context2.next = 21;
+              break;
+            }
+
+            _req$body = req.body, name = _req$body.name, phone = _req$body.phone, _email = _req$body.email, city = _req$body.city;
+            _context2.prev = 6;
+            _context2.next = 9;
             return _ClientModels["default"].create({
               name: name,
               phone: phone,
-              email: email,
+              email: _email,
               city: city
             }, {
               fields: ['name', 'phone', 'email', 'city']
             });
 
-          case 4:
+          case 9:
             newProject = _context2.sent;
 
             if (!newProject) {
-              _context2.next = 8;
+              _context2.next = 13;
               break;
             }
 
             res.json({
-              message: "client created successsfully !!",
+              message: 'new account',
               data: newProject
             });
             return _context2.abrupt("return");
 
-          case 8:
-            _context2.next = 14;
+          case 13:
+            _context2.next = 19;
             break;
 
-          case 10:
-            _context2.prev = 10;
-            _context2.t0 = _context2["catch"](1);
+          case 15:
+            _context2.prev = 15;
+            _context2.t0 = _context2["catch"](6);
             console.log(_context2.t0);
             res.status(500).json({
               message: "Something goes wrong",
               data: {}
             });
 
-          case 14:
+          case 19:
+            _context2.next = 22;
+            break;
+
+          case 21:
+            res.json({
+              message: 'error account'
+            });
+
+          case 22:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[1, 10]]);
+    }, _callee2, null, [[6, 15]]);
   }));
-  return _createClients.apply(this, arguments);
+  return _updatemethod.apply(this, arguments);
 }
-
-;
 
 function getOneClient(_x5, _x6) {
   return _getOneClient.apply(this, arguments);
@@ -133,23 +189,30 @@ function _getOneClient() {
   _getOneClient = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee3(req, res) {
-    var id, project;
+    var email, project;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             //OBTENER UN CLIENTE
-            id = req.params.id;
+            email = req.params.email;
             _context3.next = 3;
             return _ClientModels["default"].findOne({
               where: {
-                id: id
+                email: email
               }
             });
 
           case 3:
             project = _context3.sent;
-            res.json(project);
+
+            if (!project == null) {
+              res.json(project);
+            } else {
+              res.json({
+                message: 'el correo no existe'
+              });
+            }
 
           case 5:
           case "end":
