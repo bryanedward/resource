@@ -96,15 +96,16 @@ export async function createClients(req, res) {
 export async function getOneClient(req, res) {
     //OBTENER UN CLIENTE
     const { email } = req.params;
+    console.log(email)
     const project = await Client.findOne({
         where: {
             email
         }
     });
-    if (!project == null) {
-        res.json(project);
+    if (project == null) {
+        res.json({ message : 'nothing'})
     } else {
-        res.json({ message: 'el correo no existe' })
+        res.json({ project})
     }
 
 };
