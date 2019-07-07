@@ -14,9 +14,56 @@ export async function getClients(req, res) {
 };
 
 
+export async function updatemethod(req, res) {
+    //NUEVO FUNCION PARA VERIFICAR UN USUARIO Y CREAR UN CLIENTE
+    const { email } = req.body;
+    
+    const data = await Client.findOne({
+        where: {
+            email
+        }
+    })
+    if (data == null) {
+        const { name, phone, email, city } = req.body;
+        try {
+            let newProject = await Client.create({
+                name,
+                phone,
+                email,
+                city
+            }, {
+                    fields: ['name', 'phone', 'email', 'city']
+                });
+
+            if (newProject) {
+                res.json({
+                    message: 'new account',
+                    data: newProject
+                })
+                return
+            }
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({
+                message: "Something goes wrong",
+                data: {}
+            });
+        }
+    } else {
+        res.json({
+            message: 'error account'
+        })
+    }
+}
+
+
+
+/*
 export async function createClients(req, res) {
     //CREAR UN CLIENTE
     const { name, phone, email, city } = req.body;
+
     try {
         let newProject = await Client.create({
             name,
@@ -43,17 +90,23 @@ export async function createClients(req, res) {
         });
     }
 };
+*/
 
 
 export async function getOneClient(req, res) {
     //OBTENER UN CLIENTE
-    const { id } = req.params;
+    const { email } = req.params;
     const project = await Client.findOne({
         where: {
-            id
+            email
         }
     });
-    res.json(project);
+    if (!project == null) {
+        res.json(project);
+    } else {
+        res.json({ message: 'el correo no existe' })
+    }
+
 };
 
 
