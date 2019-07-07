@@ -196,25 +196,28 @@ function _getOneClient() {
           case 0:
             //OBTENER UN CLIENTE
             email = req.params.email;
-            _context3.next = 3;
+            console.log(email);
+            _context3.next = 4;
             return _ClientModels["default"].findOne({
               where: {
                 email: email
               }
             });
 
-          case 3:
+          case 4:
             project = _context3.sent;
 
-            if (!project == null) {
-              res.json(project);
+            if (project == null) {
+              res.json({
+                message: 'nothing'
+              });
             } else {
               res.json({
-                message: 'el correo no existe'
+                project: project
               });
             }
 
-          case 5:
+          case 6:
           case "end":
             return _context3.stop();
         }
