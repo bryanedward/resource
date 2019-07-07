@@ -37,7 +37,7 @@ function _getClients() {
           case 3:
             projects = _context.sent;
             res.json({
-              data: projects
+              projects: projects
             });
             _context.next = 10;
             break;

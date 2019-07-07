@@ -6,7 +6,7 @@ export async function getClients(req, res) {
     try {
         const projects = await Client.findAll();
         res.json({
-            data: projects
+            projects
         });
     } catch (error) {
         console.log(error);
