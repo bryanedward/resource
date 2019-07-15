@@ -29,6 +29,9 @@ var Client = _database.sequelize.define('client', {
   },
   city: {
     type: _sequelize["default"].TEXT
+  },
+  urlimg: {
+    type: _sequelize["default"].TEXT
   }
 }, {
   timestamps: false

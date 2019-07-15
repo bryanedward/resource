@@ -19,6 +19,9 @@ const Client = sequelize.define('client', {
     },
     city: {
         type: Sequelize.TEXT
+    },
+    urlimg:{
+        type: Sequelize.TEXT
     }
 }, {
         timestamps: false

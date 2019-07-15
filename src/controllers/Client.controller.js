@@ -24,15 +24,16 @@ export async function updatemethod(req, res) {
         }
     })
     if (data == null) {
-        const { name, phone, email, city } = req.body;
+        const { name, phone, email, city , urlimg} = req.body;
         try {
             let newProject = await Client.create({
                 name,
                 phone,
                 email,
-                city
+                city,
+                urlimg
             }, {
-                    fields: ['name', 'phone', 'email', 'city']
+                    fields: ['name', 'phone', 'email', 'city', 'urlimg']
                 });
 
             if (newProject) {
