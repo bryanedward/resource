@@ -22,6 +22,9 @@ const Client = sequelize.define('client', {
     },
     urlimg:{
         type: Sequelize.TEXT
+    },
+    pass:{
+        type: Sequelize.TEXT
     }
 }, {
         timestamps: false

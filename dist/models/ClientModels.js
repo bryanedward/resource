@@ -32,6 +32,9 @@ var Client = _database.sequelize.define('client', {
   },
   urlimg: {
     type: _sequelize["default"].TEXT
+  },
+  pass: {
+    type: _sequelize["default"].TEXT
   }
 }, {
   timestamps: false

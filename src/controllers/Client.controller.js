@@ -17,23 +17,24 @@ export async function getClients(req, res) {
 export async function updatemethod(req, res) {
     //NUEVO FUNCION PARA VERIFICAR UN USUARIO Y CREAR UN CLIENTE
     const { email } = req.body;
-    
+
     const data = await Client.findOne({
         where: {
             email
         }
     })
     if (data == null) {
-        const { name, phone, email, city , urlimg} = req.body;
+        const { name, phone, email, city, urlimg, pass } = req.body;
         try {
             let newProject = await Client.create({
                 name,
                 phone,
                 email,
                 city,
-                urlimg
+                urlimg,
+                pass
             }, {
-                    fields: ['name', 'phone', 'email', 'city', 'urlimg']
+                    fields: ['name', 'phone', 'email', 'city', 'urlimg', 'pass']
                 });
 
             if (newProject) {
@@ -104,9 +105,9 @@ export async function getOneClient(req, res) {
         }
     });
     if (project == null) {
-        res.json({ message : 'nothing'})
+        res.json({ message: 'nothing' })
     } else {
-        res.json({ project})
+        res.json({ project })
     }
 
 };

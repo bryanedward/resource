@@ -100,7 +100,7 @@ function _updatemethod() {
   _updatemethod = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(req, res) {
-    var email, data, _req$body, name, phone, _email, city, urlimg, newProject;
+    var email, data, _req$body, name, phone, _email, city, urlimg, pass, newProject;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -123,7 +123,7 @@ function _updatemethod() {
               break;
             }
 
-            _req$body = req.body, name = _req$body.name, phone = _req$body.phone, _email = _req$body.email, city = _req$body.city, urlimg = _req$body.urlimg;
+            _req$body = req.body, name = _req$body.name, phone = _req$body.phone, _email = _req$body.email, city = _req$body.city, urlimg = _req$body.urlimg, pass = _req$body.pass;
             _context2.prev = 6;
             _context2.next = 9;
             return _ClientModels["default"].create({
@@ -131,9 +131,10 @@ function _updatemethod() {
               phone: phone,
               email: _email,
               city: city,
-              urlimg: urlimg
+              urlimg: urlimg,
+              pass: pass
             }, {
-              fields: ['name', 'phone', 'email', 'city', 'urlimg']
+              fields: ['name', 'phone', 'email', 'city', 'urlimg', 'pass']
             });
 
           case 9:
