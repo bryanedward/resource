@@ -1,4 +1,5 @@
 import Product from '../models/ProductModels';
+import Client from '../models/ClientModels';
 
 
 export async function createProduct(req, res) {
@@ -28,6 +29,8 @@ export async function getProducts(req, res) {
     });
     res.json({ tasks });
 }
+
+
 
 
 export async function getOneProduct(req, res) {
@@ -88,5 +91,35 @@ export async function getProductByClientid(req, res) {
         where: { clientid }
     });
     res.json(tasks);
+}
 
+
+export async function getUser(req, res) {
+    //FUNCTION USER WITH ALL THE PRODUCTS
+    const { clientid } = req.params;
+
+    const cli = await Client.findOne({
+        attributes: ['name', 'phone', 'email', 'urlimg'],
+        where: { id: clientid }
+    });
+    const produ = await Product.findAll({
+        attributes: ['nameproduct', 'description', 'urlimg'],
+        where: { clientid }
+    })
+    res.json({
+        cli,
+        produ
+    })
+}
+
+
+export async function getUserDouble(req, res) {
+    //FUNCTION USER WITH ALL THE PRODUCTS
+    const product = await Product.findAll({
+        attributes: ['clientid','nameproduct', 'description', 'urlimg']
+    }); 
+    const client = await Client.findAll({
+        attributes:['id','name', 'urlimg', 'email', 'city']
+    })
+    res.json({product, client})
 }

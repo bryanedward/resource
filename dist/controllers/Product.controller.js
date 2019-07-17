@@ -9,8 +9,12 @@ exports.getOneProduct = getOneProduct;
 exports.updateProduct = updateProduct;
 exports.deleteProduct = deleteProduct;
 exports.getProductByClientid = getProductByClientid;
+exports.getUser = getUser;
+exports.getUserDouble = getUserDouble;
 
 var _ProductModels = _interopRequireDefault(require("../models/ProductModels"));
+
+var _ClientModels = _interopRequireDefault(require("../models/ClientModels"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -254,4 +258,96 @@ function _getProductByClientid() {
     }, _callee6);
   }));
   return _getProductByClientid.apply(this, arguments);
+}
+
+function getUser(_x13, _x14) {
+  return _getUser.apply(this, arguments);
+}
+
+function _getUser() {
+  _getUser = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee7(req, res) {
+    var clientid, cli, produ;
+    return regeneratorRuntime.wrap(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            //FUNCTION USER WITH ALL THE PRODUCTS
+            clientid = req.params.clientid;
+            _context7.next = 3;
+            return _ClientModels["default"].findOne({
+              attributes: ['name', 'phone', 'email', 'urlimg'],
+              where: {
+                id: clientid
+              }
+            });
+
+          case 3:
+            cli = _context7.sent;
+            _context7.next = 6;
+            return _ProductModels["default"].findAll({
+              attributes: ['nameproduct', 'description', 'urlimg'],
+              where: {
+                clientid: clientid
+              }
+            });
+
+          case 6:
+            produ = _context7.sent;
+            res.json({
+              cli: cli,
+              produ: produ
+            });
+
+          case 8:
+          case "end":
+            return _context7.stop();
+        }
+      }
+    }, _callee7);
+  }));
+  return _getUser.apply(this, arguments);
+}
+
+function getUserDouble(_x15, _x16) {
+  return _getUserDouble.apply(this, arguments);
+}
+
+function _getUserDouble() {
+  _getUserDouble = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee8(req, res) {
+    var product, client;
+    return regeneratorRuntime.wrap(function _callee8$(_context8) {
+      while (1) {
+        switch (_context8.prev = _context8.next) {
+          case 0:
+            _context8.next = 2;
+            return _ProductModels["default"].findAll({
+              attributes: ['clientid', 'nameproduct', 'description', 'urlimg']
+            });
+
+          case 2:
+            product = _context8.sent;
+            _context8.next = 5;
+            return _ClientModels["default"].findAll({
+              attributes: ['id', 'name', 'urlimg', 'email', 'city']
+            });
+
+          case 5:
+            client = _context8.sent;
+            res.json({
+              product: product,
+              client: client
+            });
+
+          case 7:
+          case "end":
+            return _context8.stop();
+        }
+      }
+    }, _callee8);
+  }));
+  return _getUserDouble.apply(this, arguments);
 }
