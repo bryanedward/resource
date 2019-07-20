@@ -116,10 +116,25 @@ export async function getUser(req, res) {
 export async function getUserDouble(req, res) {
     //FUNCTION USER WITH ALL THE PRODUCTS
     const product = await Product.findAll({
-        attributes: ['clientid','nameproduct', 'description', 'urlimg']
-    }); 
+        attributes: ['clientid', 'nameproduct', 'description', 'urlimg']
+    });
     const client = await Client.findAll({
-        attributes:['id','name', 'urlimg', 'email', 'city']
+        attributes: ['id', 'name', 'urlimg', 'email', 'city']
     })
-    res.json({product, client})
+    res.json({ product, client })
+}
+
+
+export async function getUpdate(req, res) {
+    //NEW FUNCTION FIND USER WITH EL CLIENTID 
+    const {user} = req.params;
+    const result = await Client.findOne({
+        where:{
+            id:user
+        }
+    })
+    
+    res.json(result);
+    
+    
 }

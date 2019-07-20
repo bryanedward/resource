@@ -16,6 +16,7 @@ router.get('/:id', _Product.getOneProduct);
 router.get('/client/:clientid', _Product.getProductByClientid);
 router.get('/user/:clientid', _Product.getUser);
 router.get('/data/user', _Product.getUserDouble);
+router.get('/update/:user', _Product.getUpdate);
 router["delete"]('/:id', _Product.deleteProduct);
 router.put('/:id', _Product.updateProduct);
 var _default = router;

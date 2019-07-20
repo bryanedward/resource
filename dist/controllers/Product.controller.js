@@ -11,6 +11,7 @@ exports.deleteProduct = deleteProduct;
 exports.getProductByClientid = getProductByClientid;
 exports.getUser = getUser;
 exports.getUserDouble = getUserDouble;
+exports.getUpdate = getUpdate;
 
 var _ProductModels = _interopRequireDefault(require("../models/ProductModels"));
 
@@ -350,4 +351,40 @@ function _getUserDouble() {
     }, _callee8);
   }));
   return _getUserDouble.apply(this, arguments);
+}
+
+function getUpdate(_x17, _x18) {
+  return _getUpdate.apply(this, arguments);
+}
+
+function _getUpdate() {
+  _getUpdate = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee9(req, res) {
+    var user, result;
+    return regeneratorRuntime.wrap(function _callee9$(_context9) {
+      while (1) {
+        switch (_context9.prev = _context9.next) {
+          case 0:
+            //NEW FUNCTION FIND USER WITH EL CLIENTID 
+            user = req.params.user;
+            _context9.next = 3;
+            return _ClientModels["default"].findOne({
+              where: {
+                id: user
+              }
+            });
+
+          case 3:
+            result = _context9.sent;
+            res.json(result);
+
+          case 5:
+          case "end":
+            return _context9.stop();
+        }
+      }
+    }, _callee9);
+  }));
+  return _getUpdate.apply(this, arguments);
 }
