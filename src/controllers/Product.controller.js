@@ -106,10 +106,9 @@ export async function getUser(req, res) {
         attributes: ['nameproduct', 'description', 'urlimg'],
         where: { clientid }
     })
-    res.json({
-        cli,
+    res.json(
         produ
-    })
+    )
 }
 
 
@@ -127,14 +126,14 @@ export async function getUserDouble(req, res) {
 
 export async function getUpdate(req, res) {
     //NEW FUNCTION FIND USER WITH EL CLIENTID 
-    const {user} = req.params;
+    const { user } = req.params;
     const results = await Client.findOne({
-        where:{
-            id:user
+        where: {
+            id: user
         }
     })
-    
+
     res.json(results);
-    
-    
+
+
 }

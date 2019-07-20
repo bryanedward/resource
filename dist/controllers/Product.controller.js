@@ -296,10 +296,7 @@ function _getUser() {
 
           case 6:
             produ = _context7.sent;
-            res.json({
-              cli: cli,
-              produ: produ
-            });
+            res.json(produ);
 
           case 8:
           case "end":
