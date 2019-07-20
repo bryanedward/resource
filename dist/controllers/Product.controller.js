@@ -361,7 +361,7 @@ function _getUpdate() {
   _getUpdate = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee9(req, res) {
-    var user, result;
+    var user, results;
     return regeneratorRuntime.wrap(function _callee9$(_context9) {
       while (1) {
         switch (_context9.prev = _context9.next) {
@@ -376,8 +376,8 @@ function _getUpdate() {
             });
 
           case 3:
-            result = _context9.sent;
-            res.json(result);
+            results = _context9.sent;
+            res.json(results);
 
           case 5:
           case "end":

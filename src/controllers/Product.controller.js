@@ -128,13 +128,13 @@ export async function getUserDouble(req, res) {
 export async function getUpdate(req, res) {
     //NEW FUNCTION FIND USER WITH EL CLIENTID 
     const {user} = req.params;
-    const result = await Client.findOne({
+    const results = await Client.findOne({
         where:{
             id:user
         }
     })
     
-    res.json(result);
+    res.json(results);
     
     
 }
