@@ -249,7 +249,9 @@ function _getProductByClientid() {
 
           case 3:
             tasks = _context6.sent;
-            res.json(tasks);
+            res.json({
+              product: tasks
+            });
 
           case 5:
           case "end":

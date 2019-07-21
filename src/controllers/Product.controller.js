@@ -90,7 +90,7 @@ export async function getProductByClientid(req, res) {
         attributes: ['id', 'clientid', 'nameproduct', 'description', 'urlimg'],
         where: { clientid }
     });
-    res.json(tasks);
+    res.json({product:tasks});
 }
 
 
@@ -107,7 +107,7 @@ export async function getUser(req, res) {
         where: { clientid }
     })
     res.json(
-        produ
+         produ 
     )
 }
 
