@@ -1,10 +1,11 @@
 "use strict";
 
-var _app = _interopRequireDefault(require("./app"));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.authToken = authToken;
 
-var _dotenv = _interopRequireDefault(require("dotenv"));
-
-require("@babel/polyfill");
+var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -12,34 +13,43 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-_dotenv["default"].config();
-
-function main() {
-  return _main.apply(this, arguments);
+function authToken(_x, _x2, _x3) {
+  return _authToken.apply(this, arguments);
 }
 
-function _main() {
-  _main = _asyncToGenerator(
+function _authToken() {
+  _authToken = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee() {
+  regeneratorRuntime.mark(function _callee(req, res, next) {
+    var token, verified;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
-            return _app["default"].listen(1000);
+            token = req.header('auto-token');
 
-          case 2:
-            console.log('server on port 1000');
+            if (token) {
+              _context.next = 3;
+              break;
+            }
+
+            return _context.abrupt("return", res.json('access denied'));
 
           case 3:
+            try {
+              verified = _jsonwebtoken["default"].verify(token, process.env.SECRET_TOKEN);
+              req.user = verified;
+              next();
+            } catch (error) {
+              res.json('error');
+            }
+
+          case 4:
           case "end":
             return _context.stop();
         }
       }
     }, _callee);
   }));
-  return _main.apply(this, arguments);
+  return _authToken.apply(this, arguments);
 }
-
-main();

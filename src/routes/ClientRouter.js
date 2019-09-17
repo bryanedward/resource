@@ -1,18 +1,16 @@
 import { Router } from 'express';
 const router = Router();
 
-import {  updatemethod, getClients, getOneClient, deleteClient, updateClient } from '../controllers/Client.controller';
+import {  updatemethod, getClients, getOneClient, deleteClient, updateClient, login } from '../controllers/Client.controller';
 
 
-//router.post('/', createClients);
 
 router.post('/client',updatemethod);
 
 router.get('/', getClients);
-
-
-
 router.get('/:email', getOneClient);
+
+router.get('/email/:login', login);
 
 
 

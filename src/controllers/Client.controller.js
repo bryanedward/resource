@@ -1,4 +1,6 @@
 import Client from '../models/ClientModels';
+import bcrypt from 'bcryptjs';
+import jwtoken from 'jsonwebtoken';
 
 
 export async function getClients(req, res) {
@@ -24,7 +26,11 @@ export async function updatemethod(req, res) {
         }
     })
     if (data == null) {
-        const { name, phone, email, city, urlimg, pass } = req.body;
+        const {name, phone, email, city, urlimg} = req.body;
+        //usar el bcrpyt para encriptar la password
+        const salt = await bcrypt.genSalt(10);
+        const bcryptPassword = await bcrypt.hash(req.body.pass, salt);
+        
         try {
             let newProject = await Client.create({
                 name,
@@ -32,7 +38,7 @@ export async function updatemethod(req, res) {
                 email,
                 city,
                 urlimg,
-                pass
+                pass : bcryptPassword
             }, {
                     fields: ['name', 'phone', 'email', 'city', 'urlimg', 'pass']
                 });
@@ -48,8 +54,7 @@ export async function updatemethod(req, res) {
         } catch (error) {
             console.log(error)
             res.status(500).json({
-                message: "Something goes wrong",
-                data: {}
+                message: "Something goes wrong"
             });
         }
     } else {
@@ -60,49 +65,13 @@ export async function updatemethod(req, res) {
 }
 
 
-
-/*
-export async function createClients(req, res) {
-    //CREAR UN CLIENTE
-    const { name, phone, email, city } = req.body;
-
-    try {
-        let newProject = await Client.create({
-            name,
-            phone,
-            email,
-            city
-        }, {
-                fields: ['name', 'phone', 'email', 'city']
-            });
-
-        if (newProject) {
-            res.json({
-                message: "client created successsfully !!",
-                data: newProject
-            });
-            return
-        }
-
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            message: "Something goes wrong",
-            data: {}
-        });
-    }
-};
-*/
-
-
 export async function getOneClient(req, res) {
     //OBTENER UN CLIENTE
-    const { email } = req.params;
-    console.log(email)
+    const email = req.body.email;
     const project = await Client.findOne({
-        where: {
-            email
-        }
+         where: {
+             email
+         },
     });
     if (project == null) {
         res.json({ message: 'nothing' })
@@ -110,11 +79,29 @@ export async function getOneClient(req, res) {
         res.json({ project })
     }
 
-};
+}
+
+
+export async function login (req, res){
+    //login of user and the password
+    const data = await Client.findOne({
+        where:{
+            email : req.body.email
+        },
+    });
+    if(!data) res.json('email not exits')
+    //use the method compare for get the pass without encrypt
+    const pass = await bcrypt.compare(req.body.pass, data.pass);
+    if(!pass) res.json('password is incorrect')
+
+    //create assign token 
+    const token = jwtoken.sign({id: data.id}, process.env.SECRET_TOKEN);
+    res.header('auto-token', token).send(token);
+}
 
 
 export async function deleteClient(req, res) {
-    //BORRAR UN CLIENTE
+    //delete the  client
     try {
         const { id } = req.params;
         const deleteRowCount = await Client.destroy({
@@ -152,7 +139,6 @@ export async function updateClient(req, res) {
             });
         });
     }
-
     return res.json({
         message: 'Project updated succesfully',
         data: projects

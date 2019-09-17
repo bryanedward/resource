@@ -6,8 +6,10 @@ import morgan from 'morgan';
 import cliente from './routes/ClientRouter';
 import producto from './routes/ProductRouter';
 
+
 //initialization
 const app = express();
+
 
 //middlewares
 app.use(morgan('dev'));

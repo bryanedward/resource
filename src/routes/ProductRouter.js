@@ -1,13 +1,16 @@
 import { Router } from 'express';
 const router = Router();
 
+
+import {authToken} from '../controllers/VerifyTokenController';
 import { createProduct, getProducts, 
     deleteProduct, updateProduct, getOneProduct , 
-    getProductByClientid , getUser, getUserDouble, getUpdate} from '../controllers/Product.controller';
+    getProductByClientid , getUser, getUserDouble, getUpdate } from '../controllers/Product.controller';
 
 router.post('/', createProduct);
 
-router.get('/', getProducts);
+router.get('/', authToken ,getProducts);
+
 
 router.get('/:id', getOneProduct);
 

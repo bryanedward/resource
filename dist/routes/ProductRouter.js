@@ -7,11 +7,13 @@ exports["default"] = void 0;
 
 var _express = require("express");
 
+var _VerifyTokenController = require("../controllers/VerifyTokenController");
+
 var _Product = require("../controllers/Product.controller");
 
 var router = (0, _express.Router)();
 router.post('/', _Product.createProduct);
-router.get('/', _Product.getProducts);
+router.get('/', _VerifyTokenController.authToken, _Product.getProducts);
 router.get('/:id', _Product.getOneProduct);
 router.get('/client/:clientid', _Product.getProductByClientid);
 router.get('/user/:clientid', _Product.getUser);
