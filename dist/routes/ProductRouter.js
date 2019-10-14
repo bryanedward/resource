@@ -14,6 +14,7 @@ var _Product = require("../controllers/Product.controller");
 var router = (0, _express.Router)();
 router.post('/', _Product.createProduct);
 router.get('/', _VerifyTokenController.authToken, _Product.getProducts);
+router.get('/token', _VerifyTokenController.authToken, _Product.newToken);
 router.get('/:id', _Product.getOneProduct);
 router.get('/client/:clientid', _Product.getProductByClientid);
 router.get('/user/:clientid', _Product.getUser);

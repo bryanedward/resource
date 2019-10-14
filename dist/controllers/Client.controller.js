@@ -4,9 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getClients = getClients;
-exports.updatemethod = updatemethod;
+exports.createClient = createClient;
 exports.getOneClient = getOneClient;
 exports.login = login;
+exports.authToken = authToken;
 exports.deleteClient = deleteClient;
 exports.updateClient = updateClient;
 
@@ -64,15 +65,15 @@ function _getClients() {
 
 ;
 
-function updatemethod(_x3, _x4) {
-  return _updatemethod.apply(this, arguments);
+function createClient(_x3, _x4) {
+  return _createClient.apply(this, arguments);
 }
 
-function _updatemethod() {
-  _updatemethod = _asyncToGenerator(
+function _createClient() {
+  _createClient = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(req, res) {
-    var email, data, _req$body, name, phone, _email, city, urlimg, salt, bcryptPassword, newProject;
+    var email, data, _req$body, name, phone, _email, city, urlimg, photo, salt, bcryptPassword, newProject;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -95,7 +96,7 @@ function _updatemethod() {
               break;
             }
 
-            _req$body = req.body, name = _req$body.name, phone = _req$body.phone, _email = _req$body.email, city = _req$body.city, urlimg = _req$body.urlimg; //usar el bcrpyt para encriptar la password
+            _req$body = req.body, name = _req$body.name, phone = _req$body.phone, _email = _req$body.email, city = _req$body.city, urlimg = _req$body.urlimg, photo = _req$body.photo; //usar el bcrpyt para encriptar la password
 
             _context2.next = 8;
             return _bcryptjs["default"].genSalt(10);
@@ -152,7 +153,7 @@ function _updatemethod() {
 
           case 27:
             res.json({
-              message: 'error account'
+              email: email
             });
 
           case 28:
@@ -162,7 +163,7 @@ function _updatemethod() {
       }
     }, _callee2, null, [[12, 21]]);
   }));
-  return _updatemethod.apply(this, arguments);
+  return _createClient.apply(this, arguments);
 }
 
 function getOneClient(_x5, _x6) {
@@ -239,7 +240,7 @@ function _login() {
 
           case 6:
             pass = _context4.sent;
-            if (!pass) res.json('password is incorrect'); //create assign token 
+            if (!pass) res.json('password is incorrect'); //create assign token
 
             token = _jsonwebtoken["default"].sign({
               id: data.id
@@ -256,22 +257,89 @@ function _login() {
   return _login.apply(this, arguments);
 }
 
-function deleteClient(_x9, _x10) {
+function authToken(_x9, _x10) {
+  return _authToken.apply(this, arguments);
+}
+
+function _authToken() {
+  _authToken = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee6(req, res) {
+    var phone, updateData;
+    return regeneratorRuntime.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            //update autotoken
+            phone = req.body.phone;
+            _context6.next = 3;
+            return _ClientModels["default"].findAll({
+              where: {
+                email: req.body.email
+              }
+            });
+
+          case 3:
+            updateData = _context6.sent;
+
+            if (updateData.length > 0) {
+              updateData.forEach(
+              /*#__PURE__*/
+              function () {
+                var _ref = _asyncToGenerator(
+                /*#__PURE__*/
+                regeneratorRuntime.mark(function _callee5(element) {
+                  return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                    while (1) {
+                      switch (_context5.prev = _context5.next) {
+                        case 0:
+                          _context5.next = 2;
+                          return element.update({
+                            phone: phone
+                          });
+
+                        case 2:
+                        case "end":
+                          return _context5.stop();
+                      }
+                    }
+                  }, _callee5);
+                }));
+
+                return function (_x15) {
+                  return _ref.apply(this, arguments);
+                };
+              }());
+            }
+
+            res.json(updateData);
+
+          case 6:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6);
+  }));
+  return _authToken.apply(this, arguments);
+}
+
+function deleteClient(_x11, _x12) {
   return _deleteClient.apply(this, arguments);
 }
 
 function _deleteClient() {
   _deleteClient = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee5(req, res) {
+  regeneratorRuntime.mark(function _callee7(req, res) {
     var id, deleteRowCount;
-    return regeneratorRuntime.wrap(function _callee5$(_context5) {
+    return regeneratorRuntime.wrap(function _callee7$(_context7) {
       while (1) {
-        switch (_context5.prev = _context5.next) {
+        switch (_context7.prev = _context7.next) {
           case 0:
-            _context5.prev = 0;
+            _context7.prev = 0;
             id = req.params.id;
-            _context5.next = 4;
+            _context7.next = 4;
             return _ClientModels["default"].destroy({
               where: {
                 id: id
@@ -279,46 +347,46 @@ function _deleteClient() {
             });
 
           case 4:
-            deleteRowCount = _context5.sent;
+            deleteRowCount = _context7.sent;
             res.json(deleteRowCount);
-            _context5.next = 11;
+            _context7.next = 11;
             break;
 
           case 8:
-            _context5.prev = 8;
-            _context5.t0 = _context5["catch"](0);
-            console.log(_context5.t0);
+            _context7.prev = 8;
+            _context7.t0 = _context7["catch"](0);
+            console.log(_context7.t0);
 
           case 11:
           case "end":
-            return _context5.stop();
+            return _context7.stop();
         }
       }
-    }, _callee5, null, [[0, 8]]);
+    }, _callee7, null, [[0, 8]]);
   }));
   return _deleteClient.apply(this, arguments);
 }
 
 ;
 
-function updateClient(_x11, _x12) {
+function updateClient(_x13, _x14) {
   return _updateClient.apply(this, arguments);
 }
 
 function _updateClient() {
   _updateClient = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee7(req, res) {
+  regeneratorRuntime.mark(function _callee9(req, res) {
     var id, _req$body2, name, phone, email, city, projects;
 
-    return regeneratorRuntime.wrap(function _callee7$(_context7) {
+    return regeneratorRuntime.wrap(function _callee9$(_context9) {
       while (1) {
-        switch (_context7.prev = _context7.next) {
+        switch (_context9.prev = _context9.next) {
           case 0:
             //ACTUALIZAR UN CLIENTE
             id = req.params.id;
             _req$body2 = req.body, name = _req$body2.name, phone = _req$body2.phone, email = _req$body2.email, city = _req$body2.city;
-            _context7.next = 4;
+            _context9.next = 4;
             return _ClientModels["default"].findAll({
               attributes: ['id', 'name', 'phone', 'email', 'city'],
               where: {
@@ -327,20 +395,20 @@ function _updateClient() {
             });
 
           case 4:
-            projects = _context7.sent;
+            projects = _context9.sent;
 
             if (projects.length > 0) {
               projects.forEach(
               /*#__PURE__*/
               function () {
-                var _ref = _asyncToGenerator(
+                var _ref2 = _asyncToGenerator(
                 /*#__PURE__*/
-                regeneratorRuntime.mark(function _callee6(element) {
-                  return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                regeneratorRuntime.mark(function _callee8(element) {
+                  return regeneratorRuntime.wrap(function _callee8$(_context8) {
                     while (1) {
-                      switch (_context6.prev = _context6.next) {
+                      switch (_context8.prev = _context8.next) {
                         case 0:
-                          _context6.next = 2;
+                          _context8.next = 2;
                           return element.update({
                             name: name,
                             phone: phone,
@@ -350,29 +418,29 @@ function _updateClient() {
 
                         case 2:
                         case "end":
-                          return _context6.stop();
+                          return _context8.stop();
                       }
                     }
-                  }, _callee6);
+                  }, _callee8);
                 }));
 
-                return function (_x13) {
-                  return _ref.apply(this, arguments);
+                return function (_x16) {
+                  return _ref2.apply(this, arguments);
                 };
               }());
             }
 
-            return _context7.abrupt("return", res.json({
+            return _context9.abrupt("return", res.json({
               message: 'Project updated succesfully',
               data: projects
             }));
 
           case 7:
           case "end":
-            return _context7.stop();
+            return _context9.stop();
         }
       }
-    }, _callee7);
+    }, _callee9);
   }));
   return _updateClient.apply(this, arguments);
 }

@@ -24,7 +24,7 @@ var app = (0, _express["default"])(); //middlewares
 app.use((0, _morgan["default"])('dev'));
 app.use((0, _express.json)()); //routers
 
-app.use('/barther/client', _ClientRouter["default"]);
-app.use('/barther/product', _ProductRouter["default"]);
+app.use('/dev/client', _ClientRouter["default"]);
+app.use('/dev/product', _ProductRouter["default"]);
 var _default = app;
 exports["default"] = _default;
