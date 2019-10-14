@@ -2,6 +2,10 @@ import Product from '../models/ProductModels';
 import Client from '../models/ClientModels';
 
 
+export async function newToken (req, res){
+    res.send(req.user)
+};
+
 export async function createProduct(req, res) {
     //CREAR UN PRODUCTO
     const { nameproduct, description, clientid, urlimg } = req.body;
@@ -94,6 +98,7 @@ export async function getProductByClientid(req, res) {
 }
 
 
+
 export async function getUser(req, res) {
     //FUNCTION USER WITH ALL THE PRODUCTS
     const { clientid } = req.params;
@@ -107,7 +112,7 @@ export async function getUser(req, res) {
         where: { clientid }
     })
     res.json(
-         produ 
+         produ
     )
 }
 
@@ -125,7 +130,7 @@ export async function getUserDouble(req, res) {
 
 
 export async function getUpdate(req, res) {
-    //NEW FUNCTION FIND USER WITH EL CLIENTID 
+    //NEW FUNCTION FIND USER WITH EL CLIENTID
     const { user } = req.params;
     const results = await Client.findOne({
         where: {

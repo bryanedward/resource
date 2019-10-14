@@ -17,8 +17,8 @@ app.use(json());
 
 
 //routers
-app.use('/barther/client',cliente);
-app.use('/barther/product',producto);
+app.use('/dev/client',cliente);
+app.use('/dev/product',producto);
 
 
 

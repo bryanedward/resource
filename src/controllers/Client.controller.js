@@ -16,8 +16,9 @@ export async function getClients(req, res) {
 };
 
 
-export async function updatemethod(req, res) {
+export async function createClient(req, res) {
     //NUEVO FUNCION PARA VERIFICAR UN USUARIO Y CREAR UN CLIENTE
+
     const { email } = req.body;
 
     const data = await Client.findOne({
@@ -26,11 +27,13 @@ export async function updatemethod(req, res) {
         }
     })
     if (data == null) {
-        const {name, phone, email, city, urlimg} = req.body;
+        const {name, phone, email, city, urlimg, photo} = req.body;
         //usar el bcrpyt para encriptar la password
         const salt = await bcrypt.genSalt(10);
         const bcryptPassword = await bcrypt.hash(req.body.pass, salt);
-        
+        //
+        // console.log(photo);
+
         try {
             let newProject = await Client.create({
                 name,
@@ -59,10 +62,13 @@ export async function updatemethod(req, res) {
         }
     } else {
         res.json({
-            message: 'error account'
+          email
         })
     }
+
+
 }
+
 
 
 export async function getOneClient(req, res) {
@@ -94,10 +100,35 @@ export async function login (req, res){
     const pass = await bcrypt.compare(req.body.pass, data.pass);
     if(!pass) res.json('password is incorrect')
 
-    //create assign token 
+    //create assign token
     const token = jwtoken.sign({id: data.id}, process.env.SECRET_TOKEN);
     res.header('auto-token', token).send(token);
 }
+
+
+
+export async function authToken (req, res){
+    //update autotoken
+    const phone = req.body.phone;
+    const updateData = await Client.findAll({
+        where:{
+            email: req.body.email
+        }
+    });
+    if(updateData.length > 0){
+        updateData.forEach(async element => {
+            await element.update({
+                phone: phone
+
+            });
+        });
+    }
+    res.json(updateData)
+}
+
+
+
+
 
 
 export async function deleteClient(req, res) {
@@ -145,4 +176,3 @@ export async function updateClient(req, res) {
     });
 
 };
-

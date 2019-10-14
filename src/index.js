@@ -5,8 +5,8 @@ import '@babel/polyfill';
 dotenv.config();
 
 async function main(){
-    await app.listen(1000);
-    console.log('server on port 1000');
+    await app.listen(2000);
+    console.log('server on port 2000');
 }
 
 
