@@ -14,11 +14,12 @@ var _Client = require("../controllers/Client.controller");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var multipartMiddleware = (0, _connectMultiparty["default"])({
-  uploadDir: './photos'
+  uploadDir: './src/photos'
 });
 var router = (0, _express.Router)();
-router.post('/data', _Client.createClient);
+router.post('/create', multipartMiddleware, _Client.createClient);
 router.get('/', _Client.getClients);
+router.get('/image', _Client.getImage);
 router.get('/:email', _Client.getOneClient);
 router.get('/email/login', _Client.login);
 router["delete"]('/:id', _Client.deleteClient);
