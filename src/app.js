@@ -1,6 +1,6 @@
 import express, {json} from 'express';
 import morgan from 'morgan';
-
+import fs from 'fs';
 
 //importing routes
 import cliente from './routes/ClientRouter';
@@ -17,8 +17,9 @@ app.use(json());
 
 
 //routers
-app.use('/dev/client',cliente);
-app.use('/dev/product',producto);
+app.use('/dev/user',cliente);
+app.use('/dev/publications',producto);
+
 
 
 
