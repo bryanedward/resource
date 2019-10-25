@@ -1,4 +1,4 @@
-import Client from '../models/ClientModels';
+import User from '../models/UserModels';
 import bcrypt from 'bcryptjs';
 import jwtoken from 'jsonwebtoken';
 import fs from 'fs';
@@ -12,12 +12,12 @@ export async function getImage(req, res){
 }
 
 
-export async function getClients(req, res) {
-    //OBTENER TODOS LOS CLIENTES
+export async function getUsers(req, res) {
+    //OBTENER TODOS LOS UserES
     try {
-        const projects = await Client.findAll();
+        const users = await User.findAll();
         res.json({
-            projects
+            users
         });
     } catch (error) {
         console.log(error);
@@ -25,21 +25,17 @@ export async function getClients(req, res) {
 };
 
 
-export async function createClient(req, res) {
-    //NUEVO FUNCION PARA VERIFICAR UN USUARIO Y CREAR UN CLIENTE
-
+export async function createUser(req, res) {
+    //NUEVO FUNCION PARA VERIFICAR UN USUARIO Y CREAR UN UserE
 
     const { email } = req.body;
-
-
-
-    const data = await Client.findOne({
+    const data = await User.findOne({
         where: {
             email
         }
     })
     if (data == null) {
-        const {name, phone, email, city, urlimg} = req.body;
+        const {nameUser, emailUser, passUser} = req.body;
 
         //usar el bcrpyt para encriptar la password
         const salt = await bcrypt.genSalt(10);
@@ -54,7 +50,7 @@ export async function createClient(req, res) {
 
         if(extName == 'png' || extName == 'jpg' || extName == 'jpeg'){
           try {
-              let newProject = await Client.create({
+              let newProject = await User.create({
                   name,
                   phone,
                   email,
@@ -94,10 +90,10 @@ export async function createClient(req, res) {
 }
 
 
-export async function getOneClient(req, res) {
-    //OBTENER UN CLIENTE
+export async function getOneUser(req, res) {
+    //OBTENER UN UserE
     const email = req.body.email;
-    const project = await Client.findOne({
+    const project = await User.findOne({
          where: {
              email
          },
@@ -113,7 +109,7 @@ export async function getOneClient(req, res) {
 
 export async function login (req, res){
     //login of user and the password
-    const data = await Client.findOne({
+    const data = await User.findOne({
         where:{
             email : req.body.email
         },
@@ -132,7 +128,7 @@ export async function login (req, res){
 export async function authToken (req, res){
     //update autotoken
     const phone = req.body.phone;
-    const updateData = await Client.findAll({
+    const updateData = await User.findAll({
         where:{
             email: req.body.email
         }
@@ -149,11 +145,11 @@ export async function authToken (req, res){
 }
 
 
-export async function deleteClient(req, res) {
-    //delete the  client
+export async function deleteUser(req, res) {
+    //delete the  User
     try {
         const { id } = req.params;
-        const deleteRowCount = await Client.destroy({
+        const deleteRowCount = await User.destroy({
             where: {
                 id
             }
@@ -165,12 +161,12 @@ export async function deleteClient(req, res) {
 };
 
 
-export async function updateClient(req, res) {
-    //ACTUALIZAR UN CLIENTE
+export async function updateUser(req, res) {
+    //ACTUALIZAR UN UserE
     const { id } = req.params;
     const { name, phone, email, city } = req.body;
 
-    const projects = await Client.findAll({
+    const projects = await User.findAll({
         attributes: ['id', 'name', 'phone', 'email', 'city'],
         where: {
             id

@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 
 export const sequelize = new Sequelize(
-    'barther',
+    'devCode',
     'postgres',
     'ryanescor96',
     {
@@ -16,4 +16,3 @@ export const sequelize = new Sequelize(
         logging: false
     }
 )
-

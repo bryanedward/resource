@@ -3,8 +3,8 @@ import morgan from 'morgan';
 import fs from 'fs';
 
 //importing routes
-import cliente from './routes/ClientRouter';
-import producto from './routes/ProductRouter';
+import user from './routes/UserRouter';
+import publication from './routes/PublicationRouter';
 
 
 //initialization
@@ -17,8 +17,8 @@ app.use(json());
 
 
 //routers
-app.use('/dev/user',cliente);
-app.use('/dev/publications',producto);
+app.use('/dev/user',user);
+app.use('/dev/publications',publication);
 
 
 

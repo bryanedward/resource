@@ -1,25 +1,22 @@
 import Sequelize, { INTEGER } from 'sequelize';
 import { sequelize } from '../database/database';
 
-const Product = sequelize.define('product', {
+const Publication = sequelize.define('product', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true
     },
-    nameproduct: {
+    namePublication: {
         type: Sequelize.TEXT
     },
-    description: {
+    descripPublication: {
         type: Sequelize.TEXT
     },
-    clientid: {
+    userId: {
         type: Sequelize.INTEGER
-    },
-    urlimg: {
-        type: Sequelize.TEXT
     }
 }, {
         timestamps: false
     });
 
-export default Product;
+export default Publication;
