@@ -4,7 +4,7 @@ import { sequelize } from '../database/database';
 import publication from './PublicationModels';
 
 const User = sequelize.define('users', {
-    id: {
+    idUser: {
         type: Sequelize.INTEGER,
         primaryKey: true
     },
@@ -21,7 +21,9 @@ const User = sequelize.define('users', {
         timestamps: false
     });
 
-User.hasMany(publication, { foreingKey: 'clientid', sourceKey: 'id' });
-publication.belongsTo(User, { foreingKey: 'clientid', sourceKey: 'id' });
+User.hasMany(publication, { foreingKey: 'userId', sourceKey: 'idUser' });
+// TODO: el foreingKey hace relacion con la llave foranea del modelo publicacion
+// TODO: y ek sourceKey hace referencia al id de la clase modelo idUser
+publication.belongsTo(User, { foreingKey: 'userId', sourceKey: 'idUser' });
 
 export default User;
