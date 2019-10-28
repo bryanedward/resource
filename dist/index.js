@@ -4,6 +4,8 @@ var _app = _interopRequireDefault(require("./app"));
 
 var _dotenv = _interopRequireDefault(require("dotenv"));
 
+var _config = _interopRequireDefault(require("./config"));
+
 require("@babel/polyfill");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -27,10 +29,10 @@ function _main() {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return _app["default"].listen(1000);
+            return _app["default"].listen(_config["default"].port);
 
           case 2:
-            console.log('server on port 1000');
+            console.log('server online');
 
           case 3:
           case "end":
