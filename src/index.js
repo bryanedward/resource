@@ -7,7 +7,7 @@ dotenv.config();
 
 async function main(){
     await app.listen(config.port);
-    console.log('server on port 4000');
+    console.log('server online');
 }
 
 
