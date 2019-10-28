@@ -18,7 +18,7 @@ router.get('/image', getImage);
 
 router.get('/:email', getOneUser);
 
-router.get('/email/login', login);
+router.post('/email/emailUser', login);
 
 router.delete('/:id', deleteUser);
 

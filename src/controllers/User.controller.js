@@ -13,7 +13,7 @@ export async function getImage(req, res){
 
 
 export async function getUsers(req, res) {
-    //OBTENER TODOS LOS UserES
+    // TODO: obtener todos los usuarios
     try {
         const users = await User.findAll();
         res.json({
@@ -26,103 +26,101 @@ export async function getUsers(req, res) {
 
 
 export async function createUser(req, res) {
-    //NUEVO FUNCION PARA VERIFICAR UN USUARIO Y CREAR UN UserE
-
-    const { email } = req.body;
+  // TODO: crear un nuevo usuario verificando si el correo existe
+    const { emailUser } = req.body;
     const data = await User.findOne({
         where: {
-            email
+            emailuser: emailUser
         }
-    })
+    });
     if (data == null) {
-        const {nameUser, emailUser, passUser} = req.body;
-
+        const {nameUser, emailUser} = req.body;
         //usar el bcrpyt para encriptar la password
         const salt = await bcrypt.genSalt(10);
-        const bcryptPassword = await bcrypt.hash(req.body.pass, salt);
-
+        const bcryptPassword = await bcrypt.hash(req.body.passUser, salt);
         // TODO: verificar si es una foto
         const urlPhoto = req.files.photo.path;
         const imgSplit = urlPhoto.split('\\');
         const fileName = imgSplit[2];
+        // TODO: fileName es la ruta donde se guarda la foto
         const extImg = fileName.split('\.');
         const extName = extImg[1];
-
         if(extName == 'png' || extName == 'jpg' || extName == 'jpeg'){
           try {
-              let newProject = await User.create({
-                  name,
-                  phone,
-                  email,
-                  city,
-                  urlimg : fileName,
-                  pass : bcryptPassword
-              }, {
-                      fields: ['name', 'phone', 'email', 'city', 'urlimg', 'pass']
-                  });
+              const newUser = await User.create({
+                  nameuser : nameUser,
+                  emailuser : emailUser,
+                  passuser : bcryptPassword
+              },{
+                fields: ['nameuser','emailuser','passuser']
+              });
 
-              if (newProject) {
-                  res.json({
-                      message: 'new account',
-                      data: newProject
-                  })
-                  return
+              if(newUser){
+                res.json({
+                  newUser
+                });
               }
-
           } catch (error) {
               res.status(500).json({
-                  message: "Something goes wrong"
+                  message: "no se pudo crear el usuario error 500"
               });
           }
-        }else {
-
         }
-
-
-
     } else {
         res.json({
-          message: 'the email exists'
+          message: 'el correo existe'
         })
     }
-
-
 }
 
 
 export async function getOneUser(req, res) {
-    //OBTENER UN UserE
-    const email = req.body.email;
-    const project = await User.findOne({
+    // TODO: buscar el usuario con el email
+    const {email} = req.params;
+    const dataUser = await User.findOne({
          where: {
-             email
+             emailuser: email
          },
     });
-    if (project == null) {
+    if (dataUser == null) {
         res.json({ message: 'nothing' })
     } else {
-        res.json({ project })
+        res.json({ dataUser })
+    }
+}
+
+
+
+export async function login (req, res){
+    //login of user and the password
+
+    const  {emailUser, passUser} = req.body;
+
+    console.log(emailUser);
+    const data = await User.findOne({
+        where:{
+            emailuser : emailUser
+        },
+    });
+
+    if(!data){
+     res.json('email no existe');
+    }else {
+      //use the method compare for get the pass without encrypt
+      const pass = await bcrypt.compare(req.body.pass, data.passuser);
+      console.log(pass);
+      if(!pass) res.json('password is incorrect');
+
+      //create assign token
+      const token = jwtoken.sign({id: data.iduser}, process.env.SECRET_TOKEN);
+      res.header('auto-token', token).send(token);
     }
 
 }
 
 
-export async function login (req, res){
-    //login of user and the password
-    const data = await User.findOne({
-        where:{
-            email : req.body.email
-        },
-    });
-    if(!data) res.json('email not exits')
-    //use the method compare for get the pass without encrypt
-    const pass = await bcrypt.compare(req.body.pass, data.pass);
-    if(!pass) res.json('password is incorrect')
 
-    //create assign token
-    const token = jwtoken.sign({id: data.id}, process.env.SECRET_TOKEN);
-    res.header('auto-token', token).send(token);
-}
+
 
 
 export async function authToken (req, res){

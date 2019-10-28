@@ -4,26 +4,26 @@ import { sequelize } from '../database/database';
 import publication from './PublicationModels';
 
 const User = sequelize.define('users', {
-    idUser: {
+    iduser: {
         type: Sequelize.INTEGER,
         primaryKey: true
     },
-    nameUser: {
+    nameuser: {
         type: Sequelize.TEXT
     },
-    emailUser: {
+    emailuser: {
         type: Sequelize.TEXT
     },
-    passUser:{
+    passuser:{
         type: Sequelize.TEXT
     }
 }, {
         timestamps: false
     });
 
-User.hasMany(publication, { foreingKey: 'userId', sourceKey: 'idUser' });
+User.hasMany(publication, { foreingKey: 'userid', sourceKey: 'iduser' });
 // TODO: el foreingKey hace relacion con la llave foranea del modelo publicacion
 // TODO: y ek sourceKey hace referencia al id de la clase modelo idUser
-publication.belongsTo(User, { foreingKey: 'userId', sourceKey: 'idUser' });
+publication.belongsTo(User, { foreingKey: 'userid', sourceKey: 'iduser' });
 
 export default User;

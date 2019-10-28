@@ -1,18 +1,18 @@
 import Sequelize, { INTEGER } from 'sequelize';
 import { sequelize } from '../database/database';
 
-const Publication = sequelize.define('product', {
+const Publication = sequelize.define('publications', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true
     },
-    namePublication: {
+    namepublication: {
         type: Sequelize.TEXT
     },
-    descripPublication: {
+    descriptpublication: {
         type: Sequelize.TEXT
     },
-    userId: {
+    userid: {
         type: Sequelize.INTEGER
     }
 }, {
