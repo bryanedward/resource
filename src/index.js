@@ -1,12 +1,13 @@
 import app from './app';
 import dotenv from 'dotenv';
+import config from './config';
 import '@babel/polyfill';
 
 dotenv.config();
 
 async function main(){
-    await app.listen(1000);
-    console.log('server on port 1000');
+    await app.listen(config.port);
+    console.log('server on port 4000');
 }
 
 
