@@ -163,7 +163,7 @@ function _createUser() {
               emailuser: _emailUser,
               roleuser: roleUser,
               passuser: bcryptPassword,
-              photouser: fileName
+              photouser: urlPhoto
             }, {
               fields: ['nameuser', 'emailuser', 'passuser', 'roleuser', 'photouser']
             });

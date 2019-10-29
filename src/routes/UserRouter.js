@@ -14,7 +14,7 @@ router.post('/create',multipartMiddleware, createUser);
 
 router.get('/', getUsers);
 
-router.get('/image', getImage);
+router.get('/image/:photoUser', getImage);
 
 router.get('/:email', getOneUser);
 

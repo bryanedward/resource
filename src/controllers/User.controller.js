@@ -3,12 +3,12 @@ import bcrypt from 'bcryptjs';
 import jwtoken from 'jsonwebtoken';
 import fs from 'fs';
 import Path from 'path';
+import url from 'url';
 
 export async function getImage(req, res){
   // TODO: especificar el tipo de dato en este caso es una imagen/jpg
   res.writeHead(200,{'content-type':'image/jpg'});
-  fs.createReadStream('src/photos/profile.jpg').pipe(res);
-
+  fs.createReadStream('src/photos/'+req.params.photoUser).pipe(res);
 }
 
 
@@ -40,14 +40,30 @@ export async function createUser(req, res) {
         const bcryptPassword = await bcrypt.hash(req.body.passUser, salt);
         // TODO: verificar si es una foto
         const urlPhoto = req.files.photo.path;
-        //const imgSplit = urlPhoto.split('\\');
-        const imgSplit = urlPhoto.split('\/');
+        const imgSplit = urlPhoto.split('\\');
+        //const imgSplit = urlPhoto.split('\/');
         const fileName = imgSplit[2];
-        // TODO: fileName es la ruta donde se guarda la foto
+        // TODO: fileName es el nombre del archivo
         const extImg = fileName.split('\.');
         const extName = extImg[1];
+
+        const reqUrl = url.format({
+          protocol: req.protocol,
+          host: req.get('host'),
+          pathname: req.originalUrl
+        });
+
+        const reqUrlSplit = reqUrl.split('\/');
+
+        console.log(reqUrlSplit[0]+''+reqUrlSplit[1]+''+reqUrlSplit[2]);
+
+
+
         if(extName == 'png' || extName == 'jpg' || extName == 'jpeg'){
           try {
+
+
+
               const newUser = await User.create({
                   nameuser : nameUser,
                   emailuser : emailUser,
