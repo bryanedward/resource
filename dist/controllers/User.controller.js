@@ -144,11 +144,11 @@ function _createUser() {
             bcryptPassword = _context3.sent;
             // TODO: verificar si es una foto
             urlPhoto = req.files.photo.path;
-            console.log(urlPhoto);
-            imgSplit = urlPhoto.split('\\');
+            imgSplit = urlPhoto.split('/');
             fileName = imgSplit[2]; // TODO: fileName es la ruta donde se guarda la foto
 
-            extImg = fileName.split('\.');
+            extImg = fileName.split('/.');
+            console.log(extImg);
             extName = extImg[1];
 
             if (!(extName == 'png' || extName == 'jpg' || extName == 'jpeg')) {
