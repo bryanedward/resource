@@ -14,8 +14,11 @@ const User = sequelize.define('users', {
     emailuser: {
         type: Sequelize.TEXT
     },
-    passuser:{
+    passuser: {
         type: Sequelize.TEXT
+    },
+    roleuser: {
+      type: Sequelize.TEXT
     }
 }, {
         timestamps: false

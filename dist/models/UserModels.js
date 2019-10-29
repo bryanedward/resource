@@ -26,6 +26,9 @@ var User = _database.sequelize.define('users', {
   },
   passuser: {
     type: _sequelize["default"].TEXT
+  },
+  roleuser: {
+    type: _sequelize["default"].TEXT
   }
 }, {
   timestamps: false
