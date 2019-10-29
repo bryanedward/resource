@@ -163,7 +163,7 @@ function _createUser() {
               emailuser: _emailUser,
               roleuser: roleUser,
               passuser: bcryptPassword,
-              photouser: _fs["default"].createReadStream(fileName)
+              photouser: fileName
             }, {
               fields: ['nameuser', 'emailuser', 'passuser', 'roleuser', 'photouser']
             });
