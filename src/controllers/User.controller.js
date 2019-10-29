@@ -44,8 +44,8 @@ export async function createUser(req, res) {
         const fileName = imgSplit[2];
         // TODO: fileName es la ruta donde se guarda la foto
         const extImg = fileName.split('/.');
-        console.log(extImg);
         const extName = extImg[1];
+        console.log(extName);
         if(extName == 'png' || extName == 'jpg' || extName == 'jpeg'){
           try {
               const newUser = await User.create({

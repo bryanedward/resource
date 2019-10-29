@@ -148,8 +148,8 @@ function _createUser() {
             fileName = imgSplit[2]; // TODO: fileName es la ruta donde se guarda la foto
 
             extImg = fileName.split('/.');
-            console.log(extImg);
             extName = extImg[1];
+            console.log(extName);
 
             if (!(extName == 'png' || extName == 'jpg' || extName == 'jpeg')) {
               _context3.next = 29;
