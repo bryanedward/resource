@@ -126,7 +126,7 @@ function _createUser() {
             data = _context3.sent;
 
             if (!(data == null)) {
-              _context3.next = 31;
+              _context3.next = 30;
               break;
             }
 
@@ -143,23 +143,21 @@ function _createUser() {
           case 11:
             bcryptPassword = _context3.sent;
             // TODO: verificar si es una foto
-            urlPhoto = req.files.photo.path;
-            imgSplit = urlPhoto.split('/');
+            urlPhoto = req.files.photo.path; //const imgSplit = urlPhoto.split('\\');
+
+            imgSplit = urlPhoto.split('\/');
             fileName = imgSplit[2]; // TODO: fileName es la ruta donde se guarda la foto
 
-            extImg = fileName.split('/.'); // console.log(extImg);
-
-            extName = extImg.split('/.'); //const extName = extImg[1];
-
-            console.log(extName);
+            extImg = fileName.split('\.');
+            extName = extImg[1];
 
             if (!(extName == 'png' || extName == 'jpg' || extName == 'jpeg')) {
-              _context3.next = 29;
+              _context3.next = 28;
               break;
             }
 
-            _context3.prev = 19;
-            _context3.next = 22;
+            _context3.prev = 18;
+            _context3.next = 21;
             return _UserModels["default"].create({
               nameuser: nameUser,
               emailuser: _emailUser,
@@ -169,7 +167,7 @@ function _createUser() {
               fields: ['nameuser', 'emailuser', 'passuser', 'roleuser']
             });
 
-          case 22:
+          case 21:
             newUser = _context3.sent;
 
             if (newUser) {
@@ -178,31 +176,31 @@ function _createUser() {
               });
             }
 
-            _context3.next = 29;
+            _context3.next = 28;
             break;
 
-          case 26:
-            _context3.prev = 26;
-            _context3.t0 = _context3["catch"](19);
+          case 25:
+            _context3.prev = 25;
+            _context3.t0 = _context3["catch"](18);
             res.status(500).json({
-              message: "no se pudo crear el usuario"
+              message: "no se pudo crear el usuario "
             });
 
-          case 29:
-            _context3.next = 32;
+          case 28:
+            _context3.next = 31;
             break;
 
-          case 31:
+          case 30:
             res.json({
               message: 'el correo existe'
             });
 
-          case 32:
+          case 31:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[19, 26]]);
+    }, _callee3, null, [[18, 25]]);
   }));
   return _createUser.apply(this, arguments);
 }
