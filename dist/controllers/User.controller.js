@@ -107,7 +107,7 @@ function _createUser() {
   _createUser = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee3(req, res) {
-    var emailUser, data, _req$body, nameUser, _emailUser, salt, bcryptPassword, urlPhoto, imgSplit, fileName, extImg, extName, newUser;
+    var emailUser, data, _req$body, nameUser, _emailUser, roleUser, salt, bcryptPassword, urlPhoto, imgSplit, fileName, extImg, extName, newUser;
 
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
@@ -130,7 +130,7 @@ function _createUser() {
               break;
             }
 
-            _req$body = req.body, nameUser = _req$body.nameUser, _emailUser = _req$body.emailUser; //usar el bcrpyt para encriptar la password
+            _req$body = req.body, nameUser = _req$body.nameUser, _emailUser = _req$body.emailUser, roleUser = _req$body.roleUser; //usar el bcrpyt para encriptar la password
 
             _context3.next = 8;
             return _bcryptjs["default"].genSalt(10);

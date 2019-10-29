@@ -18,8 +18,8 @@ CREATE TABLE IF NOT EXISTS publications(
 
 
 
-INSERT INTO users(nameUser,emailUser,passUser)
-VALUES ('Bryan','edwardbrian96@gmail.com',3893259);
+INSERT INTO users(nameUser,emailUser,passUser, roleUser)
+VALUES ('Bryan','edwardbrian96@gmail.com','3893259','students');
 
 INSERT INTO users(nameUser,emailUser,passUser)
 VALUES ('Ricardo','ricardo@gmail.com',389325229);

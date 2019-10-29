@@ -34,7 +34,7 @@ export async function createUser(req, res) {
         }
     });
     if (data == null) {
-        const {nameUser, emailUser} = req.body;
+        const {nameUser, emailUser, roleUser} = req.body;
         //usar el bcrpyt para encriptar la password
         const salt = await bcrypt.genSalt(10);
         const bcryptPassword = await bcrypt.hash(req.body.passUser, salt);
