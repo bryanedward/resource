@@ -19,7 +19,7 @@ var multipartMiddleware = (0, _connectMultiparty["default"])({
 var router = (0, _express.Router)();
 router.post('/create', multipartMiddleware, _User.createUser);
 router.get('/', _User.getUsers);
-router.get('/image', _User.getImage);
+router.get('/image/:photoUser', _User.getImage);
 router.get('/:email', _User.getOneUser);
 router.post('/email/emailUser', _User.login);
 router["delete"]('/:id', _User.deleteUser);

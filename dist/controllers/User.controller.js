@@ -22,6 +22,8 @@ var _fs = _interopRequireDefault(require("fs"));
 
 var _path = _interopRequireDefault(require("path"));
 
+var _url = _interopRequireDefault(require("url"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -45,7 +47,7 @@ function _getImage() {
               'content-type': 'image/jpg'
             });
 
-            _fs["default"].createReadStream('src/photos/profile.jpg').pipe(res);
+            _fs["default"].createReadStream('src/photos/' + req.params.photoUser).pipe(res);
 
           case 2:
           case "end":
@@ -107,7 +109,7 @@ function _createUser() {
   _createUser = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee3(req, res) {
-    var emailUser, data, _req$body, nameUser, _emailUser, roleUser, salt, bcryptPassword, urlPhoto, imgSplit, fileName, extImg, extName, newUser;
+    var emailUser, data, _req$body, nameUser, _emailUser, roleUser, salt, bcryptPassword, urlPhoto, imgSplit, fileName, extImg, extName, reqUrl, reqUrlSplit, photoUser, newUser;
 
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
@@ -126,7 +128,7 @@ function _createUser() {
             data = _context3.sent;
 
             if (!(data == null)) {
-              _context3.next = 30;
+              _context3.next = 33;
               break;
             }
 
@@ -143,32 +145,40 @@ function _createUser() {
           case 11:
             bcryptPassword = _context3.sent;
             // TODO: verificar si es una foto
-            urlPhoto = req.files.photo.path; //const imgSplit = urlPhoto.split('\\');
+            urlPhoto = req.files.photo.path;
+            imgSplit = urlPhoto.split('\\'); //const imgSplit = urlPhoto.split('\/');
 
-            imgSplit = urlPhoto.split('\/');
-            fileName = imgSplit[2]; // TODO: fileName es la ruta donde se guarda la foto
+            fileName = imgSplit[2]; // TODO: fileName es el nombre del archivo
 
             extImg = fileName.split('\.');
             extName = extImg[1];
+            reqUrl = _url["default"].format({
+              // TODO: obtener la url
+              protocol: req.protocol,
+              host: req.get('host'),
+              pathname: req.originalUrl
+            });
+            reqUrlSplit = reqUrl.split('\/');
+            photoUser = reqUrlSplit[0] + '//' + reqUrlSplit[1] + '' + reqUrlSplit[2] + '/' + reqUrlSplit[3] + '/' + reqUrlSplit[4] + '/image/' + fileName;
 
             if (!(extName == 'png' || extName == 'jpg' || extName == 'jpeg')) {
-              _context3.next = 28;
+              _context3.next = 31;
               break;
             }
 
-            _context3.prev = 18;
-            _context3.next = 21;
+            _context3.prev = 21;
+            _context3.next = 24;
             return _UserModels["default"].create({
               nameuser: nameUser,
               emailuser: _emailUser,
               roleuser: roleUser,
               passuser: bcryptPassword,
-              photouser: urlPhoto
+              photouser: photoUser
             }, {
               fields: ['nameuser', 'emailuser', 'passuser', 'roleuser', 'photouser']
             });
 
-          case 21:
+          case 24:
             newUser = _context3.sent;
 
             if (newUser) {
@@ -177,31 +187,31 @@ function _createUser() {
               });
             }
 
-            _context3.next = 28;
+            _context3.next = 31;
             break;
 
-          case 25:
-            _context3.prev = 25;
-            _context3.t0 = _context3["catch"](18);
+          case 28:
+            _context3.prev = 28;
+            _context3.t0 = _context3["catch"](21);
             res.status(500).json({
               message: "no se pudo crear el usuario "
             });
 
-          case 28:
-            _context3.next = 31;
+          case 31:
+            _context3.next = 34;
             break;
 
-          case 30:
+          case 33:
             res.json({
               message: 'el correo existe'
             });
 
-          case 31:
+          case 34:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[18, 25]]);
+    }, _callee3, null, [[21, 28]]);
   }));
   return _createUser.apply(this, arguments);
 }

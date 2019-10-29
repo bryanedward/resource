@@ -7,13 +7,13 @@ exports["default"] = void 0;
 
 var _sequelize = _interopRequireDefault(require("sequelize"));
 
-var _database = require("../database/database");
+var _databaseLocal = require("../database/databaseLocal");
 
 var _PublicationModels = _interopRequireDefault(require("./PublicationModels"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var User = _database.sequelize.define('users', {
+var User = _databaseLocal.sequelize.define('users', {
   iduser: {
     type: _sequelize["default"].INTEGER,
     primaryKey: true
