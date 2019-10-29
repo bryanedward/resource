@@ -54,7 +54,7 @@ export async function createUser(req, res) {
                   roleuser: roleUser,
                   passuser : bcryptPassword
               },{
-                fields: ['nameuser','emailuser','passuser','roleUser']
+                fields: ['nameuser','emailuser','passuser','roleuser']
               });
 
               if(newUser){

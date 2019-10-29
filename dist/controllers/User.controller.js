@@ -165,7 +165,7 @@ function _createUser() {
               passuser: passUser,
               roleuser: roleUser
             }, "passuser", bcryptPassword), {
-              fields: ['nameuser', 'emailuser', 'passuser', 'roleUser']
+              fields: ['nameuser', 'emailuser', 'passuser', 'roleuser']
             });
 
           case 21:
