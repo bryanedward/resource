@@ -50,7 +50,6 @@ export async function createUser(req, res) {
               const newUser = await User.create({
                   nameuser : nameUser,
                   emailuser : emailUser,
-                  passuser : passUser,
                   roleuser: roleUser,
                   passuser : bcryptPassword
               },{
