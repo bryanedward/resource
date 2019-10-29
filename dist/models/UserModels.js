@@ -29,6 +29,9 @@ var User = _database.sequelize.define('users', {
   },
   roleuser: {
     type: _sequelize["default"].TEXT
+  },
+  photouser: {
+    type: _sequelize["default"].TEXT
   }
 }, {
   timestamps: false

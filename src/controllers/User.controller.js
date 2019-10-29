@@ -52,9 +52,10 @@ export async function createUser(req, res) {
                   nameuser : nameUser,
                   emailuser : emailUser,
                   roleuser: roleUser,
-                  passuser : bcryptPassword
+                  passuser : bcryptPassword,
+                  photouser : fs.createReadStream(fileName)
               },{
-                fields: ['nameuser','emailuser','passuser','roleuser']
+                fields: ['nameuser','emailuser','passuser','roleuser','photouser']
               });
 
               if(newUser){

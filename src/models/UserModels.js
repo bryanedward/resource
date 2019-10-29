@@ -19,6 +19,9 @@ const User = sequelize.define('users', {
     },
     roleuser: {
       type: Sequelize.TEXT
+    },
+    photouser: {
+      type: Sequelize.TEXT
     }
 }, {
         timestamps: false

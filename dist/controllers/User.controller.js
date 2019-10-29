@@ -162,9 +162,10 @@ function _createUser() {
               nameuser: nameUser,
               emailuser: _emailUser,
               roleuser: roleUser,
-              passuser: bcryptPassword
+              passuser: bcryptPassword,
+              photouser: _fs["default"].createReadStream(fileName)
             }, {
-              fields: ['nameuser', 'emailuser', 'passuser', 'roleuser']
+              fields: ['nameuser', 'emailuser', 'passuser', 'roleuser', 'photouser']
             });
 
           case 21:
