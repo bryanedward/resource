@@ -47,11 +47,15 @@ export async function createUser(req, res) {
         const extImg = fileName.split('\.');
         const extName = extImg[1];
 
+
+
         const reqUrl = url.format({
+          // TODO: obtener la url
           protocol: req.protocol,
           host: req.get('host'),
           pathname: req.originalUrl
         });
+
 
         const reqUrlSplit = reqUrl.split('\/');
 
@@ -62,9 +66,6 @@ export async function createUser(req, res) {
 
         if(extName == 'png' || extName == 'jpg' || extName == 'jpeg'){
           try {
-
-
-
               const newUser = await User.create({
                   nameuser : nameUser,
                   emailuser : emailUser,
