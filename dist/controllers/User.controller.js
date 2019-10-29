@@ -144,7 +144,7 @@ function _createUser() {
             bcryptPassword = _context3.sent;
             // TODO: verificar si es una foto
             urlPhoto = req.files.photo.path;
-            res.send(urlPhoto);
+            console.log(urlPhoto);
             imgSplit = urlPhoto.split('\\');
             fileName = imgSplit[2]; // TODO: fileName es la ruta donde se guarda la foto
 

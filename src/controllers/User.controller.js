@@ -40,7 +40,7 @@ export async function createUser(req, res) {
         const bcryptPassword = await bcrypt.hash(req.body.passUser, salt);
         // TODO: verificar si es una foto
         const urlPhoto = req.files.photo.path;
-        res.send(urlPhoto);
+        console.log(urlPhoto);
         const imgSplit = urlPhoto.split('\\');
         const fileName = imgSplit[2];
         // TODO: fileName es la ruta donde se guarda la foto
