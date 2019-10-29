@@ -40,12 +40,14 @@ export async function createUser(req, res) {
         const bcryptPassword = await bcrypt.hash(req.body.passUser, salt);
         // TODO: verificar si es una foto
         const urlPhoto = req.files.photo.path;
+
         const imgSplit = urlPhoto.split('/');
         const fileName = imgSplit[2];
         // TODO: fileName es la ruta donde se guarda la foto
         const extImg = fileName.split('/.');
-        console.log(extImg);
-        const extName = extImg[1];
+        // console.log(extImg);
+        const extName = extImg.split('/.');
+        //const extName = extImg[1];
         console.log(extName);
         if(extName == 'png' || extName == 'jpg' || extName == 'jpeg'){
           try {
