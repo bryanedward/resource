@@ -63,7 +63,7 @@ export async function createUser(req, res) {
               }
           } catch (error) {
               res.status(500).json({
-                  message: "no se pudo crear el usuario error 500"
+                  message: "no se pudo crear el usuario"
               });
           }
         }

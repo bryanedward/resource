@@ -182,7 +182,7 @@ function _createUser() {
             _context3.prev = 25;
             _context3.t0 = _context3["catch"](18);
             res.status(500).json({
-              message: "no se pudo crear el usuario error 500"
+              message: "no se pudo crear el usuario"
             });
 
           case 28:
