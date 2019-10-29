@@ -55,7 +55,8 @@ export async function createUser(req, res) {
 
         const reqUrlSplit = reqUrl.split('\/');
 
-        console.log(reqUrlSplit[0]+''+reqUrlSplit[1]+''+reqUrlSplit[2]);
+        const photoUser = reqUrlSplit[0]+'//'+reqUrlSplit[1]+''
+        +reqUrlSplit[2]+'/'+reqUrlSplit[3]+'/'+reqUrlSplit[4]+'/image/'+fileName
 
 
 
@@ -69,7 +70,7 @@ export async function createUser(req, res) {
                   emailuser : emailUser,
                   roleuser: roleUser,
                   passuser : bcryptPassword,
-                  photouser : fileName
+                  photouser : photoUser
               },{
                 fields: ['nameuser','emailuser','passuser','roleuser','photouser']
               });
