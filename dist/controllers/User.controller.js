@@ -128,7 +128,7 @@ function _createUser() {
             data = _context3.sent;
 
             if (!(data == null)) {
-              _context3.next = 33;
+              _context3.next = 36;
               break;
             }
 
@@ -162,7 +162,7 @@ function _createUser() {
             photoUser = reqUrlSplit[0] + '//' + reqUrlSplit[1] + '' + reqUrlSplit[2] + '/' + reqUrlSplit[3] + '/' + reqUrlSplit[4] + '/image/' + fileName;
 
             if (!(extName == 'png' || extName == 'jpg' || extName == 'jpeg')) {
-              _context3.next = 31;
+              _context3.next = 33;
               break;
             }
 
@@ -202,11 +202,22 @@ function _createUser() {
             break;
 
           case 33:
+            _fs["default"].unlink(urlPhoto, function (err) {
+              return res.status(200).send({
+                message: 'el documento no es el correcto'
+              });
+            });
+
+          case 34:
+            _context3.next = 37;
+            break;
+
+          case 36:
             res.json({
               message: 'el correo existe'
             });
 
-          case 34:
+          case 37:
           case "end":
             return _context3.stop();
         }

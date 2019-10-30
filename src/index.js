@@ -6,7 +6,7 @@ import '@babel/polyfill';
 dotenv.config();
 
 async function main(){
-    await app.listen(1100);
+    await app.listen(config.port);
     console.log('server online');
 }
 

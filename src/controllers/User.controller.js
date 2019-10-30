@@ -82,9 +82,15 @@ export async function createUser(req, res) {
                   message: "no se pudo crear el usuario "
               });
           }
+        }else {
+          fs.unlink(urlPhoto,(err)=>{
+            return res.status(200).send({
+              message: 'el documento no es el correcto'
+            });
+          });
         }
     } else {
-      
+
         res.json({
           message: 'el correo existe'
         })
