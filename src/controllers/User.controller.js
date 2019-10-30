@@ -47,8 +47,6 @@ export async function createUser(req, res) {
         const extImg = fileName.split('\.');
         const extName = extImg[1];
 
-
-
         const reqUrl = url.format({
           // TODO: obtener la url
           protocol: req.protocol,
@@ -56,12 +54,10 @@ export async function createUser(req, res) {
           pathname: req.originalUrl
         });
 
-
         const reqUrlSplit = reqUrl.split('\/');
 
         const photoUser = reqUrlSplit[0]+'//'+reqUrlSplit[1]+''
         +reqUrlSplit[2]+'/'+reqUrlSplit[3]+'/'+reqUrlSplit[4]+'/image/'+fileName
-
 
 
         if(extName == 'png' || extName == 'jpg' || extName == 'jpeg'){
@@ -88,6 +84,7 @@ export async function createUser(req, res) {
           }
         }
     } else {
+      
         res.json({
           message: 'el correo existe'
         })
