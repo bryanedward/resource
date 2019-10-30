@@ -145,9 +145,9 @@ function _createUser() {
           case 11:
             bcryptPassword = _context3.sent;
             // TODO: verificar si es una foto
-            urlPhoto = req.files.photo.path;
-            imgSplit = urlPhoto.split('\\'); //const imgSplit = urlPhoto.split('\/');
+            urlPhoto = req.files.photo.path; //const imgSplit = urlPhoto.split('\\');
 
+            imgSplit = urlPhoto.split('\/');
             fileName = imgSplit[2]; // TODO: fileName es el nombre del archivo
 
             extImg = fileName.split('\.');
