@@ -79,7 +79,7 @@ export async function createUser(req, res) {
               }
           } catch (error) {
               res.status(500).json({
-                  message: "no se pudo crear el usuario "
+                  message: "no se pudo crear el usuario"
               });
           }
         }else {
@@ -90,7 +90,6 @@ export async function createUser(req, res) {
           });
         }
     } else {
-
         res.json({
           message: 'el correo existe'
         })
