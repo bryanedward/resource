@@ -4,8 +4,8 @@
   "description": "first comment",
   "main": "index.js",
   "scripts": {
-    "build": "babel src --out-dir dist",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "build": "babel src --out-dir dist"
   },
   "repository": {
     "type": "git",
