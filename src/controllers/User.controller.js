@@ -28,6 +28,17 @@ export async function getUsers(req, res) {
 export async function createUser(req, res) {
   // TODO: crear un nuevo usuario verificando si el correo existe
     const { emailUser } = req.body;
+    // TODO: -- obtener la direccion donde se guarda la foto
+    const urlPhoto = req.files.photo.path;
+
+    const reqUrl = url.format({
+      // TODO: ------ se obtiene la url del metodo createUser-----
+      protocol: req.protocol,
+      host: req.get('host'),
+      pathname: req.originalUrl
+    });
+
+
     const data = await User.findOne({
         where: {
             emailuser: emailUser
@@ -35,30 +46,21 @@ export async function createUser(req, res) {
     });
     if (data == null) {
         const {nameUser, emailUser, roleUser} = req.body;
-        //usar el bcrpyt para encriptar la password
+        // TODO: ------- se usa el bcrpyt para encriptar la passwor-----
         const salt = await bcrypt.genSalt(10);
         const bcryptPassword = await bcrypt.hash(req.body.passUser, salt);
-        // TODO: verificar si es una foto
-        const urlPhoto = req.files.photo.path;
-        //const imgSplit = urlPhoto.split('\\');
-        const imgSplit = urlPhoto.split('\/');
+
+        // TODO: -------obtener la extension para verificacion
+        const imgSplit = urlPhoto.split('\\');
+        //const imgSplit = urlPhoto.split('\/');
         const fileName = imgSplit[2];
-        // TODO: fileName es el nombre del archivo
         const extImg = fileName.split('\.');
         const extName = extImg[1];
 
-        const reqUrl = url.format({
-          // TODO: obtener la url
-          protocol: req.protocol,
-          host: req.get('host'),
-          pathname: req.originalUrl
-        });
-
+        // TODO: ------Se crea la url donde estara la imagen del usuario -----------
         const reqUrlSplit = reqUrl.split('\/');
-
         const photoUser = reqUrlSplit[0]+'//'+reqUrlSplit[1]+''
         +reqUrlSplit[2]+'/'+reqUrlSplit[3]+'/'+reqUrlSplit[4]+'/image/'+fileName
-
 
         if(extName == 'png' || extName == 'jpg' || extName == 'jpeg'){
           try {
@@ -82,17 +84,20 @@ export async function createUser(req, res) {
                   message: "no se pudo crear el usuario"
               });
           }
-        }else {
-          fs.unlink(urlPhoto,(err)=>{
-            return res.status(200).send({
-              message: 'el documento no es el correcto'
+        }
+        else {
+          fs.unlink(urlPhoto, (err) => {
+            res.status(400).send({
+              message: "no es una foto"
             });
           });
         }
     } else {
-        res.json({
-          message: 'el correo existe'
-        })
+      fs.unlink(urlPhoto, (err) => {
+        res.status(400).send({
+          message: "el email ya existe"
+        });
+      });
     }
 }
 

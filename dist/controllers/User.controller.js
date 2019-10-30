@@ -109,22 +109,30 @@ function _createUser() {
   _createUser = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee3(req, res) {
-    var emailUser, data, _req$body, nameUser, _emailUser, roleUser, salt, bcryptPassword, urlPhoto, imgSplit, fileName, extImg, extName, reqUrl, reqUrlSplit, photoUser, newUser;
+    var emailUser, urlPhoto, reqUrl, data, _req$body, nameUser, _emailUser, roleUser, salt, bcryptPassword, imgSplit, fileName, extImg, extName, reqUrlSplit, photoUser, newUser;
 
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             // TODO: crear un nuevo usuario verificando si el correo existe
-            emailUser = req.body.emailUser;
-            _context3.next = 3;
+            emailUser = req.body.emailUser; // TODO: -- obtener la direccion donde se guarda la foto
+
+            urlPhoto = req.files.photo.path;
+            reqUrl = _url["default"].format({
+              // TODO: ------ se obtiene la url del metodo createUser-----
+              protocol: req.protocol,
+              host: req.get('host'),
+              pathname: req.originalUrl
+            });
+            _context3.next = 5;
             return _UserModels["default"].findOne({
               where: {
                 emailuser: emailUser
               }
             });
 
-          case 3:
+          case 5:
             data = _context3.sent;
 
             if (!(data == null)) {
@@ -132,32 +140,25 @@ function _createUser() {
               break;
             }
 
-            _req$body = req.body, nameUser = _req$body.nameUser, _emailUser = _req$body.emailUser, roleUser = _req$body.roleUser; //usar el bcrpyt para encriptar la password
+            _req$body = req.body, nameUser = _req$body.nameUser, _emailUser = _req$body.emailUser, roleUser = _req$body.roleUser; // TODO: ------- se usa el bcrpyt para encriptar la passwor-----
 
-            _context3.next = 8;
+            _context3.next = 10;
             return _bcryptjs["default"].genSalt(10);
 
-          case 8:
+          case 10:
             salt = _context3.sent;
-            _context3.next = 11;
+            _context3.next = 13;
             return _bcryptjs["default"].hash(req.body.passUser, salt);
 
-          case 11:
+          case 13:
             bcryptPassword = _context3.sent;
-            // TODO: verificar si es una foto
-            urlPhoto = req.files.photo.path; //const imgSplit = urlPhoto.split('\\');
+            // TODO: -------obtener la extension para verificacion
+            imgSplit = urlPhoto.split('\\'); //const imgSplit = urlPhoto.split('\/');
 
-            imgSplit = urlPhoto.split('\/');
-            fileName = imgSplit[2]; // TODO: fileName es el nombre del archivo
-
+            fileName = imgSplit[2];
             extImg = fileName.split('\.');
-            extName = extImg[1];
-            reqUrl = _url["default"].format({
-              // TODO: obtener la url
-              protocol: req.protocol,
-              host: req.get('host'),
-              pathname: req.originalUrl
-            });
+            extName = extImg[1]; // TODO: ------Se crea la url donde estara la imagen del usuario -----------
+
             reqUrlSplit = reqUrl.split('\/');
             photoUser = reqUrlSplit[0] + '//' + reqUrlSplit[1] + '' + reqUrlSplit[2] + '/' + reqUrlSplit[3] + '/' + reqUrlSplit[4] + '/image/' + fileName;
 
@@ -203,8 +204,8 @@ function _createUser() {
 
           case 33:
             _fs["default"].unlink(urlPhoto, function (err) {
-              return res.status(200).send({
-                message: 'el documento no es el correcto'
+              res.status(400).send({
+                message: "no es una foto"
               });
             });
 
@@ -213,8 +214,10 @@ function _createUser() {
             break;
 
           case 36:
-            res.json({
-              message: 'el correo existe'
+            _fs["default"].unlink(urlPhoto, function (err) {
+              res.status(400).send({
+                message: "el email ya existe"
+              });
             });
 
           case 37:

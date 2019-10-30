@@ -4,9 +4,10 @@
   "description": "first comment",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js ---exec babel-node",
-    "start": "node dist/index.js",
-    "build": "babel src --out-dir dist"
+    "dev": "nodemon src/index.js --exec babel-node",
+    "build": "babel src --out-dir dist",
+    "start": "node dist/index.js"
+
   },
   "repository": {
     "type": "git",

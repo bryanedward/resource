@@ -7,7 +7,7 @@ dotenv.config();
 
 async function main(){
     await app.listen(config.port);
-    console.log('server online');
+    console.log('server online bryanedward');
 }
 
 
