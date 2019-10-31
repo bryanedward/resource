@@ -9,6 +9,15 @@ export async function getImage(req, res){
   // TODO: especificar el tipo de dato en este caso es una imagen/jpg
   res.writeHead(200,{'content-type':'image/jpg'});
   fs.createReadStream('src/photos/'+req.params.photoUser).pipe(res);
+
+  const reqUrl = url.format({
+    // TODO: ------ se obtiene la url del metodo createUser-----
+    protocol: req.protocol,
+    host: req.get('host'),
+    pathname: req.originalUrl
+  });
+
+    console.log(reqUrl);
 }
 
 
