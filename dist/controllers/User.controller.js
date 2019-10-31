@@ -38,7 +38,6 @@ function _getImage() {
   _getImage = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(req, res) {
-    var reqUrl;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -50,15 +49,7 @@ function _getImage() {
 
             _fs["default"].createReadStream('src/photos/' + req.params.photoUser).pipe(res);
 
-            reqUrl = _url["default"].format({
-              // TODO: ------ se obtiene la url del metodo createUser-----
-              protocol: req.protocol,
-              host: req.get('host'),
-              pathname: req.originalUrl
-            });
-            console.log(reqUrl);
-
-          case 4:
+          case 2:
           case "end":
             return _context.stop();
         }
