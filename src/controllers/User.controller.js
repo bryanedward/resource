@@ -88,7 +88,7 @@ export async function createUser(req, res) {
         else {
           fs.unlink(urlPhoto, (err) => {
             res.status(400).send({
-              message: "elija una foto"
+              message: "elija foto"
             });
           });
         }

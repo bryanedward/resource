@@ -205,7 +205,7 @@ function _createUser() {
           case 33:
             _fs["default"].unlink(urlPhoto, function (err) {
               res.status(400).send({
-                message: "elija una foto"
+                message: "elija foto"
               });
             });
 
