@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 import { sequelize } from '../database/database';
 
-import publication from './PublicationModels';
+import publication from '../models/PublicationModels';
 
 const User = sequelize.define('users', {
     iduser: {

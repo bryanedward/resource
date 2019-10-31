@@ -9,7 +9,7 @@ var _sequelize = _interopRequireDefault(require("sequelize"));
 
 var _database = require("../database/database");
 
-var _PublicationModels = _interopRequireDefault(require("./PublicationModels"));
+var _PublicationModels = _interopRequireDefault(require("../models/PublicationModels"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
