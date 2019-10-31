@@ -153,8 +153,8 @@ function _createUser() {
           case 13:
             bcryptPassword = _context3.sent;
             // TODO: -------obtener la extension para verificacion
-            //const imgSplit = urlPhoto.split('\\');
-            imgSplit = urlPhoto.split('\/');
+            imgSplit = urlPhoto.split('\\'); //const imgSplit = urlPhoto.split('\/');
+
             fileName = imgSplit[2];
             extImg = fileName.split('\.');
             extName = extImg[1]; // TODO: ------Se crea la url donde estara la imagen del usuario -----------
