@@ -51,8 +51,8 @@ export async function createUser(req, res) {
         const bcryptPassword = await bcrypt.hash(req.body.passUser, salt);
 
         // TODO: -------obtener la extension para verificacion
-        //const imgSplit = urlPhoto.split('\\');
-        const imgSplit = urlPhoto.split('\/');
+        const imgSplit = urlPhoto.split('\\');
+        //const imgSplit = urlPhoto.split('\/');
         const fileName = imgSplit[2];
         const extImg = fileName.split('\.');
         const extName = extImg[1];
