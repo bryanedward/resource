@@ -29,10 +29,10 @@ function _main() {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return _app["default"].listen(_config["default"].port);
+            return _app["default"].listen(1100);
 
           case 2:
-            console.log('server online bryanedward');
+            console.log('server online ');
 
           case 3:
           case "end":
