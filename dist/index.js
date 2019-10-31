@@ -29,7 +29,7 @@ function _main() {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return _app["default"].listen(1100);
+            return _app["default"].listen(_config["default"].port);
 
           case 2:
             console.log('server online ok ');
