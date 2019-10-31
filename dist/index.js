@@ -32,7 +32,7 @@ function _main() {
             return _app["default"].listen(_config["default"].port);
 
           case 2:
-            console.log('server online ok ');
+            console.log('server online');
 
           case 3:
           case "end":
