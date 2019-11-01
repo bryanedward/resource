@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 
 export const sequelize = new Sequelize(
-    'devCode',
+    'devcode',
     'postgres',
     'ryanescor96',
     {
