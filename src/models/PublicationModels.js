@@ -1,5 +1,5 @@
 import Sequelize, { INTEGER } from 'sequelize';
-import { sequelize } from '../database/database';
+import { sequelize } from '../database/databaseLocal';
 
 const Publication = sequelize.define('publications', {
     id: {

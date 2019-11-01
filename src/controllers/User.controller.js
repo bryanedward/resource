@@ -5,6 +5,9 @@ import fs from 'fs';
 import Path from 'path';
 import url from 'url';
 
+
+
+
 export async function getImage(req, res){
   // TODO: especificar el tipo de dato en este caso es una imagen/jpg
   res.writeHead(200,{'content-type':'image/jpg'});

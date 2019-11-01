@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import { sequelize } from '../database/database';
+import { sequelize } from '../database/databaseLocal';
 
 import publication from './PublicationModels';
 

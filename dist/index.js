@@ -32,7 +32,7 @@ function _main() {
             return _app["default"].listen(_config["default"].port);
 
           case 2:
-            console.log('server online');
+            console.log('postgressql onl');
 
           case 3:
           case "end":
