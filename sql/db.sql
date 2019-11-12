@@ -27,6 +27,9 @@ CREATE TABLE IF NOT EXISTS messages(
 
 
 
+
+
+
 INSERT INTO users(nameUser,emailUser,passUser, roleUser)
 VALUES ('Bryan','edwardbrian96@gmail.com','3893259','students');
 

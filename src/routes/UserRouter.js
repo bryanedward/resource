@@ -11,10 +11,11 @@ import {  createUser, getUsers, getOneUser,
 
 router.get('/', getUsers);
 
-router.post('/create',multipartMiddleware, createUser);
-
-
 router.post('/login', login);
+
+
+
+router.post('/create',multipartMiddleware, createUser);
 
 
 
