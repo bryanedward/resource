@@ -2,7 +2,7 @@ import Sequelize, { INTEGER } from 'sequelize';
 import { sequelize } from '../database/databaseLocal';
 
 const Publication = sequelize.define('publications', {
-    id: {
+    idpublication: {
         type: Sequelize.INTEGER,
         primaryKey: true
     },
@@ -11,6 +11,9 @@ const Publication = sequelize.define('publications', {
     },
     descriptpublication: {
         type: Sequelize.TEXT
+    },
+    levelsubject:{
+      type: Sequelize.INTEGER
     },
     userid: {
         type: Sequelize.INTEGER

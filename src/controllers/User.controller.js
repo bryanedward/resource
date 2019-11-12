@@ -4,6 +4,7 @@ import jwtoken from 'jsonwebtoken';
 import fs from 'fs';
 import Path from 'path';
 import url from 'url';
+import config from '../config';
 
 
 
@@ -16,17 +17,28 @@ export async function getImage(req, res){
 }
 
 
-export async function getUsers(req, res) {
-    // TODO: obtener todos los usuarios
-    try {
-        const users = await User.findAll();
-        res.json({
-            users
-        });
-    } catch (error) {
-        console.log(error);
-    }
-};
+export async function login (req, res){
+    //login of user and the password
+      const user = await User.findOne({
+          where:{
+              emailuser : req.body.emailUser
+          },
+      });
+      if(!user){
+       res.json('este correo no existe');
+      }else {
+        //use the method compare for get the pass without encrypt
+        const pass = await bcrypt.compare(req.body.passUser, user.passuser);
+
+        if(pass) {
+          //create assign token
+          const token = jwtoken.sign({id: user.iduser}, config.SECRET_TOKEN);
+          res.header('auto-token', token).send(token);
+        }else {
+          res.json('password es  incorrecta')
+        }
+      }
+}
 
 
 export async function createUser(req, res) {
@@ -55,8 +67,8 @@ export async function createUser(req, res) {
         const bcryptPassword = await bcrypt.hash(req.body.passUser, salt);
 
         // TODO: -------obtener la extension para verificacion
-        //const imgSplit = urlPhoto.split('\\');
-        const imgSplit = urlPhoto.split('\/');
+        const imgSplit = urlPhoto.split('\\');
+        //const imgSplit = urlPhoto.split('\/');
         const fileName = imgSplit[2];
         const extImg = fileName.split('\.');
         const extName = extImg[1];
@@ -64,7 +76,7 @@ export async function createUser(req, res) {
         // TODO: ------Se crea la url donde estara la imagen del usuario -----------
         const reqUrlSplit = reqUrl.split('\/');
         const photoUser = reqUrlSplit[0]+'//'+reqUrlSplit[1]+''
-        +reqUrlSplit[2]+'/'+reqUrlSplit[3]+'/'+reqUrlSplit[4]+'/image/'+fileName
+        +reqUrlSplit[2]+'/'+reqUrlSplit[3]+'/'+reqUrlSplit[4]+'/image/'+fileName;
 
         if(extName == 'png' || extName == 'jpg' || extName == 'jpeg'){
           try {
@@ -106,6 +118,12 @@ export async function createUser(req, res) {
 }
 
 
+
+
+
+
+
+
 export async function getOneUser(req, res) {
     // TODO: buscar el usuario con el email
     const {email} = req.params;
@@ -122,37 +140,17 @@ export async function getOneUser(req, res) {
 }
 
 
-
-export async function login (req, res){
-    //login of user and the password
-
-    const  {emailUser, passUser} = req.body;
-
-    console.log(emailUser);
-    const data = await User.findOne({
-        where:{
-            emailuser : emailUser
-        },
-    });
-
-    if(!data){
-     res.json('email no existe');
-    }else {
-      //use the method compare for get the pass without encrypt
-      const pass = await bcrypt.compare(req.body.pass, data.passuser);
-      console.log(pass);
-      if(!pass) res.json('password is incorrect');
-
-      //create assign token
-      const token = jwtoken.sign({id: data.iduser}, process.env.SECRET_TOKEN);
-      res.header('auto-token', token).send(token);
+export async function getUsers(req, res) {
+    // TODO: obtener todos los usuarios
+    try {
+        const users = await User.findAll();
+        res.json({
+            users
+        });
+    } catch (error) {
+        console.log(error);
     }
-
-}
-
-
-
-
+};
 
 
 export async function authToken (req, res){

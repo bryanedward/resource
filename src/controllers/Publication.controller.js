@@ -2,37 +2,44 @@ import Publication from '../models/PublicationModels';
 import User from '../models/UserModels';
 
 
-export async function newToken (req, res){
-    res.send(req.user)
-};
-
-export async function createPublication(req, res) {
-    //CREAR UN PublicationO
-    const { namePublication, description, Userid, urlimg } = req.body;
-    await Publication.create({
-        namePublication,
-        description,
-        Userid,
-        urlimg
-    }, {
-            fields: ['namePublication', 'description', 'Userid', 'urlimg']
-        });
-    res.json({
-        message: 'New Publication created'
-    });
-}
-
 
 export async function getPublications(req, res) {
-    //OBTENER TODOS LOS PublicationOS
-    const tasks = await Publication.findAll({
-        attributes: ['id', 'namePublication', 'description', 'Userid', 'urlimg'],
+    // TODO: obtener todas las publicaciones identificandose con el jwt
+    const publications = await Publication.findAll({
+        attributes: ['idpublication', 'namepublication', 'descriptpublication',
+        'levelsubject','userid'],
         order: [
-            ['id', 'DESC']
+            ['idpublication', 'DESC']
         ]
     });
-    res.json({ tasks });
+    res.json({publications});
+
 }
+
+
+
+
+export async function createPublication(req, res) {
+    // TODO: crear una publicacion con el jwt para identificarse
+    const { namePublication, descriptPublication, levelSubject} = req.body;
+
+    await Publication.create({
+      namepublication : namePublication,
+      descriptpublication : descriptPublication,
+      levelsubject : levelSubject,
+      userid : req.user.id
+    },{
+      fields: ['namepublication', 'descriptpublication',
+       'levelsubject', 'userid']
+    });
+    res.json({
+        message: 'publicacion creada'
+    });
+}
+
+
+
+
 
 
 

@@ -9,10 +9,8 @@ dotenv.config();
 
 async function main(){
     await app.listen(config.port);
-    console.log('postgressql onl');
+    console.log('server online');
 }
-
-
 
 
 main();

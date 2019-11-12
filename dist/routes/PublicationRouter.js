@@ -7,14 +7,13 @@ exports["default"] = void 0;
 
 var _express = require("express");
 
-var _VerifyTokenController = require("../controllers/VerifyTokenController");
+var _VerifyTokenController = require("../auth/VerifyTokenController");
 
 var _Publication = require("../controllers/Publication.controller");
 
 var router = (0, _express.Router)();
-router.post('/', _Publication.createPublication);
-router.get('/', _VerifyTokenController.authToken, _Publication.getPublications);
-router.get('/token', _VerifyTokenController.authToken, _Publication.newToken);
+router.get('/home', _VerifyTokenController.authToken, _Publication.getPublications);
+router.post('/create', _VerifyTokenController.authToken, _Publication.createPublication);
 router.get('/:id', _Publication.getOnePublication);
 router.get('/client/:clientid', _Publication.getPublicationByUserid);
 router.get('/user/:clientid', _Publication.getUser);

@@ -4,10 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getImage = getImage;
-exports.getUsers = getUsers;
+exports.login = login;
 exports.createUser = createUser;
 exports.getOneUser = getOneUser;
-exports.login = login;
+exports.getUsers = getUsers;
 exports.authToken = authToken;
 exports.deleteUser = deleteUser;
 exports.updateUser = updateUser;
@@ -23,6 +23,8 @@ var _fs = _interopRequireDefault(require("fs"));
 var _path = _interopRequireDefault(require("path"));
 
 var _url = _interopRequireDefault(require("url"));
+
+var _config = _interopRequireDefault(require("../config"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -59,47 +61,64 @@ function _getImage() {
   return _getImage.apply(this, arguments);
 }
 
-function getUsers(_x3, _x4) {
-  return _getUsers.apply(this, arguments);
+function login(_x3, _x4) {
+  return _login.apply(this, arguments);
 }
 
-function _getUsers() {
-  _getUsers = _asyncToGenerator(
+function _login() {
+  _login = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(req, res) {
-    var users;
+    var user, pass, token;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            _context2.prev = 0;
-            _context2.next = 3;
-            return _UserModels["default"].findAll();
-
-          case 3:
-            users = _context2.sent;
-            res.json({
-              users: users
+            _context2.next = 2;
+            return _UserModels["default"].findOne({
+              where: {
+                emailuser: req.body.emailUser
+              }
             });
-            _context2.next = 10;
+
+          case 2:
+            user = _context2.sent;
+
+            if (user) {
+              _context2.next = 7;
+              break;
+            }
+
+            res.json('este correo no existe');
+            _context2.next = 11;
             break;
 
           case 7:
-            _context2.prev = 7;
-            _context2.t0 = _context2["catch"](0);
-            console.log(_context2.t0);
+            _context2.next = 9;
+            return _bcryptjs["default"].compare(req.body.passUser, user.passuser);
 
-          case 10:
+          case 9:
+            pass = _context2.sent;
+
+            if (pass) {
+              //create assign token
+              token = _jsonwebtoken["default"].sign({
+                id: user.iduser
+              }, _config["default"].SECRET_TOKEN);
+              res.header('auto-token', token).send(token);
+            } else {
+              res.json('password es  incorrecta');
+            }
+
+          case 11:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 7]]);
+    }, _callee2);
   }));
-  return _getUsers.apply(this, arguments);
+  return _login.apply(this, arguments);
 }
-
-;
 
 function createUser(_x5, _x6) {
   return _createUser.apply(this, arguments);
@@ -153,8 +172,8 @@ function _createUser() {
           case 13:
             bcryptPassword = _context3.sent;
             // TODO: -------obtener la extension para verificacion
-            //const imgSplit = urlPhoto.split('\\');
-            imgSplit = urlPhoto.split('\/');
+            imgSplit = urlPhoto.split('\\'); //const imgSplit = urlPhoto.split('\/');
+
             fileName = imgSplit[2];
             extImg = fileName.split('\.');
             extName = extImg[1]; // TODO: ------Se crea la url donde estara la imagen del usuario -----------
@@ -275,65 +294,47 @@ function _getOneUser() {
   return _getOneUser.apply(this, arguments);
 }
 
-function login(_x9, _x10) {
-  return _login.apply(this, arguments);
+function getUsers(_x9, _x10) {
+  return _getUsers.apply(this, arguments);
 }
 
-function _login() {
-  _login = _asyncToGenerator(
+function _getUsers() {
+  _getUsers = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee5(req, res) {
-    var _req$body2, emailUser, passUser, data, pass, token;
-
+    var users;
     return regeneratorRuntime.wrap(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
-            //login of user and the password
-            _req$body2 = req.body, emailUser = _req$body2.emailUser, passUser = _req$body2.passUser;
-            console.log(emailUser);
-            _context5.next = 4;
-            return _UserModels["default"].findOne({
-              where: {
-                emailuser: emailUser
-              }
+            _context5.prev = 0;
+            _context5.next = 3;
+            return _UserModels["default"].findAll();
+
+          case 3:
+            users = _context5.sent;
+            res.json({
+              users: users
             });
-
-          case 4:
-            data = _context5.sent;
-
-            if (data) {
-              _context5.next = 9;
-              break;
-            }
-
-            res.json('email no existe');
-            _context5.next = 16;
+            _context5.next = 10;
             break;
 
-          case 9:
-            _context5.next = 11;
-            return _bcryptjs["default"].compare(req.body.pass, data.passuser);
+          case 7:
+            _context5.prev = 7;
+            _context5.t0 = _context5["catch"](0);
+            console.log(_context5.t0);
 
-          case 11:
-            pass = _context5.sent;
-            console.log(pass);
-            if (!pass) res.json('password is incorrect'); //create assign token
-
-            token = _jsonwebtoken["default"].sign({
-              id: data.iduser
-            }, process.env.SECRET_TOKEN);
-            res.header('auto-token', token).send(token);
-
-          case 16:
+          case 10:
           case "end":
             return _context5.stop();
         }
       }
-    }, _callee5);
+    }, _callee5, null, [[0, 7]]);
   }));
-  return _login.apply(this, arguments);
+  return _getUsers.apply(this, arguments);
 }
+
+;
 
 function authToken(_x11, _x12) {
   return _authToken.apply(this, arguments);
@@ -455,7 +456,7 @@ function _updateUser() {
   _updateUser = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee10(req, res) {
-    var id, _req$body3, name, phone, email, city, projects;
+    var id, _req$body2, name, phone, email, city, projects;
 
     return regeneratorRuntime.wrap(function _callee10$(_context10) {
       while (1) {
@@ -463,7 +464,7 @@ function _updateUser() {
           case 0:
             //ACTUALIZAR UN UserE
             id = req.params.id;
-            _req$body3 = req.body, name = _req$body3.name, phone = _req$body3.phone, email = _req$body3.email, city = _req$body3.city;
+            _req$body2 = req.body, name = _req$body2.name, phone = _req$body2.phone, email = _req$body2.email, city = _req$body2.city;
             _context10.next = 4;
             return _UserModels["default"].findAll({
               attributes: ['id', 'name', 'phone', 'email', 'city'],
