@@ -33,10 +33,7 @@ export async function login (req, res){
         if(pass) {
           //create assign token
           const token = jwtoken.sign({id: user.iduser}, config.SECRET_TOKEN);
-          res.json({
-            autotoken:token
-          });
-          //res.header('auto-token', token).send(token);
+          res.header('auto-token', token).json({autotoken:token});
         }else {
           res.json('password es  incorrecta')
         }

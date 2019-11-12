@@ -105,9 +105,9 @@ function _login() {
               token = _jsonwebtoken["default"].sign({
                 id: user.iduser
               }, _config["default"].SECRET_TOKEN);
-              res.json({
+              res.header('auto-token', token).json({
                 autotoken: token
-              }); //res.header('auto-token', token).send(token);
+              });
             } else {
               res.json('password es  incorrecta');
             }
