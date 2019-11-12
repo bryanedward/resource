@@ -121,12 +121,6 @@ export async function createUser(req, res) {
 }
 
 
-
-
-
-
-
-
 export async function getOneUser(req, res) {
     // TODO: buscar el usuario con el email
     const {email} = req.params;
