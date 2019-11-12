@@ -12,7 +12,7 @@ var _VerifyTokenController = require("../auth/VerifyTokenController");
 var _Publication = require("../controllers/Publication.controller");
 
 var router = (0, _express.Router)();
-router.get('/', _VerifyTokenController.authToken, _Publication.getPublications);
+router.get('/home', _VerifyTokenController.authToken, _Publication.getPublications);
 router.post('/create', _VerifyTokenController.authToken, _Publication.createPublication);
 router.get('/:id', _Publication.getOnePublication);
 router.get('/client/:clientid', _Publication.getPublicationByUserid);

@@ -13,7 +13,6 @@ export async function getPublications(req, res) {
         ]
     });
     res.json({publications});
-
 }
 
 
