@@ -19,7 +19,6 @@ export async function getImage(req, res){
 
 export async function login (req, res){
     //login of user and the password
-    try {
       const user = await User.findOne({
           where:{
               emailuser : req.body.emailUser
@@ -42,10 +41,6 @@ export async function login (req, res){
           res.json('password es  incorrecta')
         }
       }
-    } catch (e) {
-      res.json(e)
-    }
-
 }
 
 

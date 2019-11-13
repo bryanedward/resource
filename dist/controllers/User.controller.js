@@ -74,31 +74,30 @@ function _login() {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            _context2.prev = 0;
-            _context2.next = 3;
+            _context2.next = 2;
             return _UserModels["default"].findOne({
               where: {
                 emailuser: req.body.emailUser
               }
             });
 
-          case 3:
+          case 2:
             user = _context2.sent;
 
             if (user) {
-              _context2.next = 8;
+              _context2.next = 7;
               break;
             }
 
             res.json('este correo no existe');
-            _context2.next = 12;
+            _context2.next = 11;
             break;
 
-          case 8:
-            _context2.next = 10;
+          case 7:
+            _context2.next = 9;
             return _bcryptjs["default"].compare(req.body.passUser, user.passuser);
 
-          case 10:
+          case 9:
             pass = _context2.sent;
 
             if (pass) {
@@ -113,21 +112,12 @@ function _login() {
               res.json('password es  incorrecta');
             }
 
-          case 12:
-            _context2.next = 17;
-            break;
-
-          case 14:
-            _context2.prev = 14;
-            _context2.t0 = _context2["catch"](0);
-            res.json(_context2.t0);
-
-          case 17:
+          case 11:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 14]]);
+    }, _callee2);
   }));
   return _login.apply(this, arguments);
 }
