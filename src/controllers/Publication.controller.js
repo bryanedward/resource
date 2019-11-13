@@ -32,7 +32,7 @@ export async function createPublication(req, res) {
        'levelsubject', 'userid']
     });
     res.json({
-        message: 'publicacion creada'
+        message: 'publicacion creada con exito'
     });
 }
 

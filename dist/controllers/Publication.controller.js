@@ -86,7 +86,7 @@ function _createPublication() {
 
           case 3:
             res.json({
-              message: 'publicacion creada'
+              message: 'publicacion creada con exito'
             });
 
           case 4:
