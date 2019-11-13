@@ -69,35 +69,38 @@ function _login() {
   _login = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(req, res) {
-    var user, pass, token;
+    var email, user, pass, token;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            _context2.next = 2;
+            //login of user and the password
+            email = req.body.emailuser;
+            console.log(email);
+            _context2.next = 4;
             return _UserModels["default"].findOne({
               where: {
-                emailuser: req.body.emailUser
+                emailuser: email
               }
             });
 
-          case 2:
+          case 4:
             user = _context2.sent;
 
             if (user) {
-              _context2.next = 7;
+              _context2.next = 9;
               break;
             }
 
             res.json('este correo no existe');
-            _context2.next = 11;
+            _context2.next = 13;
             break;
 
-          case 7:
-            _context2.next = 9;
+          case 9:
+            _context2.next = 11;
             return _bcryptjs["default"].compare(req.body.passUser, user.passuser);
 
-          case 9:
+          case 11:
             pass = _context2.sent;
 
             if (pass) {
@@ -112,7 +115,7 @@ function _login() {
               res.json('password es  incorrecta');
             }
 
-          case 11:
+          case 13:
           case "end":
             return _context2.stop();
         }

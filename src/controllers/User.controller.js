@@ -19,9 +19,11 @@ export async function getImage(req, res){
 
 export async function login (req, res){
     //login of user and the password
+    var email = req.body.emailuser;
+    console.log(email);
       const user = await User.findOne({
           where:{
-              emailuser : req.body.emailUser
+              emailuser : email
           },
       });
       if(!user){
