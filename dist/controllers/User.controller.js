@@ -75,7 +75,7 @@ function _login() {
         switch (_context2.prev = _context2.next) {
           case 0:
             //login of user and the password
-            email = req.body.emailuser;
+            email = req.body.emailUser;
             console.log(email);
             _context2.next = 4;
             return _UserModels["default"].findOne({
