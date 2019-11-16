@@ -26,31 +26,14 @@ CREATE TABLE IF NOT EXISTS messages(
 
 
 
-
-
-
-
 INSERT INTO users(nameUser,emailUser,passUser, roleUser)
 VALUES ('Bryan','edwardbrian96@gmail.com','3893259','students');
 
-INSERT INTO users(nameUser,emailUser,passUser)
-VALUES ('Ricardo','ricardo@gmail.com',389325229);
-
-INSERT INTO projects(name,priority, description, deliverydate)
-VALUES ('make a app mobile', 1, 'using express', '2019-05-13');
-
-INSERT INTO projects(name,priority, description, deliverydate)
-VALUES ('make a table for pg', 1, 'using express', '2019-05-14');
 
 -- INSERT TASKS DATA
 INSERT INTO publications(namePublication,descriptPublication,userId)
 VALUES ('jwtoken','para que sirve',1);
 
-INSERT INTO tasks (name, done, projectId)
-VALUES ('create app mobile', true, 1);
 
-INSERT INTO tasks (name, done, projectId)
-VALUES ('practice java', true, 2);
-
-INSERT INTO tasks (name, done, projectId)
-VALUES ('connect database', false, 1);
+INSERT INTO messages(messageuser,userid,publicationid)
+VALUES ('se mas especifico',1, 1);

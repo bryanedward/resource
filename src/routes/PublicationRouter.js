@@ -8,10 +8,14 @@ import { createPublication, getPublications,
 
 
 
-router.get('/home', authToken ,getPublications);
+router.get('/home' ,getPublications);
 
 
 router.post('/create', authToken ,createPublication);
+
+
+
+
 
 
 
