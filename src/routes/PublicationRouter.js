@@ -9,12 +9,7 @@ import { createPublication, getPublications,
 
 
 router.get('/home' ,getPublications);
-
-
 router.post('/create', authToken ,createPublication);
-
-
-
 
 
 

@@ -17,7 +17,6 @@ var multipartMiddleware = (0, _connectMultiparty["default"])({
   uploadDir: './src/photos'
 });
 var router = (0, _express.Router)();
-router.get('/', _User.getUsers);
 router.post('/login', _User.login);
 router.post('/create', multipartMiddleware, _User.createUser);
 router.get('/image/:photoUser', _User.getImage);

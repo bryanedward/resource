@@ -1,6 +1,6 @@
 import Sequelize, { INTEGER } from 'sequelize';
+import User from './UserModels';
 import { sequelize } from '../database/databaseLocal';
-import message from './MessagesModels';
 
 const Publication = sequelize.define('publications', {
     idpublication: {
@@ -23,8 +23,8 @@ const Publication = sequelize.define('publications', {
         timestamps: false
     });
 
-    Publication.hasMany(message,{foreingKey:'publicationid', sourceKey:'idpublication'});
+    //Publication.belongsTo(User, { foreingKey: 'userid', sourceKey: 'userid' });
 
-    message.belongsTo(Publication, {foreingKey:'publicationid', sourceKey:'idpublication'});
+
 
 export default Publication;

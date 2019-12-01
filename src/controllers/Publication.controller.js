@@ -18,6 +18,19 @@ export async function getPublications(req, res) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 export async function createPublication(req, res) {
     // TODO: crear una publicacion con el jwt para identificarse
     const { namePublication, descriptPublication, levelSubject} = req.body;
@@ -123,15 +136,25 @@ export async function getUser(req, res) {
 }
 
 
+
 export async function getUserDouble(req, res) {
-    //FUNCTION USER WITH ALL THE PublicationS
-    const Publication = await Publication.findAll({
-        attributes: ['Userid', 'namePublication', 'description', 'urlimg']
-    });
-    const User = await User.findAll({
-        attributes: ['id', 'name', 'urlimg', 'email', 'city']
-    })
-    res.json({ Publication, User })
+    //FUNCTION USER WITH ALL THE PublicationSS
+
+     Publication.belongsTo(User, {foreignKey: 'userid'});
+     var iterable = await User.findAll();
+     var publication = new Array();
+     for (var variable of iterable) {
+        var data = await Publication.findAll({
+        attributes:['userid','namepublication', 'descriptpublication'],
+         include:[{
+           model:  User, attributes:['nameuser','emailuser','roleuser','iduser'],
+           where: {'iduser': variable.iduser}
+         }]
+      });
+      publication.push(data);
+     }
+    res.json({publication});
+
 }
 
 

@@ -1,6 +1,5 @@
 import Sequelize from 'sequelize';
 import { sequelize } from '../database/databaseLocal';
-
 import publication from './PublicationModels';
 
 const User = sequelize.define('users', {
@@ -27,9 +26,13 @@ const User = sequelize.define('users', {
         timestamps: false
     });
 
-User.hasMany(publication, { foreingKey: 'userid', sourceKey: 'iduser' });
-// TODO: el foreingKey hace relacion con la llave foranea del modelo publicacion
-// TODO: y ek sourceKey hace referencia al id de la clase modelo idUser
-publication.belongsTo(User, { foreingKey: 'userid', sourceKey: 'iduser' });
+
+
+    //asociar las tablas
+    User.hasMany(publication, { foreingKey: 'userid', sourceKey: 'iduser' });
+    // TODO: el foreingKey hace relacion con la llave foranea del modelo publicacion
+    // TODO: y ek sourceKey llave de origen hace referencia al id de la clase modelo idUser
+    publication.belongsTo(User, { foreingKey: 'userid', sourceKey: 'iduser' });
+
 
 export default User;

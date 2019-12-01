@@ -5,11 +5,11 @@ const multipartMiddleware = multipart({uploadDir: './src/photos'});
 
 const router = Router();
 
-import {  createUser, getUsers, getOneUser,
+import {  createUser, getOneUser,
   deleteUser, updateUser, getImage, login, authToken } from '../controllers/User.controller';
 
 
-router.get('/', getUsers);
+
 
 router.post('/login', login);
 

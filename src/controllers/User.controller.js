@@ -1,4 +1,6 @@
 import User from '../models/UserModels';
+import Publication from '../models/PublicationModels';
+
 import bcrypt from 'bcryptjs';
 import jwtoken from 'jsonwebtoken';
 import fs from 'fs';
@@ -139,17 +141,7 @@ export async function getOneUser(req, res) {
 }
 
 
-export async function getUsers(req, res) {
-    // TODO: obtener todos los usuarios
-    try {
-        const users = await User.findAll();
-        res.json({
-            users
-        });
-    } catch (error) {
-        console.log(error);
-    }
-};
+
 
 
 export async function authToken (req, res){

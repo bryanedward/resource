@@ -35,13 +35,14 @@ var User = _databaseLocal.sequelize.define('users', {
   }
 }, {
   timestamps: false
-});
+}); //asociar las tablas
+
 
 User.hasMany(_PublicationModels["default"], {
   foreingKey: 'userid',
   sourceKey: 'iduser'
 }); // TODO: el foreingKey hace relacion con la llave foranea del modelo publicacion
-// TODO: y ek sourceKey hace referencia al id de la clase modelo idUser
+// TODO: y ek sourceKey llave de origen hace referencia al id de la clase modelo idUser
 
 _PublicationModels["default"].belongsTo(User, {
   foreingKey: 'userid',
