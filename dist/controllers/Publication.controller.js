@@ -276,7 +276,7 @@ function getUserDouble(req, res) {
           variable = _step.value;
           _context8.next = 14;
           return regeneratorRuntime.awrap(_PublicationModels["default"].findAll({
-            attributes: ['userid', 'namepublication', 'descriptpublication'],
+            attributes: ['idpublication', 'userid', 'namepublication', 'descriptpublication'],
             include: [{
               model: _UserModels["default"],
               attributes: ['nameuser', 'emailuser', 'roleuser', 'iduser'],
@@ -288,7 +288,7 @@ function getUserDouble(req, res) {
 
         case 14:
           data = _context8.sent;
-          publication.push(data);
+          publication.unshift(data);
 
         case 16:
           _iteratorNormalCompletion = true;
@@ -330,6 +330,7 @@ function getUserDouble(req, res) {
           return _context8.finish(25);
 
         case 33:
+          //res.send(Object.assign(publication[1],publication[0]));
           res.json({
             publication: publication
           });

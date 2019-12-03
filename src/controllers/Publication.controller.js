@@ -145,14 +145,18 @@ export async function getUserDouble(req, res) {
      var publication = new Array();
      for (var variable of iterable) {
         var data = await Publication.findAll({
-        attributes:['userid','namepublication', 'descriptpublication'],
+        attributes:[
+          'idpublication','userid','namepublication', 'descriptpublication'
+        ],
          include:[{
            model:  User, attributes:['nameuser','emailuser','roleuser','iduser'],
            where: {'iduser': variable.iduser}
          }]
       });
-      publication.push(data);
+      publication.unshift(data);
      }
+
+    //res.send(Object.assign(publication[1],publication[0]));
     res.json({publication});
 
 }

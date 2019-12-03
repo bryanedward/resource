@@ -22,7 +22,9 @@ router.post('/create',multipartMiddleware, createUser);
 
 router.get('/image/:photoUser', getImage);
 
-router.get('/:email', getOneUser);
+
+
+router.get('/:id', getOneUser);
 
 
 router.delete('/:id', deleteUser);

@@ -225,17 +225,17 @@ function createUser(req, res) {
 }
 
 function getOneUser(req, res) {
-  var email, dataUser;
+  var id, dataUser;
   return regeneratorRuntime.async(function getOneUser$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
           // TODO: buscar el usuario con el email
-          email = req.params.email;
+          id = req.params.id;
           _context4.next = 3;
           return regeneratorRuntime.awrap(_UserModels["default"].findOne({
             where: {
-              emailuser: email
+              iduser: id
             }
           }));
 
