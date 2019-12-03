@@ -247,9 +247,7 @@ function getOneUser(req, res) {
               message: 'nothing'
             });
           } else {
-            res.json({
-              dataUser: dataUser
-            });
+            res.json(dataUser);
           }
 
         case 5:

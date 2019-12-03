@@ -136,7 +136,7 @@ export async function getOneUser(req, res) {
     if (dataUser == null) {
         res.json({ message: 'nothing' })
     } else {
-        res.json({ dataUser })
+        res.json(dataUser)
     }
 }
 
