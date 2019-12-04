@@ -90,7 +90,8 @@ function login(req, res) {
               id: user.iduser
             }, _config["default"].SECRET_TOKEN);
             res.json({
-              authToken: token
+              authToken: token,
+              photo: user.photouser
             }); //res.header('auto-token', token).send(token);
           } else {
             res.json('password es  incorrecta');

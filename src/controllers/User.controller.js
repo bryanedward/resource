@@ -38,7 +38,8 @@ export async function login (req, res){
           //create assign token
           const token = jwtoken.sign({id: user.iduser}, config.SECRET_TOKEN);
           res.json({
-            authToken: token
+            authToken: token,
+            photo: user.photouser
           })
           //res.header('auto-token', token).send(token);
         }else {
