@@ -10,7 +10,6 @@ exports.updatePublication = updatePublication;
 exports.deletePublication = deletePublication;
 exports.getPublicationByUserid = getPublicationByUserid;
 exports.getUser = getUser;
-exports.getUserDouble = getUserDouble;
 exports.getUpdate = getUpdate;
 
 var _PublicationModels = _interopRequireDefault(require("../models/PublicationModels"));
@@ -243,115 +242,15 @@ function getUser(req, res) {
   });
 }
 
-function getUserDouble(req, res) {
-  var iterable, publication, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, variable, data;
-
-  return regeneratorRuntime.async(function getUserDouble$(_context8) {
+function getUpdate(req, res) {
+  var user, results;
+  return regeneratorRuntime.async(function getUpdate$(_context8) {
     while (1) {
       switch (_context8.prev = _context8.next) {
         case 0:
-          //FUNCTION USER WITH ALL THE PublicationSS
-          _PublicationModels["default"].belongsTo(_UserModels["default"], {
-            foreignKey: 'userid'
-          });
-
-          _context8.next = 3;
-          return regeneratorRuntime.awrap(_UserModels["default"].findAll());
-
-        case 3:
-          iterable = _context8.sent;
-          publication = new Array();
-          _iteratorNormalCompletion = true;
-          _didIteratorError = false;
-          _iteratorError = undefined;
-          _context8.prev = 8;
-          _iterator = iterable[Symbol.iterator]();
-
-        case 10:
-          if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-            _context8.next = 19;
-            break;
-          }
-
-          variable = _step.value;
-          _context8.next = 14;
-          return regeneratorRuntime.awrap(_PublicationModels["default"].findAll({
-            attributes: ['idpublication', 'userid', 'namepublication', 'descriptpublication'],
-            include: [{
-              model: _UserModels["default"],
-              attributes: ['nameuser', 'emailuser', 'roleuser', 'iduser'],
-              where: {
-                'iduser': variable.iduser
-              }
-            }]
-          }));
-
-        case 14:
-          data = _context8.sent;
-          publication.unshift(data);
-
-        case 16:
-          _iteratorNormalCompletion = true;
-          _context8.next = 10;
-          break;
-
-        case 19:
-          _context8.next = 25;
-          break;
-
-        case 21:
-          _context8.prev = 21;
-          _context8.t0 = _context8["catch"](8);
-          _didIteratorError = true;
-          _iteratorError = _context8.t0;
-
-        case 25:
-          _context8.prev = 25;
-          _context8.prev = 26;
-
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
-          }
-
-        case 28:
-          _context8.prev = 28;
-
-          if (!_didIteratorError) {
-            _context8.next = 31;
-            break;
-          }
-
-          throw _iteratorError;
-
-        case 31:
-          return _context8.finish(28);
-
-        case 32:
-          return _context8.finish(25);
-
-        case 33:
-          //res.send(Object.assign(publication[1],publication[0]));
-          res.json({
-            publication: publication
-          });
-
-        case 34:
-        case "end":
-          return _context8.stop();
-      }
-    }
-  }, null, null, [[8, 21, 25, 33], [26,, 28, 32]]);
-}
-
-function getUpdate(req, res) {
-  var user, results;
-  return regeneratorRuntime.async(function getUpdate$(_context9) {
-    while (1) {
-      switch (_context9.prev = _context9.next) {
-        case 0:
           //NEW FUNCTION FIND USER WITH EL UserID
           user = req.params.user;
-          _context9.next = 3;
+          _context8.next = 3;
           return regeneratorRuntime.awrap(_UserModels["default"].findOne({
             where: {
               id: user
@@ -359,12 +258,12 @@ function getUpdate(req, res) {
           }));
 
         case 3:
-          results = _context9.sent;
+          results = _context8.sent;
           res.json(results);
 
         case 5:
         case "end":
-          return _context9.stop();
+          return _context8.stop();
       }
     }
   });

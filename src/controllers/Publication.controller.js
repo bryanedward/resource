@@ -137,29 +137,7 @@ export async function getUser(req, res) {
 
 
 
-export async function getUserDouble(req, res) {
-    //FUNCTION USER WITH ALL THE PublicationSS
 
-     Publication.belongsTo(User, {foreignKey: 'userid'});
-     var iterable = await User.findAll();
-     var publication = new Array();
-     for (var variable of iterable) {
-        var data = await Publication.findAll({
-        attributes:[
-          'idpublication','userid','namepublication', 'descriptpublication'
-        ],
-         include:[{
-           model:  User, attributes:['nameuser','emailuser','roleuser','iduser'],
-           where: {'iduser': variable.iduser}
-         }]
-      });
-      publication.unshift(data);
-     }
-
-    //res.send(Object.assign(publication[1],publication[0]));
-    res.json({publication});
-
-}
 
 
 export async function getUpdate(req, res) {

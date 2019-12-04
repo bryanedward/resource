@@ -8,7 +8,7 @@ import { createPublication, getPublications,
 
 
 
-router.get('/home' ,getPublications);
+router.get('/home',getPublications);
 router.post('/create', authToken ,createPublication);
 
 
@@ -17,7 +17,7 @@ router.post('/create', authToken ,createPublication);
 router.get('/:id', getOnePublication);
 router.get('/client/:clientid', getPublicationByUserid);
 router.get('/user/:clientid', getUser);
-router.get('/data/user', getUserDouble);
+
 router.get('/update/:user', getUpdate);
 
 

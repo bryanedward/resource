@@ -17,7 +17,6 @@ router.post('/create', _VerifyTokenController.authToken, _Publication.createPubl
 router.get('/:id', _Publication.getOnePublication);
 router.get('/client/:clientid', _Publication.getPublicationByUserid);
 router.get('/user/:clientid', _Publication.getUser);
-router.get('/data/user', _Publication.getUserDouble);
 router.get('/update/:user', _Publication.getUpdate);
 router["delete"]('/:id', _Publication.deletePublication);
 router.put('/:id', _Publication.updatePublication);
