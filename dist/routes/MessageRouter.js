@@ -12,6 +12,7 @@ var _VerifyTokenController = require("../auth/VerifyTokenController");
 var _MessageController = require("../controllers/MessageController");
 
 var router = (0, _express.Router)();
-router.get('/:idpublication', _VerifyTokenController.authToken, _MessageController.getMessagePublications);
+router.get('/:idpublication', _MessageController.getMessagePublications);
+router.post('/create', _VerifyTokenController.authToken, _MessageController.postMessagesPublications);
 var _default = router;
 exports["default"] = _default;

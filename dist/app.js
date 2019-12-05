@@ -30,14 +30,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var app = (0, _express["default"])(); //middlewares
 
 app.use((0, _morgan["default"])('dev'));
-app.use((0, _express.json)());
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-  res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-  next();
-}); //routers
+app.use((0, _express.json)()); //routers
 
 app.use('/dev/user', _UserRouter["default"]);
 app.use('/dev/publications', _PublicationRouter["default"]);

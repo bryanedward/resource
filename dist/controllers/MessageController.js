@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getMessagePublications = getMessagePublications;
+exports.postMessagesPublications = postMessagesPublications;
 
 var _MessagesModels = _interopRequireDefault(require("../models/MessagesModels"));
 
@@ -21,7 +22,7 @@ function getMessagePublications(req, res) {
 
           _context.next = 3;
           return regeneratorRuntime.awrap(_MessagesModels["default"].findAll({
-            attributes: ['messageuser'],
+            attributes: ['messageuser', 'userid', 'publicationid'],
             where: {
               publicationid: idpublication
             }
@@ -36,6 +37,40 @@ function getMessagePublications(req, res) {
         case 5:
         case "end":
           return _context.stop();
+      }
+    }
+  });
+}
+
+;
+
+function postMessagesPublications(req, res) {
+  var _req$body, messageuser, messageid;
+
+  return regeneratorRuntime.async(function postMessagesPublications$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          //se obtiene el token para asignar el id del usuario y los parametros para la creacion de
+          //del nuevo mensaje
+          _req$body = req.body, messageuser = _req$body.messageuser, messageid = _req$body.messageid;
+          _context2.next = 3;
+          return regeneratorRuntime.awrap(_MessagesModels["default"].create({
+            messageuser: messageuser,
+            userid: req.user.id,
+            publicationid: messageid
+          }, {
+            fields: ['messageuser', 'userid', 'publicationid']
+          }));
+
+        case 3:
+          res.json({
+            message: 'mensaje creado'
+          });
+
+        case 4:
+        case "end":
+          return _context2.stop();
       }
     }
   });

@@ -19,18 +19,6 @@ export async function getPublications(req, res) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 export async function createPublication(req, res) {
     // TODO: crear una publicacion con el jwt para identificarse
     const { namePublication, descriptPublication, levelSubject} = req.body;

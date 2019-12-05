@@ -2,9 +2,9 @@ import { Router } from 'express';
 const router = Router();
 
 import {authToken} from '../auth/VerifyTokenController';
-import {getMessagePublications} from '../controllers/MessageController';
+import {getMessagePublications, postMessagesPublications} from '../controllers/MessageController';
 
-router.get('/:idpublication', authToken, getMessagePublications);
-
+router.get('/:idpublication', getMessagePublications);
+router.post('/create',authToken, postMessagesPublications);
 
 export default router;
