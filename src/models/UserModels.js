@@ -25,9 +25,6 @@ const User = sequelize.define('users', {
 }, {
         timestamps: false
     });
-
-
-
     //asociar las tablas
     User.hasMany(publication, { foreingKey: 'userid', sourceKey: 'iduser' });
     // TODO: el foreingKey hace relacion con la llave foranea del modelo publicacion

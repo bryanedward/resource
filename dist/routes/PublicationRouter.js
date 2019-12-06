@@ -14,6 +14,7 @@ var _Publication = require("../controllers/Publication.controller");
 var router = (0, _express.Router)();
 router.get('/home', _Publication.getPublications);
 router.post('/create', _VerifyTokenController.authToken, _Publication.createPublication);
+router.get('/test', _Publication.test);
 router.get('/:id', _Publication.getOnePublication);
 router.get('/client/:clientid', _Publication.getPublicationByUserid);
 router.get('/user/:clientid', _Publication.getUser);

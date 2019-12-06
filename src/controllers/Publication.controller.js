@@ -5,14 +5,9 @@ import User from '../models/UserModels';
 
 export async function getPublications(req, res) {
     // TODO: obtener todas las publicaciones identificandose con el jwt
-    const publications = await Publication.findAll({
-        attributes: ['idpublication', 'namepublication', 'descriptpublication',
-        'levelsubject','userid'],
-        order: [
-            ['idpublication', 'DESC']
-        ]
-    });
-    res.json({publications});
+    const publications = await Publication.findAll({include:[User],
+      order:[['idpublication','DESC']]});
+      res.json({publications})
 }
 
 
@@ -36,6 +31,19 @@ export async function createPublication(req, res) {
         message: 'publicacion creada con exito'
     });
 }
+
+
+
+
+
+
+
+export async function test(req,res){
+
+}
+
+
+
 
 
 

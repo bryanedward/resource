@@ -4,14 +4,14 @@ const router = Router();
 import {authToken} from '../auth/VerifyTokenController';
 import { createPublication, getPublications,
     deletePublication, updatePublication, getOnePublication ,
-    getPublicationByUserid , getUser, getUserDouble, getUpdate  } from '../controllers/Publication.controller';
+    getPublicationByUserid , getUser, getUserDouble, getUpdate, test  } from '../controllers/Publication.controller';
 
 
 
 router.get('/home',getPublications);
 router.post('/create', authToken ,createPublication);
 
-
+router.get('/test',test);
 
 
 router.get('/:id', getOnePublication);

@@ -16,14 +16,14 @@ const Publication = sequelize.define('publications', {
     levelsubject:{
       type: Sequelize.INTEGER
     },
-    userid: {
+    userIduser: {
         type: Sequelize.INTEGER
     }
 }, {
         timestamps: false
     });
 
-    //Publication.belongsTo(User, { foreingKey: 'userid', sourceKey: 'userid' });
+
 
 
 

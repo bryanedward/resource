@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS publications(
     namepublication text NOT NULL CHECK (namepublication <> ''),
     descriptpublication text,
     levelsubject INTEGER NOT NULL,
-    userid INTEGER REFERENCES users(iduser)
+    "userIduser" INTEGER REFERENCES users(iduser)
 );
 
 
@@ -31,8 +31,8 @@ VALUES ('Bryan','edwardbrian96@gmail.com','3893259','students');
 
 
 -- INSERT TASKS DATA
-INSERT INTO publications(namePublication,descriptPublication,userId)
-VALUES ('jwtoken','para que sirve',1);
+INSERT INTO publications(namePublication,descriptPublication,levelsubject,"userIduser")
+VALUES ('sequelize','como hacer join',1,4);
 
 
 INSERT INTO messages(messageuser,userid,publicationid)

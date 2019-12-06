@@ -33,13 +33,12 @@ var Publication = _databaseLocal.sequelize.define('publications', {
   levelsubject: {
     type: _sequelize["default"].INTEGER
   },
-  userid: {
+  userIduser: {
     type: _sequelize["default"].INTEGER
   }
 }, {
   timestamps: false
-}); //Publication.belongsTo(User, { foreingKey: 'userid', sourceKey: 'userid' });
-
+});
 
 var _default = Publication;
 exports["default"] = _default;
