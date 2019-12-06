@@ -11,6 +11,8 @@ var _MessagesModels = _interopRequireDefault(require("../models/MessagesModels")
 
 var _PublicationModels = _interopRequireDefault(require("../models/PublicationModels"));
 
+var _UserModels = _interopRequireDefault(require("../models/UserModels"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function getMessagePublications(req, res) {
@@ -21,22 +23,24 @@ function getMessagePublications(req, res) {
         case 0:
           idpublication = req.params.idpublication; // TODO: obtenemos el id de la pregunta y buscamos en la tabla de la base datos
 
-          _context.next = 3;
+          _MessagesModels["default"].belongsTo(_UserModels["default"]);
+
+          _context.next = 4;
           return regeneratorRuntime.awrap(_MessagesModels["default"].findAll({
-            attributes: ['idmessage', 'messageuser', 'userid', 'publicationid'],
+            include: [_UserModels["default"]],
             order: [['idmessage', 'DESC']],
             where: {
-              publicationid: idpublication
+              'publicationid': idpublication
             }
           }));
 
-        case 3:
+        case 4:
           messages = _context.sent;
           res.json({
             messages: messages
           });
 
-        case 5:
+        case 6:
         case "end":
           return _context.stop();
       }

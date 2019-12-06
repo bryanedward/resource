@@ -1,19 +1,16 @@
 import Message from '../models/MessagesModels';
 import Publication from '../models/PublicationModels';
-
+import User from '../models/UserModels';
 
 export async function getMessagePublications(req,res){
   const {idpublication} = req.params;
   // TODO: obtenemos el id de la pregunta y buscamos en la tabla de la base datos
+  Message.belongsTo(User);
   const messages = await Message.findAll({
-    attributes:[
-      'idmessage','messageuser', 'userid', 'publicationid'],
-      order: [
-        ['idmessage','DESC']
-      ],
-    where:{publicationid: idpublication },
-
-  });
+    include:[User],
+    order:[['idmessage','DESC']],
+    where:{ 'publicationid': idpublication}
+  })
   res.json({messages});
 };
 

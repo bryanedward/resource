@@ -27,7 +27,7 @@ var Message = _databaseLocal.sequelize.define('messages', {
   messageuser: {
     type: _sequelize["default"].TEXT
   },
-  userid: {
+  userIduser: {
     type: _sequelize["default"].INTEGER
   },
   publicationid: {

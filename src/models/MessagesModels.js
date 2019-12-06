@@ -10,7 +10,7 @@ const Message  = sequelize.define('messages',{
   messageuser:{
     type: Sequelize.TEXT
   },
-  userid:{
+  userIduser:{
     type: Sequelize.INTEGER
   },
   publicationid:{
