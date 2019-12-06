@@ -23,7 +23,8 @@ function getMessagePublications(req, res) {
 
           _context.next = 3;
           return regeneratorRuntime.awrap(_MessagesModels["default"].findAll({
-            attributes: ['messageuser', 'userid', 'publicationid'],
+            attributes: ['idmessage', 'messageuser', 'userid', 'publicationid'],
+            order: [['idmessage', 'DESC']],
             where: {
               publicationid: idpublication
             }

@@ -6,8 +6,13 @@ export async function getMessagePublications(req,res){
   const {idpublication} = req.params;
   // TODO: obtenemos el id de la pregunta y buscamos en la tabla de la base datos
   const messages = await Message.findAll({
-    attributes:['messageuser', 'userid', 'publicationid'],
-    where:{publicationid: idpublication }
+    attributes:[
+      'idmessage','messageuser', 'userid', 'publicationid'],
+      order: [
+        ['idmessage','DESC']
+      ],
+    where:{publicationid: idpublication },
+
   });
   res.json({messages});
 };
