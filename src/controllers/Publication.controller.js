@@ -16,16 +16,17 @@ export async function getPublications(req, res) {
 
 export async function createPublication(req, res) {
     // TODO: crear una publicacion con el jwt para identificarse
+
     const { namePublication, descriptPublication, levelSubject} = req.body;
 
     await Publication.create({
       namepublication : namePublication,
       descriptpublication : descriptPublication,
       levelsubject : levelSubject,
-      userid : req.user.id
+      userIduser : req.user.id
     },{
       fields: ['namepublication', 'descriptpublication',
-       'levelsubject', 'userid']
+       'levelsubject', 'userIduser']
     });
     res.json({
         message: 'publicacion creada con exito'

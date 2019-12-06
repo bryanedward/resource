@@ -59,9 +59,9 @@ function createPublication(req, res) {
             namepublication: namePublication,
             descriptpublication: descriptPublication,
             levelsubject: levelSubject,
-            userid: req.user.id
+            userIduser: req.user.id
           }, {
-            fields: ['namepublication', 'descriptpublication', 'levelsubject', 'userid']
+            fields: ['namepublication', 'descriptpublication', 'levelsubject', 'userIduser']
           }));
 
         case 3:
