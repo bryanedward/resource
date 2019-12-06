@@ -63,10 +63,10 @@ function postMessagesPublications(req, res) {
           _context2.next = 3;
           return regeneratorRuntime.awrap(_MessagesModels["default"].create({
             messageuser: messageuser,
-            userid: req.user.id,
+            userIduser: req.user.id,
             publicationid: messageid
           }, {
-            fields: ['messageuser', 'userid', 'publicationid']
+            fields: ['messageuser', 'userIduser', 'publicationid']
           }));
 
         case 3:

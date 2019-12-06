@@ -24,10 +24,10 @@ export async function postMessagesPublications(req,res){
   const { messageuser, messageid } = req.body;
   await Message.create({
     messageuser: messageuser,
-    userid: req.user.id,
+    userIduser: req.user.id,
     publicationid : messageid
   },{
-    fields:['messageuser','userid','publicationid']
+    fields:['messageuser','userIduser','publicationid']
   });
   res.json({
     message: 'mensaje creado'
