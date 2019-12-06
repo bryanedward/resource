@@ -30,5 +30,8 @@ export async function postMessagesPublications(req,res){
   res.json({
     message: 'mensaje creado'
   });
-
 };
+
+export async function deleteMessagePublications(req,res){
+
+}

@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getMessagePublications = getMessagePublications;
 exports.postMessagesPublications = postMessagesPublications;
+exports.deleteMessagePublications = deleteMessagePublications;
 
 var _MessagesModels = _interopRequireDefault(require("../models/MessagesModels"));
 
@@ -77,3 +78,15 @@ function postMessagesPublications(req, res) {
 }
 
 ;
+
+function deleteMessagePublications(req, res) {
+  return regeneratorRuntime.async(function deleteMessagePublications$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  });
+}

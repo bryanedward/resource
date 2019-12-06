@@ -7,4 +7,5 @@ import {getMessagePublications, postMessagesPublications} from '../controllers/M
 router.get('/:idpublication', getMessagePublications);
 router.post('/create',authToken, postMessagesPublications);
 
+
 export default router;
