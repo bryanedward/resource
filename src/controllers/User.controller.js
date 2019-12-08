@@ -51,7 +51,10 @@ export async function login (req, res){
 
 export async function createUser(req, res) {
   // TODO: crear un nuevo usuario verificando si el correo existe
-    const { emailUser } = req.body;
+    var result = req.body;
+
+
+    const { emailUser } = result;
     // TODO: -- obtener la direccion donde se guarda la foto
     const urlPhoto = req.files.photo.path;
 

@@ -106,14 +106,15 @@ function login(req, res) {
 }
 
 function createUser(req, res) {
-  var emailUser, urlPhoto, reqUrl, data, _req$body, nameUser, _emailUser, roleUser, salt, bcryptPassword, imgSplit, fileName, extImg, extName, reqUrlSplit, photoUser, newUser;
+  var result, emailUser, urlPhoto, reqUrl, data, _req$body, nameUser, _emailUser, roleUser, salt, bcryptPassword, imgSplit, fileName, extImg, extName, reqUrlSplit, photoUser, newUser;
 
   return regeneratorRuntime.async(function createUser$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           // TODO: crear un nuevo usuario verificando si el correo existe
-          emailUser = req.body.emailUser; // TODO: -- obtener la direccion donde se guarda la foto
+          result = req.body;
+          emailUser = result.emailUser; // TODO: -- obtener la direccion donde se guarda la foto
 
           urlPhoto = req.files.photo.path;
           reqUrl = _url["default"].format({
@@ -122,32 +123,32 @@ function createUser(req, res) {
             host: req.get('host'),
             pathname: req.originalUrl
           });
-          _context3.next = 5;
+          _context3.next = 6;
           return regeneratorRuntime.awrap(_UserModels["default"].findOne({
             where: {
               emailuser: emailUser
             }
           }));
 
-        case 5:
+        case 6:
           data = _context3.sent;
 
           if (!(data == null)) {
-            _context3.next = 36;
+            _context3.next = 37;
             break;
           }
 
           _req$body = req.body, nameUser = _req$body.nameUser, _emailUser = _req$body.emailUser, roleUser = _req$body.roleUser; // TODO: ------- se usa el bcrpyt para encriptar la passwor-----
 
-          _context3.next = 10;
+          _context3.next = 11;
           return regeneratorRuntime.awrap(_bcryptjs["default"].genSalt(10));
 
-        case 10:
+        case 11:
           salt = _context3.sent;
-          _context3.next = 13;
+          _context3.next = 14;
           return regeneratorRuntime.awrap(_bcryptjs["default"].hash(req.body.passUser, salt));
 
-        case 13:
+        case 14:
           bcryptPassword = _context3.sent;
           // TODO: -------obtener la extension para verificacion
           //const imgSplit = urlPhoto.split('\\');
@@ -160,12 +161,12 @@ function createUser(req, res) {
           photoUser = reqUrlSplit[0] + '//' + reqUrlSplit[1] + '' + reqUrlSplit[2] + '/' + reqUrlSplit[3] + '/' + reqUrlSplit[4] + '/image/' + fileName;
 
           if (!(extName == 'png' || extName == 'jpg' || extName == 'jpeg')) {
-            _context3.next = 33;
+            _context3.next = 34;
             break;
           }
 
-          _context3.prev = 21;
-          _context3.next = 24;
+          _context3.prev = 22;
+          _context3.next = 25;
           return regeneratorRuntime.awrap(_UserModels["default"].create({
             nameuser: nameUser,
             emailuser: _emailUser,
@@ -176,7 +177,7 @@ function createUser(req, res) {
             fields: ['nameuser', 'emailuser', 'passuser', 'roleuser', 'photouser']
           }));
 
-        case 24:
+        case 25:
           newUser = _context3.sent;
 
           if (newUser) {
@@ -185,44 +186,44 @@ function createUser(req, res) {
             });
           }
 
-          _context3.next = 31;
+          _context3.next = 32;
           break;
 
-        case 28:
-          _context3.prev = 28;
-          _context3.t0 = _context3["catch"](21);
+        case 29:
+          _context3.prev = 29;
+          _context3.t0 = _context3["catch"](22);
           res.status(500).json({
             message: "no se pudo crear el usuario"
           });
 
-        case 31:
-          _context3.next = 34;
+        case 32:
+          _context3.next = 35;
           break;
 
-        case 33:
+        case 34:
           _fs["default"].unlink(urlPhoto, function (err) {
             res.status(400).send({
               message: " foto"
             });
           });
 
-        case 34:
-          _context3.next = 37;
+        case 35:
+          _context3.next = 38;
           break;
 
-        case 36:
+        case 37:
           _fs["default"].unlink(urlPhoto, function (err) {
             res.status(400).send({
               message: "el email ya existe"
             });
           });
 
-        case 37:
+        case 38:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[21, 28]]);
+  }, null, null, [[22, 29]]);
 }
 
 function getOneUser(req, res) {

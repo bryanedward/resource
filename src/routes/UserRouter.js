@@ -14,8 +14,30 @@ import {  createUser, getOneUser,
 router.post('/login',login);
 
 
-
 router.post('/create',multipartMiddleware, createUser);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
