@@ -6,7 +6,7 @@ const multipartMiddleware = multipart({uploadDir: './src/photos'});
 const router = Router();
 
 import {  createUser, getOneUser,
-  deleteUser, updateUser, getImage, login, authToken } from '../controllers/User.controller';
+  deleteUser, updateUser, getImage, login, authToken, test } from '../controllers/User.controller';
 
 
 
@@ -16,7 +16,7 @@ router.post('/login',login);
 
 router.post('/create',multipartMiddleware, createUser);
 
-
+router.post('/test', test);
 
 
 

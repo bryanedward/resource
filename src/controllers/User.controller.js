@@ -147,6 +147,16 @@ export async function getOneUser(req, res) {
 
 
 
+export async function test(req,res){
+  console.log(req.body);
+}
+
+
+
+
+
+
+
 
 export async function authToken (req, res){
     //update autotoken

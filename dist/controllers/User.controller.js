@@ -7,6 +7,7 @@ exports.getImage = getImage;
 exports.login = login;
 exports.createUser = createUser;
 exports.getOneUser = getOneUser;
+exports.test = test;
 exports.authToken = authToken;
 exports.deleteUser = deleteUser;
 exports.updateUser = updateUser;
@@ -260,15 +261,30 @@ function getOneUser(req, res) {
   });
 }
 
+function test(req, res) {
+  return regeneratorRuntime.async(function test$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          console.log(req.body);
+
+        case 1:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  });
+}
+
 function authToken(req, res) {
   var phone, updateData;
-  return regeneratorRuntime.async(function authToken$(_context6) {
+  return regeneratorRuntime.async(function authToken$(_context7) {
     while (1) {
-      switch (_context6.prev = _context6.next) {
+      switch (_context7.prev = _context7.next) {
         case 0:
           //update autotoken
           phone = req.body.phone;
-          _context6.next = 3;
+          _context7.next = 3;
           return regeneratorRuntime.awrap(_UserModels["default"].findAll({
             where: {
               email: req.body.email
@@ -276,22 +292,22 @@ function authToken(req, res) {
           }));
 
         case 3:
-          updateData = _context6.sent;
+          updateData = _context7.sent;
 
           if (updateData.length > 0) {
             updateData.forEach(function _callee(element) {
-              return regeneratorRuntime.async(function _callee$(_context5) {
+              return regeneratorRuntime.async(function _callee$(_context6) {
                 while (1) {
-                  switch (_context5.prev = _context5.next) {
+                  switch (_context6.prev = _context6.next) {
                     case 0:
-                      _context5.next = 2;
+                      _context6.next = 2;
                       return regeneratorRuntime.awrap(element.update({
                         phone: phone
                       }));
 
                     case 2:
                     case "end":
-                      return _context5.stop();
+                      return _context6.stop();
                   }
                 }
               });
@@ -302,7 +318,7 @@ function authToken(req, res) {
 
         case 6:
         case "end":
-          return _context6.stop();
+          return _context7.stop();
       }
     }
   });
@@ -310,13 +326,13 @@ function authToken(req, res) {
 
 function deleteUser(req, res) {
   var id, deleteRowCount;
-  return regeneratorRuntime.async(function deleteUser$(_context7) {
+  return regeneratorRuntime.async(function deleteUser$(_context8) {
     while (1) {
-      switch (_context7.prev = _context7.next) {
+      switch (_context8.prev = _context8.next) {
         case 0:
-          _context7.prev = 0;
+          _context8.prev = 0;
           id = req.params.id;
-          _context7.next = 4;
+          _context8.next = 4;
           return regeneratorRuntime.awrap(_UserModels["default"].destroy({
             where: {
               id: id
@@ -324,19 +340,19 @@ function deleteUser(req, res) {
           }));
 
         case 4:
-          deleteRowCount = _context7.sent;
+          deleteRowCount = _context8.sent;
           res.json(deleteRowCount);
-          _context7.next = 11;
+          _context8.next = 11;
           break;
 
         case 8:
-          _context7.prev = 8;
-          _context7.t0 = _context7["catch"](0);
-          console.log(_context7.t0);
+          _context8.prev = 8;
+          _context8.t0 = _context8["catch"](0);
+          console.log(_context8.t0);
 
         case 11:
         case "end":
-          return _context7.stop();
+          return _context8.stop();
       }
     }
   }, null, null, [[0, 8]]);
@@ -347,14 +363,14 @@ function deleteUser(req, res) {
 function updateUser(req, res) {
   var id, _req$body2, name, phone, email, city, projects;
 
-  return regeneratorRuntime.async(function updateUser$(_context9) {
+  return regeneratorRuntime.async(function updateUser$(_context10) {
     while (1) {
-      switch (_context9.prev = _context9.next) {
+      switch (_context10.prev = _context10.next) {
         case 0:
           //ACTUALIZAR UN UserE
           id = req.params.id;
           _req$body2 = req.body, name = _req$body2.name, phone = _req$body2.phone, email = _req$body2.email, city = _req$body2.city;
-          _context9.next = 4;
+          _context10.next = 4;
           return regeneratorRuntime.awrap(_UserModels["default"].findAll({
             attributes: ['id', 'name', 'phone', 'email', 'city'],
             where: {
@@ -363,15 +379,15 @@ function updateUser(req, res) {
           }));
 
         case 4:
-          projects = _context9.sent;
+          projects = _context10.sent;
 
           if (projects.length > 0) {
             projects.forEach(function _callee2(element) {
-              return regeneratorRuntime.async(function _callee2$(_context8) {
+              return regeneratorRuntime.async(function _callee2$(_context9) {
                 while (1) {
-                  switch (_context8.prev = _context8.next) {
+                  switch (_context9.prev = _context9.next) {
                     case 0:
-                      _context8.next = 2;
+                      _context9.next = 2;
                       return regeneratorRuntime.awrap(element.update({
                         name: name,
                         phone: phone,
@@ -381,21 +397,21 @@ function updateUser(req, res) {
 
                     case 2:
                     case "end":
-                      return _context8.stop();
+                      return _context9.stop();
                   }
                 }
               });
             });
           }
 
-          return _context9.abrupt("return", res.json({
+          return _context10.abrupt("return", res.json({
             message: 'Project updated succesfully',
             data: projects
           }));
 
         case 7:
         case "end":
-          return _context9.stop();
+          return _context10.stop();
       }
     }
   });
