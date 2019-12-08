@@ -38,8 +38,7 @@ export async function login (req, res){
           //create assign token
           const token = jwtoken.sign({id: user.iduser}, config.SECRET_TOKEN);
           res.json({
-            authToken: token,
-            photo: user.photouser
+            authToken: token
           })
           //res.header('auto-token', token).send(token);
         }else {
@@ -143,6 +142,24 @@ export async function getOneUser(req, res) {
         res.json(dataUser)
     }
 }
+
+
+
+
+export async function getDataUser(req,res){
+
+  const infoUser = await User.findOne({
+    attributes:['roleuser'],
+    where:{
+      iduser: req.user.id
+    }
+  });
+
+  res.json(infoUser);
+}
+
+
+
 
 
 
