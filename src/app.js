@@ -14,7 +14,7 @@ const app = express();
 //middlewares
 app.use(morgan('dev'));
 app.use(json());
-app.user(express.static(__dirname+'/photos'));
+app.use(express.static(__dirname+'/photos'));
 
 
 
