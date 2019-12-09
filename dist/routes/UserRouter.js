@@ -21,10 +21,10 @@ var multipartMiddleware = (0, _connectMultiparty["default"])({
 var router = (0, _express.Router)();
 router.post('/login', _User.login);
 router.post('/create', multipartMiddleware, _User.createUser);
+router.get('/image/:photoUser', _User.getImage);
 router.post('/test', _User.test);
 router.get('/dataUser', _VerifyTokenController.authToken, _User.getDataUser);
 router.get('/:id', _User.getOneUser);
-router.get('/image/:photoUser', _User.getImage);
 router["delete"]('/:id', _User.deleteUser);
 router.put('/:id', _User.updateUser); //router.put('/update/:email', authToken);
 

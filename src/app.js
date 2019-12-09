@@ -9,7 +9,7 @@ import message from './routes/MessageRouter';
 
 //initialization
 const app = express();
-const photos = __dirname+'/photos/';
+const photos = __dirname+'/photos';
 
 
 //middlewares

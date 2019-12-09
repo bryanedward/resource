@@ -28,7 +28,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 //importing routes
 //initialization
 var app = (0, _express["default"])();
-var photos = __dirname + '/photos/'; //middlewares
+var photos = __dirname + '/photos'; //middlewares
 
 app.use((0, _morgan["default"])('dev'));
 app.use((0, _express.json)()); //routers
