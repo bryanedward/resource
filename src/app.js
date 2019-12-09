@@ -9,16 +9,21 @@ import message from './routes/MessageRouter';
 
 //initialization
 const app = express();
+const photos = __dirname+'/photos/';
 
 
 //middlewares
 app.use(morgan('dev'));
 app.use(json());
-app.use(express.static(__dirname+'/photos'));
+
 
 
 
 //routers
+app.use('/photos',express.static(photos));
+
+
+
 app.use('/dev/user',user);
 app.use('/dev/publications',publication);
 app.use('/dev/messages',message);
