@@ -31,7 +31,7 @@ var app = (0, _express["default"])(); //middlewares
 
 app.use((0, _morgan["default"])('dev'));
 app.use((0, _express.json)());
-app.use('./photos', _express["default"]["static"](__dirname)); //routers
+app.user(_express["default"]["static"](__dirname + './photos')); //routers
 
 app.use('/dev/user', _UserRouter["default"]);
 app.use('/dev/publications', _PublicationRouter["default"]);
