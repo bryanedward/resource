@@ -15,7 +15,7 @@ const app = express();
 app.use(morgan('dev'));
 app.use(json());
 
-
+app.use('./photos', express.static(__dirname));
 
 
 //routers
