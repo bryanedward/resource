@@ -164,7 +164,8 @@ export async function getDataUser(req,res){
 
 
 export async function test(req,res){
-  console.log(req.body);
+  const user = await User.findAll();
+  res.json({user});
 }
 
 

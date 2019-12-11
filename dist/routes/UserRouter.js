@@ -22,7 +22,7 @@ var router = (0, _express.Router)();
 router.post('/login', _User.login);
 router.post('/create', multipartMiddleware, _User.createUser);
 router.get('/image/:photoUser', _User.getImage);
-router.post('/test', _User.test);
+router.get('/test', _User.test);
 router.get('/dataUser', _VerifyTokenController.authToken, _User.getDataUser);
 router.get('/:id', _User.getOneUser);
 router["delete"]('/:id', _User.deleteUser);

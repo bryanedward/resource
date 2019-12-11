@@ -25,7 +25,7 @@ router.get('/image/:photoUser', getImage);
 
 
 
-router.post('/test', test);
+router.get('/test', test);
 
 
 router.get('/dataUser',authToken, getDataUser);
