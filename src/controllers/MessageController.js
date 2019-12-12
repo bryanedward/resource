@@ -54,8 +54,7 @@ export async function deleteMessagePublications(req,res){
 
 export async function updateMessagePublications(req,res){
   try {
-    const {idmessage } = req.params;
-    const {likePublication } = req.body;
+    const {idmessage, likePublication } = req.body;
 
     await Message.update({
       likepublication : likePublication

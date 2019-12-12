@@ -122,15 +122,15 @@ function deleteMessagePublications(req, res) {
 }
 
 function updateMessagePublications(req, res) {
-  var idmessage, likePublication;
+  var _req$body2, idmessage, likePublication;
+
   return regeneratorRuntime.async(function updateMessagePublications$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
           _context4.prev = 0;
-          idmessage = req.params.idmessage;
-          likePublication = req.body.likePublication;
-          _context4.next = 5;
+          _req$body2 = req.body, idmessage = _req$body2.idmessage, likePublication = _req$body2.likePublication;
+          _context4.next = 4;
           return regeneratorRuntime.awrap(_MessagesModels["default"].update({
             likepublication: likePublication
           }, {
@@ -139,20 +139,20 @@ function updateMessagePublications(req, res) {
             }
           }));
 
-        case 5:
+        case 4:
           res.json("actualizado");
-          _context4.next = 11;
+          _context4.next = 10;
           break;
 
-        case 8:
-          _context4.prev = 8;
+        case 7:
+          _context4.prev = 7;
           _context4.t0 = _context4["catch"](0);
           console.log(_context4.t0);
 
-        case 11:
+        case 10:
         case "end":
           return _context4.stop();
       }
     }
-  }, null, null, [[0, 8]]);
+  }, null, null, [[0, 7]]);
 }

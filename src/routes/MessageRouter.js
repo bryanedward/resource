@@ -9,5 +9,5 @@ import {getMessagePublications,
 router.get('/:idpublication', getMessagePublications);
 router.post('/create',authToken, postMessagesPublications);
 router.delete('/:idmessage', deleteMessagePublications);
-router.post('/update/:idmessage',updateMessagePublications);
+router.post('/update',updateMessagePublications);
 export default router;
