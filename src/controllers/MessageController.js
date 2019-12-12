@@ -21,13 +21,14 @@ export async function getMessagePublications(req,res){
 export async function postMessagesPublications(req,res){
   //se obtiene el token para asignar el id del usuario y los parametros para la creacion de
   //del nuevo mensaje
-  const { messageuser, messageid } = req.body;
+  const { messageuser, messageid} = req.body;
   await Message.create({
     messageuser: messageuser,
     userIduser: req.user.id,
-    publicationid : messageid
+    publicationid : messageid,
+    likepublication :0
   },{
-    fields:['messageuser','userIduser','publicationid']
+    fields:['messageuser','userIduser','publicationid','likepublication']
   });
   res.json({
     message: 'mensaje creado'

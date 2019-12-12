@@ -65,9 +65,10 @@ function postMessagesPublications(req, res) {
           return regeneratorRuntime.awrap(_MessagesModels["default"].create({
             messageuser: messageuser,
             userIduser: req.user.id,
-            publicationid: messageid
+            publicationid: messageid,
+            likepublication: 0
           }, {
-            fields: ['messageuser', 'userIduser', 'publicationid']
+            fields: ['messageuser', 'userIduser', 'publicationid', 'likepublication']
           }));
 
         case 3:
