@@ -85,13 +85,37 @@ function postMessagesPublications(req, res) {
 ;
 
 function deleteMessagePublications(req, res) {
+  var idmessage, deleteRowCount;
   return regeneratorRuntime.async(function deleteMessagePublications$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
+          _context3.prev = 0;
+          idmessage = req.params.idmessage;
+          _context3.next = 4;
+          return regeneratorRuntime.awrap(_MessagesModels["default"].destroy({
+            where: {
+              idmessage: idmessage
+            }
+          }));
+
+        case 4:
+          deleteRowCount = _context3.sent;
+          res.json({
+            deleteRowCount: deleteRowCount
+          });
+          _context3.next = 11;
+          break;
+
+        case 8:
+          _context3.prev = 8;
+          _context3.t0 = _context3["catch"](0);
+          console.log(_context3.t0);
+
+        case 11:
         case "end":
           return _context3.stop();
       }
     }
-  });
+  }, null, null, [[0, 8]]);
 }

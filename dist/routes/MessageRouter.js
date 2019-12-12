@@ -14,5 +14,6 @@ var _MessageController = require("../controllers/MessageController");
 var router = (0, _express.Router)();
 router.get('/:idpublication', _MessageController.getMessagePublications);
 router.post('/create', _VerifyTokenController.authToken, _MessageController.postMessagesPublications);
+router["delete"]('/:idmessage', _MessageController.deleteMessagePublications);
 var _default = router;
 exports["default"] = _default;

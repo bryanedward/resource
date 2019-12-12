@@ -35,5 +35,16 @@ export async function postMessagesPublications(req,res){
 };
 
 export async function deleteMessagePublications(req,res){
-
+  //eliminar un mensaje
+  try {
+      const { idmessage } = req.params;
+      const deleteRowCount = await Message.destroy({
+          where: {
+              idmessage:idmessage
+          }
+      });
+      res.json({deleteRowCount})
+  } catch (error) {
+      console.log(error);
+  }
 }
