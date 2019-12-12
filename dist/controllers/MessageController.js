@@ -14,6 +14,8 @@ var _PublicationModels = _interopRequireDefault(require("../models/PublicationMo
 
 var _UserModels = _interopRequireDefault(require("../models/UserModels"));
 
+var _LikesModels = _interopRequireDefault(require("../models/LikesModels"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function getMessagePublications(req, res) {

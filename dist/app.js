@@ -19,6 +19,8 @@ var _PublicationRouter = _interopRequireDefault(require("./routes/PublicationRou
 
 var _MessageRouter = _interopRequireDefault(require("./routes/MessageRouter"));
 
+var _LikesRouter = _interopRequireDefault(require("./routes/LikesRouter"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -37,5 +39,6 @@ app.use('/photos', _express["default"]["static"](photos));
 app.use('/dev/user', _UserRouter["default"]);
 app.use('/dev/publications', _PublicationRouter["default"]);
 app.use('/dev/messages', _MessageRouter["default"]);
+app.use('/dev/likes', _LikesRouter["default"]);
 var _default = app;
 exports["default"] = _default;

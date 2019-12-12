@@ -1,6 +1,7 @@
 import Message from '../models/MessagesModels';
 import Publication from '../models/PublicationModels';
 import User from '../models/UserModels';
+import Like from '../models/LikesModels';
 
 export async function getMessagePublications(req,res){
   const {idpublication} = req.params;

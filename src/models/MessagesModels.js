@@ -23,8 +23,5 @@ const Message  = sequelize.define('messages',{
   timestamps:false
 });
 
-  //Message.hasMany(Publication,{foreingKey:'idmessage', sourceKey:'idmessage'});
-  //Message.belongsTo(Publication, {targetKey:'publicationid', sourceKey:'idmessage' });
-
 
 export default Message;

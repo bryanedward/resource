@@ -6,6 +6,7 @@ import fs from 'fs';
 import user from './routes/UserRouter';
 import publication from './routes/PublicationRouter';
 import message from './routes/MessageRouter';
+import like from './routes/LikesRouter';
 
 //initialization
 const app = express();
@@ -27,7 +28,7 @@ app.use('/photos',express.static(photos));
 app.use('/dev/user',user);
 app.use('/dev/publications',publication);
 app.use('/dev/messages',message);
-
+app.use('/dev/likes',like);
 
 
 
