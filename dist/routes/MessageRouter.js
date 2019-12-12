@@ -15,5 +15,6 @@ var router = (0, _express.Router)();
 router.get('/:idpublication', _MessageController.getMessagePublications);
 router.post('/create', _VerifyTokenController.authToken, _MessageController.postMessagesPublications);
 router["delete"]('/:idmessage', _MessageController.deleteMessagePublications);
+router.put('/update/:id', _MessageController.updateMessagePublications);
 var _default = router;
 exports["default"] = _default;

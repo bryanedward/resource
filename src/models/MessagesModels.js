@@ -13,6 +13,9 @@ const Message  = sequelize.define('messages',{
   userIduser:{
     type: Sequelize.INTEGER
   },
+  likepublication:{
+    type: Sequelize.INTEGER
+  },
   publicationid:{
     type: Sequelize.INTEGER
   }

@@ -3,10 +3,11 @@ const router = Router();
 
 import {authToken} from '../auth/VerifyTokenController';
 import {getMessagePublications,
-  postMessagesPublications, deleteMessagePublications} from '../controllers/MessageController';
+  postMessagesPublications, deleteMessagePublications,
+  updateMessagePublications} from '../controllers/MessageController';
 
 router.get('/:idpublication', getMessagePublications);
 router.post('/create',authToken, postMessagesPublications);
 router.delete('/:idmessage', deleteMessagePublications);
-
+router.put('/update/:id',updateMessagePublications);
 export default router;

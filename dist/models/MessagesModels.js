@@ -30,6 +30,9 @@ var Message = _databaseLocal.sequelize.define('messages', {
   userIduser: {
     type: _sequelize["default"].INTEGER
   },
+  likepublication: {
+    type: _sequelize["default"].INTEGER
+  },
   publicationid: {
     type: _sequelize["default"].INTEGER
   }

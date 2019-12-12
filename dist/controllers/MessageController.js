@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getMessagePublications = getMessagePublications;
 exports.postMessagesPublications = postMessagesPublications;
 exports.deleteMessagePublications = deleteMessagePublications;
+exports.updateMessagePublications = updateMessagePublications;
 
 var _MessagesModels = _interopRequireDefault(require("../models/MessagesModels"));
 
@@ -115,6 +116,42 @@ function deleteMessagePublications(req, res) {
         case 11:
         case "end":
           return _context3.stop();
+      }
+    }
+  }, null, null, [[0, 8]]);
+}
+
+function updateMessagePublications(req, res) {
+  var id, likePublication;
+  return regeneratorRuntime.async(function updateMessagePublications$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.prev = 0;
+          id = req.params.id;
+          likePublication = req.body.likePublication;
+          _context4.next = 5;
+          return regeneratorRuntime.awrap(_MessagesModels["default"].update({
+            likepublication: likePublication
+          }, {
+            where: {
+              idmessage: id
+            }
+          }));
+
+        case 5:
+          res.json("actualizado");
+          _context4.next = 11;
+          break;
+
+        case 8:
+          _context4.prev = 8;
+          _context4.t0 = _context4["catch"](0);
+          console.log(_context4.t0);
+
+        case 11:
+        case "end":
+          return _context4.stop();
       }
     }
   }, null, null, [[0, 8]]);
