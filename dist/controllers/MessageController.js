@@ -122,20 +122,20 @@ function deleteMessagePublications(req, res) {
 }
 
 function updateMessagePublications(req, res) {
-  var id, likePublication;
+  var idmessage, likePublication;
   return regeneratorRuntime.async(function updateMessagePublications$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
           _context4.prev = 0;
-          id = req.params.id;
+          idmessage = req.params.idmessage;
           likePublication = req.body.likePublication;
           _context4.next = 5;
           return regeneratorRuntime.awrap(_MessagesModels["default"].update({
             likepublication: likePublication
           }, {
             where: {
-              idmessage: id
+              idmessage: idmessage
             }
           }));
 

@@ -54,13 +54,13 @@ export async function deleteMessagePublications(req,res){
 
 export async function updateMessagePublications(req,res){
   try {
-    const {id } = req.params;
+    const {idmessage } = req.params;
     const {likePublication } = req.body;
 
     await Message.update({
       likepublication : likePublication
     },{
-      where:{idmessage: id}
+      where:{idmessage: idmessage}
     });
     res.json("actualizado")
   } catch (e) {
