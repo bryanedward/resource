@@ -149,7 +149,7 @@ export async function getOneUser(req, res) {
 export async function getDataUser(req,res){
 
   const infoUser = await User.findOne({
-    attributes:['roleuser','nameuser','emailuser','photouser'],
+    attributes:['iduser','roleuser','nameuser','emailuser','photouser'],
     where:{
       iduser: req.user.id
     }

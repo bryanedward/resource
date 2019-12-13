@@ -269,7 +269,7 @@ function getDataUser(req, res) {
         case 0:
           _context5.next = 2;
           return regeneratorRuntime.awrap(_UserModels["default"].findOne({
-            attributes: ['roleuser', 'nameuser', 'emailuser', 'photouser'],
+            attributes: ['iduser', 'roleuser', 'nameuser', 'emailuser', 'photouser'],
             where: {
               iduser: req.user.id
             }
