@@ -40,12 +40,22 @@ export async function deleteMessagePublications(req,res){
   //eliminar un mensaje
   try {
       const { idmessage } = req.params;
+
+      await Like.destroy({
+        where:{
+          messageIdmessage: idmessage
+        }
+      });
+
       const deleteRowCount = await Message.destroy({
           where: {
               idmessage:idmessage
           }
       });
-      res.json({deleteRowCount})
+
+      res.json("eliminado")
+
+
   } catch (error) {
       console.log(error);
   }
