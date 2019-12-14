@@ -55,7 +55,7 @@ export async function deleteMessagePublications(req,res){
           }
       });
 
-      res.json("eliminado")
+      res.json({message:"elimnado"})
 
 
   } catch (error) {

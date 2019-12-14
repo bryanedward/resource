@@ -114,7 +114,9 @@ function deleteMessagePublications(req, res) {
 
         case 6:
           deleteRowCount = _context3.sent;
-          res.json("eliminado");
+          res.json({
+            message: "elimnado"
+          });
           _context3.next = 13;
           break;
 
