@@ -68,9 +68,10 @@ function postMessagesPublications(req, res) {
             messageuser: messageuser,
             userIduser: req.user.id,
             publicationid: messageid,
-            likepublication: 0
+            likepublication: 0,
+            complemeints: 0
           }, {
-            fields: ['messageuser', 'userIduser', 'publicationid', 'likepublication']
+            fields: ['messageuser', 'userIduser', 'publicationid', 'likepublication', 'complemeints']
           }));
 
         case 3:

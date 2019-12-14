@@ -1,6 +1,5 @@
 import Sequelize, { INTEGER } from 'sequelize';
 import {sequelize} from '../database/databaseLocal';
-import Publication from './PublicationModels';
 
 const Message  = sequelize.define('messages',{
   idmessage:{
@@ -14,6 +13,9 @@ const Message  = sequelize.define('messages',{
     type: Sequelize.INTEGER
   },
   likepublication:{
+    type: Sequelize.INTEGER
+  },
+  complemeints:{
     type: Sequelize.INTEGER
   },
   publicationid:{

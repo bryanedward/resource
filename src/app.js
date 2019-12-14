@@ -28,7 +28,7 @@ app.use('/photos',express.static(photos));
 app.use('/dev/user',user);
 app.use('/dev/publications',publication);
 app.use('/dev/messages',message);
-app.use('/dev/likes',like);
+app.use('/dev/extras',like);
 
 
 

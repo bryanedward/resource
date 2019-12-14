@@ -7,38 +7,28 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _express = _interopRequireWildcard(require("express"));
+var _sequelize = _interopRequireWildcard(require("sequelize"));
 
-var _morgan = _interopRequireDefault(require("morgan"));
-
-var _fs = _interopRequireDefault(require("fs"));
-
-var _UserRouter = _interopRequireDefault(require("./routes/UserRouter"));
-
-var _PublicationRouter = _interopRequireDefault(require("./routes/PublicationRouter"));
-
-var _MessageRouter = _interopRequireDefault(require("./routes/MessageRouter"));
-
-var _LikesRouter = _interopRequireDefault(require("./routes/LikesRouter"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+var _databaseLocal = require("../database/databaseLocal");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-//importing routes
-//initialization
-var app = (0, _express["default"])();
-var photos = __dirname + '/photos'; //middlewares
+var Complemeint = _databaseLocal.sequelize.define('complemeints', {
+  idcomplemeint: {
+    type: _sequelize["default"].INTEGER,
+    primaryKey: true
+  },
+  messageid: {
+    type: _sequelize["default"].TEXT
+  },
+  userid: {
+    type: _sequelize["default"].INTEGER
+  }
+}, {
+  timestamps: false
+});
 
-app.use((0, _morgan["default"])('dev'));
-app.use((0, _express.json)()); //routers
-
-app.use('/photos', _express["default"]["static"](photos));
-app.use('/dev/user', _UserRouter["default"]);
-app.use('/dev/publications', _PublicationRouter["default"]);
-app.use('/dev/messages', _MessageRouter["default"]);
-app.use('/dev/extras', _LikesRouter["default"]);
-var _default = app;
+var _default = Complemeint;
 exports["default"] = _default;
