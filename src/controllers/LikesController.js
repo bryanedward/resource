@@ -39,7 +39,7 @@ export async function createLikes(req,res){
       for (var variable of findLikes) {
 
         if(variable.messageIdmessage == messageId){
-          res.json({message:"no se puede"})
+          res.json({message:"ya distes like "})
           pass = false;
         }
       }
@@ -64,7 +64,7 @@ export async function createLikes(req,res){
         },{
           where:{idmessage:messageId}
         });
-        res.json({message:"actualizado y creado el like"});
+        res.json({message:"gracias por su like"});
       }
     //}
   } catch (e) {
@@ -86,7 +86,7 @@ export async function createComplemeint(req,res){
     });
     for (var variable of complemeintsAll) {
       if (variable.messageid == complemeintId) {
-        res.json("ya hicistes la denuncia")
+        res.json({message:"ya hicistes la denuncia"})
         passComplemeint = false;
       }
     }
@@ -111,7 +111,7 @@ export async function createComplemeint(req,res){
       },{
         where:{idmessage:complemeintId}
       });
-      res.json({message:"actualizado y creado la denuncia"});
+      res.json({message:"gracias por su denuncia"});
     }
 
   } catch (e) {

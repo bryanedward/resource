@@ -86,7 +86,7 @@ function createLikes(req, res) {
 
             if (variable.messageIdmessage == messageId) {
               res.json({
-                message: "no se puede"
+                message: "ya distes like "
               });
               pass = false;
             }
@@ -161,7 +161,7 @@ function createLikes(req, res) {
 
         case 34:
           res.json({
-            message: "actualizado y creado el like"
+            message: "gracias por su like"
           });
 
         case 35:
@@ -209,7 +209,9 @@ function createComplemeint(req, res) {
             variable = _step2.value;
 
             if (variable.messageid == complemeintId) {
-              res.json("ya hicistes la denuncia");
+              res.json({
+                message: "ya hicistes la denuncia"
+              });
               passComplemeint = false;
             }
           }
@@ -283,7 +285,7 @@ function createComplemeint(req, res) {
 
         case 34:
           res.json({
-            message: "actualizado y creado la denuncia"
+            message: "gracias por su denuncia"
           });
 
         case 35:
