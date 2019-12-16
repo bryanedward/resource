@@ -102,7 +102,7 @@ export async function createUser(req, res) {
 
               if(newUser){
                 res.json({
-                  newUser
+                  message: "usuario creado"
                 });
               }
           } catch (error) {

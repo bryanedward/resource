@@ -183,7 +183,7 @@ function createUser(req, res) {
 
           if (newUser) {
             res.json({
-              newUser: newUser
+              message: "usuario creado"
             });
           }
 
