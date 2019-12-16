@@ -43,7 +43,7 @@ export async function deleteMessagePublications(req,res){
   //eliminar un mensaje
   try {
       const { idmessage } = req.params;
-
+      console.log(idmessage);
       await Like.destroy({
         where:{
           messageIdmessage: idmessage
