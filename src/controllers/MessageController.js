@@ -2,6 +2,7 @@ import Message from '../models/MessagesModels';
 import Publication from '../models/PublicationModels';
 import User from '../models/UserModels';
 import Like from '../models/LikesModels';
+import Complemeint from '../models/ComplemeintModels';
 
 export async function getMessagePublications(req,res){
   const {idpublication} = req.params;
@@ -46,6 +47,12 @@ export async function deleteMessagePublications(req,res){
       await Like.destroy({
         where:{
           messageIdmessage: idmessage
+        }
+      });
+
+      await Complemeint.destroy({
+        where:{
+          messageid : idmessage
         }
       });
 

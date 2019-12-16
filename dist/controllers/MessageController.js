@@ -16,6 +16,8 @@ var _UserModels = _interopRequireDefault(require("../models/UserModels"));
 
 var _LikesModels = _interopRequireDefault(require("../models/LikesModels"));
 
+var _ComplemeintModels = _interopRequireDefault(require("../models/ComplemeintModels"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function getMessagePublications(req, res) {
@@ -106,31 +108,39 @@ function deleteMessagePublications(req, res) {
 
         case 4:
           _context3.next = 6;
+          return regeneratorRuntime.awrap(_ComplemeintModels["default"].destroy({
+            where: {
+              messageid: idmessage
+            }
+          }));
+
+        case 6:
+          _context3.next = 8;
           return regeneratorRuntime.awrap(_MessagesModels["default"].destroy({
             where: {
               idmessage: idmessage
             }
           }));
 
-        case 6:
+        case 8:
           deleteRowCount = _context3.sent;
           res.json({
             message: "elimnado"
           });
-          _context3.next = 13;
+          _context3.next = 15;
           break;
 
-        case 10:
-          _context3.prev = 10;
+        case 12:
+          _context3.prev = 12;
           _context3.t0 = _context3["catch"](0);
           console.log(_context3.t0);
 
-        case 13:
+        case 15:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[0, 10]]);
+  }, null, null, [[0, 12]]);
 }
 
 function updateMessagePublications(req, res) {

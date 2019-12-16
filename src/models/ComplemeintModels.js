@@ -8,7 +8,7 @@ const Complemeint  = sequelize.define('complemeints',{
     primaryKey: true
   },
   messageid:{
-    type: Sequelize.TEXT
+    type: Sequelize.INTEGER
   },
   userid:{
     type: Sequelize.INTEGER

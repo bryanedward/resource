@@ -21,7 +21,7 @@ var Complemeint = _databaseLocal.sequelize.define('complemeints', {
     primaryKey: true
   },
   messageid: {
-    type: _sequelize["default"].TEXT
+    type: _sequelize["default"].INTEGER
   },
   userid: {
     type: _sequelize["default"].INTEGER
