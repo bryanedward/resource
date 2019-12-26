@@ -16,7 +16,6 @@ export async function getPublications(req, res) {
 
 export async function createPublication(req, res) {
     // TODO: crear una publicacion con el jwt para identificarse
-
     const { namePublication, descriptPublication, levelSubject} = req.body;
 
     await Publication.create({
@@ -32,6 +31,47 @@ export async function createPublication(req, res) {
         message: 'publicacion creada con exito'
     });
 }
+
+
+export async function updatePublication(req, res) {
+    // TODO: actualizar las publicaciones
+    const { idpublication ,namepublication, descriptpublication } = req.body;
+
+    const updatedTask = await Publication.update({
+        namepublication,
+        descriptpublication,
+
+    }, {
+            where: { idpublication }
+        });
+    res.json({
+        message: 'actualizado con exito'
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -65,28 +105,7 @@ export async function getOnePublication(req, res) {
 
 
 
-export async function updatePublication(req, res) {
-    //ACTUALIZAR UN PublicationO
-    const { id } = req.params;
-    const { namePublication, description, Userid, urlimg } = req.body;
 
-    /*const tasks = await Publication.findOne({
-        attributes: ['namePublication', 'description', 'Userid', 'id', 'urlimg'],
-        where: { id }
-    });*/
-    const updatedTask = await Publication.update({
-        namePublication,
-        description,
-        Userid,
-        urlimg
-    }, {
-            where: { id }
-        });
-    res.json({
-        message: 'Publication updated',
-        updatedTask
-    });
-}
 
 
 

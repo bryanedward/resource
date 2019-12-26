@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getPublications = getPublications;
 exports.createPublication = createPublication;
+exports.updatePublication = updatePublication;
 exports.test = test;
 exports.getOnePublication = getOnePublication;
-exports.updatePublication = updatePublication;
 exports.deletePublication = deletePublication;
 exports.getPublicationByUserid = getPublicationByUserid;
 exports.getUser = getUser;
@@ -77,11 +77,32 @@ function createPublication(req, res) {
   });
 }
 
-function test(req, res) {
-  return regeneratorRuntime.async(function test$(_context3) {
+function updatePublication(req, res) {
+  var _req$body2, idpublication, namepublication, descriptpublication, updatedTask;
+
+  return regeneratorRuntime.async(function updatePublication$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
+          // TODO: actualizar las publicaciones
+          _req$body2 = req.body, idpublication = _req$body2.idpublication, namepublication = _req$body2.namepublication, descriptpublication = _req$body2.descriptpublication;
+          _context3.next = 3;
+          return regeneratorRuntime.awrap(_PublicationModels["default"].update({
+            namepublication: namepublication,
+            descriptpublication: descriptpublication
+          }, {
+            where: {
+              idpublication: idpublication
+            }
+          }));
+
+        case 3:
+          updatedTask = _context3.sent;
+          res.json({
+            message: 'actualizado con exito'
+          });
+
+        case 5:
         case "end":
           return _context3.stop();
       }
@@ -89,15 +110,27 @@ function test(req, res) {
   });
 }
 
-function getOnePublication(req, res) {
-  var id, tasks;
-  return regeneratorRuntime.async(function getOnePublication$(_context4) {
+function test(req, res) {
+  return regeneratorRuntime.async(function test$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  });
+}
+
+function getOnePublication(req, res) {
+  var id, tasks;
+  return regeneratorRuntime.async(function getOnePublication$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
           //OBTENER UN PublicationO
           id = req.params.id;
-          _context4.next = 3;
+          _context5.next = 3;
           return regeneratorRuntime.awrap(_PublicationModels["default"].findOne({
             where: {
               id: id
@@ -106,52 +139,10 @@ function getOnePublication(req, res) {
           }));
 
         case 3:
-          tasks = _context4.sent;
+          tasks = _context5.sent;
           res.json(tasks);
 
         case 5:
-        case "end":
-          return _context4.stop();
-      }
-    }
-  });
-}
-
-function updatePublication(req, res) {
-  var id, _req$body2, namePublication, description, Userid, urlimg, updatedTask;
-
-  return regeneratorRuntime.async(function updatePublication$(_context5) {
-    while (1) {
-      switch (_context5.prev = _context5.next) {
-        case 0:
-          //ACTUALIZAR UN PublicationO
-          id = req.params.id;
-          _req$body2 = req.body, namePublication = _req$body2.namePublication, description = _req$body2.description, Userid = _req$body2.Userid, urlimg = _req$body2.urlimg;
-          /*const tasks = await Publication.findOne({
-              attributes: ['namePublication', 'description', 'Userid', 'id', 'urlimg'],
-              where: { id }
-          });*/
-
-          _context5.next = 4;
-          return regeneratorRuntime.awrap(_PublicationModels["default"].update({
-            namePublication: namePublication,
-            description: description,
-            Userid: Userid,
-            urlimg: urlimg
-          }, {
-            where: {
-              id: id
-            }
-          }));
-
-        case 4:
-          updatedTask = _context5.sent;
-          res.json({
-            message: 'Publication updated',
-            updatedTask: updatedTask
-          });
-
-        case 6:
         case "end":
           return _context5.stop();
       }

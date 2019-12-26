@@ -10,10 +10,26 @@ import { createPublication, getPublications,
 
 router.get('/home',getPublications);
 router.post('/create', authToken ,createPublication);
+router.post('/updatePublication', updatePublication);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 router.get('/test',test);
-
-
 router.get('/:id', getOnePublication);
 router.get('/client/:clientid', getPublicationByUserid);
 router.get('/user/:clientid', getUser);
@@ -23,6 +39,5 @@ router.get('/update/:user', getUpdate);
 
 router.delete('/:id', deletePublication);
 
-router.put('/:id', updatePublication);
 
 export default router;
