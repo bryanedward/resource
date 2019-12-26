@@ -17,9 +17,6 @@ export async function getMessagePublications(req,res){
 };
 
 
-
-
-
 export async function postMessagesPublications(req,res){
   //se obtiene el token para asignar el id del usuario y los parametros para la creacion de
   //del nuevo mensaje
@@ -61,10 +58,7 @@ export async function deleteMessagePublications(req,res){
               idmessage:idmessage
           }
       });
-
       res.json({message:"elimnado"})
-
-
   } catch (error) {
       console.log(error);
   }
@@ -73,16 +67,19 @@ export async function deleteMessagePublications(req,res){
 
 
 
+
 export async function updateMessagePublications(req,res){
   try {
-    const {idmessage, likePublication } = req.body;
+    const {idmessage, messageuser } = req.body;
 
     await Message.update({
-      likepublication : likePublication
+      messageuser
     },{
       where:{idmessage: idmessage}
     });
-    res.json("actualizado")
+    res.json({
+      message: "comentario actualizado"
+    })
   } catch (e) {
     console.log(e);
   }

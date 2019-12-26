@@ -145,17 +145,17 @@ function deleteMessagePublications(req, res) {
 }
 
 function updateMessagePublications(req, res) {
-  var _req$body2, idmessage, likePublication;
+  var _req$body2, idmessage, messageuser;
 
   return regeneratorRuntime.async(function updateMessagePublications$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
           _context4.prev = 0;
-          _req$body2 = req.body, idmessage = _req$body2.idmessage, likePublication = _req$body2.likePublication;
+          _req$body2 = req.body, idmessage = _req$body2.idmessage, messageuser = _req$body2.messageuser;
           _context4.next = 4;
           return regeneratorRuntime.awrap(_MessagesModels["default"].update({
-            likepublication: likePublication
+            messageuser: messageuser
           }, {
             where: {
               idmessage: idmessage
@@ -163,7 +163,9 @@ function updateMessagePublications(req, res) {
           }));
 
         case 4:
-          res.json("actualizado");
+          res.json({
+            message: "comentario actualizado"
+          });
           _context4.next = 10;
           break;
 
