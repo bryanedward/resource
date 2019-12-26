@@ -70,12 +70,12 @@ export async function deleteMessagePublications(req,res){
 
 export async function updateMessagePublications(req,res){
   try {
-    const {idmessage, messageuser } = req.body;
+    const {messageuser, messageid } = req.body;
 
     await Message.update({
       messageuser
     },{
-      where:{idmessage: idmessage}
+      where:{idmessage: messageid}
     });
     res.json({
       message: "comentario actualizado"
