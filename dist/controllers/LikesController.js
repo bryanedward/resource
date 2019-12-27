@@ -16,7 +16,7 @@ var _UserModels = _interopRequireDefault(require("../models/UserModels"));
 
 var _ComplemeintModels = _interopRequireDefault(require("../models/ComplemeintModels"));
 
-var _Sequelize = _interopRequireDefault(require("Sequelize"));
+var _sequelize = _interopRequireDefault(require("sequelize"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -316,7 +316,7 @@ function getComplemeint(req, res) {
       switch (_context4.prev = _context4.next) {
         case 0:
           // TODO: importo Op de Sequelize para buscar las denuncias masyores de 1
-          Op = _Sequelize["default"].Op;
+          Op = _sequelize["default"].Op;
           _context4.next = 3;
           return regeneratorRuntime.awrap(_MessagesModels["default"].findAll({
             where: {

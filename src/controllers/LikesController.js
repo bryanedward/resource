@@ -2,7 +2,7 @@ import Likes from '../models/LikesModels';
 import Message from '../models/MessagesModels';
 import User from '../models/UserModels';
 import Complemeint from '../models/ComplemeintModels';
-import Sequelize from 'Sequelize';
+import Sequelize from 'sequelize';
 
 
 export async function getLikes(req,res){
