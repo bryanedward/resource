@@ -317,21 +317,25 @@ function getComplemeint(req, res) {
         case 0:
           // TODO: importo Op de Sequelize para buscar las denuncias masyores de 1
           Op = _sequelize["default"].Op;
-          _context4.next = 3;
+
+          _MessagesModels["default"].belongsTo(_UserModels["default"]);
+
+          _context4.next = 4;
           return regeneratorRuntime.awrap(_MessagesModels["default"].findAll({
+            include: [_UserModels["default"]],
+            order: [['complemeints', 'DESC']],
             where: {
               complemeints: _defineProperty({}, Op.gt, 0)
-            },
-            order: [['complemeints', 'DESC']]
+            }
           }));
 
-        case 3:
+        case 4:
           complemeints = _context4.sent;
           res.json({
             complemeints: complemeints
           });
 
-        case 5:
+        case 6:
         case "end":
           return _context4.stop();
       }

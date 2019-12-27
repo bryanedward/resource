@@ -125,13 +125,16 @@ export async function createComplemeint(req,res){
 export async function getComplemeint(req,res){
   // TODO: importo Op de Sequelize para buscar las denuncias masyores de 1
   const Op = Sequelize.Op;
+
+  Message.belongsTo(User);
   const complemeints = await Message.findAll({
+    include:[User],
+    order:[['complemeints','DESC']],
     where: {
       complemeints: {
         [Op.gt]: 0
       }
-    },
-    order:[['complemeints','DESC']]
+    }
   });
 
   res.json({complemeints});
