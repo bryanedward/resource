@@ -59,7 +59,7 @@ export async function deleteMessagePublications(req,res){
               idmessage:idmessage
           }
       });
-      res.json({message:"elimnado"})
+      res.json({message:"eliminado"})
   } catch (error) {
       console.log(error);
   }
