@@ -36,6 +36,7 @@ export async function postMessagesPublications(req,res){
   });
 };
 
+
 export async function deleteMessagePublications(req,res){
   //eliminar un mensaje
   try {
@@ -65,10 +66,8 @@ export async function deleteMessagePublications(req,res){
 }
 
 
-
-
-
 export async function updateMessagePublications(req,res){
+  // TODO: actualizar un mensaje
   try {
     const {messageuser, messageid } = req.body;
 

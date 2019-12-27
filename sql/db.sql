@@ -53,11 +53,11 @@ INSERT INTO publications(namePublication,descriptPublication,levelsubject,"userI
 VALUES ('sequelize','como hacer join',1,4);
 
 
-INSERT INTO messages(messageuser,"userIduser",likePublication,complemeints,publicationid)
-VALUES ('testiando',11,1,0,5);
+INSERT INTO messages(messageuser,"userIduser",likepublication,complemeints,publicationid)
+VALUES ('testi',4,1,6,4);
 
 INSERT INTO likes("messageIdmessage","userIduser")
 VALUES (1,9);
 
 INSERT INTO complemeints(messageid,userid)
-VALUES(1,12);
+VALUES(2,5);

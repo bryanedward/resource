@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getLikes = getLikes;
 exports.createLikes = createLikes;
 exports.createComplemeint = createComplemeint;
+exports.getComplemeint = getComplemeint;
 
 var _LikesModels = _interopRequireDefault(require("../models/LikesModels"));
 
@@ -15,7 +16,11 @@ var _UserModels = _interopRequireDefault(require("../models/UserModels"));
 
 var _ComplemeintModels = _interopRequireDefault(require("../models/ComplemeintModels"));
 
+var _Sequelize = _interopRequireDefault(require("Sequelize"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function getLikes(req, res) {
   var allLikes;
@@ -302,4 +307,34 @@ function createComplemeint(req, res) {
       }
     }
   }, null, null, [[1, 37], [9, 13, 17, 25], [18,, 20, 24]]);
+}
+
+function getComplemeint(req, res) {
+  var Op, complemeints;
+  return regeneratorRuntime.async(function getComplemeint$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          // TODO: importo Op de Sequelize para buscar las denuncias masyores de 1
+          Op = _Sequelize["default"].Op;
+          _context4.next = 3;
+          return regeneratorRuntime.awrap(_MessagesModels["default"].findAll({
+            where: {
+              complemeints: _defineProperty({}, Op.gt, 0)
+            },
+            order: [['complemeints', 'DESC']]
+          }));
+
+        case 3:
+          complemeints = _context4.sent;
+          res.json({
+            complemeints: complemeints
+          });
+
+        case 5:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  });
 }

@@ -2,6 +2,7 @@ import Likes from '../models/LikesModels';
 import Message from '../models/MessagesModels';
 import User from '../models/UserModels';
 import Complemeint from '../models/ComplemeintModels';
+import Sequelize from 'Sequelize';
 
 
 export async function getLikes(req,res){
@@ -117,4 +118,22 @@ export async function createComplemeint(req,res){
   } catch (e) {
 
   }
+}
+
+
+
+export async function getComplemeint(req,res){
+  // TODO: importo Op de Sequelize para buscar las denuncias masyores de 1
+  const Op = Sequelize.Op;
+  const complemeints = await Message.findAll({
+    where: {
+      complemeints: {
+        [Op.gt]: 0
+      }
+    },
+    order:[['complemeints','DESC']]
+  });
+
+  res.json({complemeints});
+
 }
