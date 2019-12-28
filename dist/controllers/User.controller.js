@@ -288,21 +288,17 @@ function getDataUser(req, res) {
 }
 
 function test(req, res) {
-  var user;
+  var urlPhoto;
   return regeneratorRuntime.async(function test$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
-          _context6.next = 2;
-          return regeneratorRuntime.awrap(_UserModels["default"].findAll());
-
-        case 2:
-          user = _context6.sent;
+          urlPhoto = req.files.photo.path;
           res.json({
-            user: user
+            message: "recibido"
           });
 
-        case 4:
+        case 2:
         case "end":
           return _context6.stop();
       }
