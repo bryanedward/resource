@@ -164,7 +164,7 @@ export async function getDataUser(req,res){
 
 
 export async function test(req,res){
-  const urlPhoto = req.files.photo;
+  const urlPhoto = req.files.photo.path;
 
   res.json({
     message: urlPhoto
