@@ -214,7 +214,7 @@ function createUser(req, res) {
 
         case 37:
           _fs["default"].unlink(urlPhoto, function (err) {
-            res.status(400).send({
+            res.status(400).json({
               message: "el email ya existe"
             });
           });
