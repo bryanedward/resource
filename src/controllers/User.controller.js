@@ -120,7 +120,7 @@ export async function createUser(req, res) {
         }
     } else {
       fs.unlink(urlPhoto, (err) => {
-        res.status(400).send({
+        res.status(400).json({
           message: "el email ya existe"
         });
       });
