@@ -106,7 +106,7 @@ export async function createUser(req, res) {
                 });
               }
           } catch (error) {
-              res.status(500).json({
+              res.json({
                   message: "no se pudo crear el usuario"
               });
           }
@@ -120,7 +120,7 @@ export async function createUser(req, res) {
         }
     } else {
       fs.unlink(urlPhoto, (err) => {
-        res.status(400).json({
+        res.json({
           message: "el email ya existe"
         });
       });

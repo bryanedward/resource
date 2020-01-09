@@ -193,7 +193,7 @@ function createUser(req, res) {
         case 29:
           _context3.prev = 29;
           _context3.t0 = _context3["catch"](22);
-          res.status(500).json({
+          res.json({
             message: "no se pudo crear el usuario"
           });
 
@@ -214,7 +214,7 @@ function createUser(req, res) {
 
         case 37:
           _fs["default"].unlink(urlPhoto, function (err) {
-            res.status(400).json({
+            res.json({
               message: "el email ya existe"
             });
           });
