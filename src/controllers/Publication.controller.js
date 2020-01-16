@@ -12,8 +12,6 @@ export async function getPublications(req, res) {
 
 
 
-
-
 export async function createPublication(req, res) {
     // TODO: crear una publicacion con el jwt para identificarse
     const { namePublication, descriptPublication, levelSubject} = req.body;
@@ -51,57 +49,27 @@ export async function updatePublication(req, res) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export async function test(req,res){
-
-}
-
-
-
-
-
-
-
-
-
-
-
 export async function getOnePublication(req, res) {
-    //OBTENER UN PublicationO
-    const { id } = req.params;
-    const tasks = await Publication.findOne({
-        where: { id },
-        attributes: ['id', 'namePublication', 'description', 'Userid', 'urlimg']
+    // TODO: obtener publicaciones por el nivel
+    const { levelsubject } = req.params;
+    const publications = await Publication.findAll({include:[User],
+      order:[['idpublication','DESC']],
+      where:{levelsubject}
     });
-    res.json(tasks);
+    res.json({publications});
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
