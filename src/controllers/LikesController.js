@@ -1,6 +1,7 @@
 import Likes from '../models/LikesModels';
 import Message from '../models/MessagesModels';
 import User from '../models/UserModels';
+import Points from '../models/PointsModels';
 import Complemeint from '../models/ComplemeintModels';
 import Sequelize from 'sequelize';
 
@@ -52,12 +53,33 @@ export async function createLikes(req,res){
         },{
           fields:['messageIdmessage','userIduser']
         });
+
         const dataUpdate = await Message.findOne({
             where:{
               idmessage:messageId
             }
         });
         var countlike = 1 + dataUpdate.likepublication;
+
+
+         const tablePoints = await Points.findOne({
+           where:{iduser: dataUpdate.userIduser}
+         });
+         var limitpoint = 1 + tablePoints.pointlimit;
+         var pointcant = tablePoints.cantpoint;
+         if (limitpoint >= 25) {
+           limitpoint = 0;
+           pointcant = pointcant + 1;
+         }
+
+         await Points.update({
+           pointlimit:limitpoint,
+           cantpoint: pointcant
+         },{
+           where:{
+             iduser: tablePoints.iduser}
+         });
+
 
 
         await Message.update({
@@ -138,5 +160,30 @@ export async function getComplemeint(req,res){
   });
 
   res.json({complemeints});
+
+}
+
+
+
+export async function getLikesByUser(req,res){
+  const allLike = await Likes.findAll({
+    where:{
+      'userIduser':req.user.id
+    }
+  });
+
+  const countJson = Object.keys(allLike).length;
+  // TODO: contar los items que exiten en el json
+  if (countJson > 25) {
+    res.json({
+      message: 1
+    });
+  }else {
+    res.json({
+      message: 0
+    })
+  }
+
+
 
 }

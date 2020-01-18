@@ -1,5 +1,6 @@
 import User from '../models/UserModels';
 import Publication from '../models/PublicationModels';
+import Points from '../models/PointsModels';
 
 import bcrypt from 'bcryptjs';
 import jwtoken from 'jsonwebtoken';
@@ -77,8 +78,8 @@ export async function createUser(req, res) {
         const bcryptPassword = await bcrypt.hash(req.body.passUser, salt);
 
         // TODO: -------obtener la extension para verificacion
-        //const imgSplit = urlPhoto.split('\\');
-        const imgSplit = urlPhoto.split('\/');
+        const imgSplit = urlPhoto.split('\\');
+        //const imgSplit = urlPhoto.split('\/');
         const fileName = imgSplit[2];
         const extImg = fileName.split('\.');
         const extName = extImg[1];
@@ -99,6 +100,16 @@ export async function createUser(req, res) {
               },{
                 fields: ['nameuser','emailuser','passuser','roleuser','photouser']
               });
+
+              console.log(newUser.iduser);
+              await Points.create({
+                iduser: newUser.iduser,
+                pointlimit: 0,
+                cantpoint: 0
+              },{
+                fields:['iduser','pointlimit','cantpoint']
+              });
+
 
               if(newUser){
                 res.json({

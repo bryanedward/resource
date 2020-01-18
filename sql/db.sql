@@ -42,6 +42,16 @@ CREATE TABLE IF NOT EXISTS complemeints(
 );
 
 
+CREATE TABLE IF NOT EXISTS points(
+  iduser INTEGER,
+  pointlimit INTEGER,
+  cantpoint INTEGER
+);
+
+
+
+
+
 
 
 INSERT INTO users(nameUser,emailUser,passUser, roleUser)
@@ -57,7 +67,11 @@ INSERT INTO messages(messageuser,"userIduser",likepublication,complemeints,publi
 VALUES ('testi',4,1,6,4);
 
 INSERT INTO likes("messageIdmessage","userIduser")
-VALUES (1,9);
+VALUES (6,5);
 
 INSERT INTO complemeints(messageid,userid)
 VALUES(2,5);
+
+
+INSERT INTO points(iduser,pointlimit,cantpoint)
+VALUES(6,0,0);

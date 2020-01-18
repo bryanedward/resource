@@ -16,5 +16,6 @@ router.get('/getLikes', _LikesController.getLikes);
 router.post('/createLikes', _VerifyTokenController.authToken, _LikesController.createLikes);
 router.post('/create/createComplemeints', _VerifyTokenController.authToken, _LikesController.createComplemeint);
 router.get('/getAllComplemeint', _LikesController.getComplemeint);
+router.get('/points', _VerifyTokenController.authToken, _LikesController.getLikesByUser);
 var _default = router;
 exports["default"] = _default;

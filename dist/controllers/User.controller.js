@@ -17,6 +17,8 @@ var _UserModels = _interopRequireDefault(require("../models/UserModels"));
 
 var _PublicationModels = _interopRequireDefault(require("../models/PublicationModels"));
 
+var _PointsModels = _interopRequireDefault(require("../models/PointsModels"));
+
 var _bcryptjs = _interopRequireDefault(require("bcryptjs"));
 
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
@@ -135,7 +137,7 @@ function createUser(req, res) {
           data = _context3.sent;
 
           if (!(data == null)) {
-            _context3.next = 37;
+            _context3.next = 40;
             break;
           }
 
@@ -152,8 +154,8 @@ function createUser(req, res) {
         case 14:
           bcryptPassword = _context3.sent;
           // TODO: -------obtener la extension para verificacion
-          //const imgSplit = urlPhoto.split('\\');
-          imgSplit = urlPhoto.split('\/');
+          imgSplit = urlPhoto.split('\\'); //const imgSplit = urlPhoto.split('\/');
+
           fileName = imgSplit[2];
           extImg = fileName.split('\.');
           extName = extImg[1]; // TODO: ------Se crea la url donde estara la imagen del usuario -----------
@@ -162,7 +164,7 @@ function createUser(req, res) {
           photoUser = reqUrlSplit[0] + '//' + reqUrlSplit[1] + '' + reqUrlSplit[2] + '/' + reqUrlSplit[3] + '/' + reqUrlSplit[4] + '/image/' + fileName;
 
           if (!(extName == 'png' || extName == 'jpg' || extName == 'jpeg')) {
-            _context3.next = 34;
+            _context3.next = 37;
             break;
           }
 
@@ -180,32 +182,31 @@ function createUser(req, res) {
 
         case 25:
           newUser = _context3.sent;
+          console.log(newUser.iduser);
+          _context3.next = 29;
+          return regeneratorRuntime.awrap(_PointsModels["default"].create({
+            iduser: newUser.iduser,
+            pointlimit: 0,
+            cantpoint: 0
+          }, {
+            fields: ['iduser', 'pointlimit', 'cantpoint']
+          }));
 
+        case 29:
           if (newUser) {
             res.json({
               message: "usuario creado"
             });
           }
 
-          _context3.next = 32;
-          break;
-
-        case 29:
-          _context3.prev = 29;
-          _context3.t0 = _context3["catch"](22);
-          res.json({
-            message: "no se pudo crear el usuario"
-          });
-
-        case 32:
           _context3.next = 35;
           break;
 
-        case 34:
-          _fs["default"].unlink(urlPhoto, function (err) {
-            res.status(400).send({
-              message: " foto"
-            });
+        case 32:
+          _context3.prev = 32;
+          _context3.t0 = _context3["catch"](22);
+          res.json({
+            message: "no se pudo crear el usuario"
           });
 
         case 35:
@@ -214,17 +215,28 @@ function createUser(req, res) {
 
         case 37:
           _fs["default"].unlink(urlPhoto, function (err) {
+            res.status(400).send({
+              message: " foto"
+            });
+          });
+
+        case 38:
+          _context3.next = 41;
+          break;
+
+        case 40:
+          _fs["default"].unlink(urlPhoto, function (err) {
             res.json({
               message: "el email ya existe"
             });
           });
 
-        case 38:
+        case 41:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[22, 29]]);
+  }, null, null, [[22, 32]]);
 }
 
 function getOneUser(req, res) {

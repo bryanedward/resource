@@ -7,12 +7,15 @@ exports.getLikes = getLikes;
 exports.createLikes = createLikes;
 exports.createComplemeint = createComplemeint;
 exports.getComplemeint = getComplemeint;
+exports.getLikesByUser = getLikesByUser;
 
 var _LikesModels = _interopRequireDefault(require("../models/LikesModels"));
 
 var _MessagesModels = _interopRequireDefault(require("../models/MessagesModels"));
 
 var _UserModels = _interopRequireDefault(require("../models/UserModels"));
+
+var _PointsModels = _interopRequireDefault(require("../models/PointsModels"));
 
 var _ComplemeintModels = _interopRequireDefault(require("../models/ComplemeintModels"));
 
@@ -52,7 +55,7 @@ function getLikes(req, res) {
 }
 
 function createLikes(req, res) {
-  var messageId, findLikes, pass, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, variable, dataUpdate, countlike;
+  var messageId, findLikes, pass, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, variable, dataUpdate, countlike, tablePoints, limitpoint, pointcant;
 
   return regeneratorRuntime.async(function createLikes$(_context2) {
     while (1) {
@@ -132,7 +135,7 @@ function createLikes(req, res) {
 
         case 25:
           if (!pass) {
-            _context2.next = 35;
+            _context2.next = 43;
             break;
           }
 
@@ -156,6 +159,34 @@ function createLikes(req, res) {
           dataUpdate = _context2.sent;
           countlike = 1 + dataUpdate.likepublication;
           _context2.next = 34;
+          return regeneratorRuntime.awrap(_PointsModels["default"].findOne({
+            where: {
+              iduser: dataUpdate.userIduser
+            }
+          }));
+
+        case 34:
+          tablePoints = _context2.sent;
+          limitpoint = 1 + tablePoints.pointlimit;
+          pointcant = tablePoints.cantpoint;
+
+          if (limitpoint >= 25) {
+            limitpoint = 0;
+            pointcant = pointcant + 1;
+          }
+
+          _context2.next = 40;
+          return regeneratorRuntime.awrap(_PointsModels["default"].update({
+            pointlimit: limitpoint,
+            cantpoint: pointcant
+          }, {
+            where: {
+              iduser: tablePoints.iduser
+            }
+          }));
+
+        case 40:
+          _context2.next = 42;
           return regeneratorRuntime.awrap(_MessagesModels["default"].update({
             likepublication: countlike
           }, {
@@ -164,25 +195,25 @@ function createLikes(req, res) {
             }
           }));
 
-        case 34:
+        case 42:
           res.json({
             message: "gracias por su like"
           });
 
-        case 35:
-          _context2.next = 39;
+        case 43:
+          _context2.next = 47;
           break;
 
-        case 37:
-          _context2.prev = 37;
+        case 45:
+          _context2.prev = 45;
           _context2.t1 = _context2["catch"](1);
 
-        case 39:
+        case 47:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[1, 37], [9, 13, 17, 25], [18,, 20, 24]]);
+  }, null, null, [[1, 45], [9, 13, 17, 25], [18,, 20, 24]]);
 }
 
 function createComplemeint(req, res) {
@@ -338,6 +369,41 @@ function getComplemeint(req, res) {
         case 6:
         case "end":
           return _context4.stop();
+      }
+    }
+  });
+}
+
+function getLikesByUser(req, res) {
+  var allLike, countJson;
+  return regeneratorRuntime.async(function getLikesByUser$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.next = 2;
+          return regeneratorRuntime.awrap(_LikesModels["default"].findAll({
+            where: {
+              'userIduser': req.user.id
+            }
+          }));
+
+        case 2:
+          allLike = _context5.sent;
+          countJson = Object.keys(allLike).length; // TODO: contar los items que exiten en el json
+
+          if (countJson > 25) {
+            res.json({
+              message: 1
+            });
+          } else {
+            res.json({
+              message: 0
+            });
+          }
+
+        case 5:
+        case "end":
+          return _context5.stop();
       }
     }
   });
