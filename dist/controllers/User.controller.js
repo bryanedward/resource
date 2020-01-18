@@ -8,7 +8,7 @@ exports.login = login;
 exports.createUser = createUser;
 exports.getOneUser = getOneUser;
 exports.getDataUser = getDataUser;
-exports.test = test;
+exports.getPoints = getPoints;
 exports.authToken = authToken;
 exports.deleteUser = deleteUser;
 exports.updateUser = updateUser;
@@ -302,18 +302,26 @@ function getDataUser(req, res) {
   });
 }
 
-function test(req, res) {
-  var urlPhoto;
-  return regeneratorRuntime.async(function test$(_context6) {
+function getPoints(req, res) {
+  var points;
+  return regeneratorRuntime.async(function getPoints$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
-          urlPhoto = req.files.photo.path;
-          res.json({
-            message: urlPhoto
-          });
+          _context6.next = 2;
+          return regeneratorRuntime.awrap(_PointsModels["default"].findOne({
+            where: {
+              userIduser: req.user.id
+            }
+          }));
 
         case 2:
+          points = _context6.sent;
+          res.json({
+            points: points
+          });
+
+        case 4:
         case "end":
           return _context6.stop();
       }

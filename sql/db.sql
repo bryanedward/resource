@@ -74,12 +74,6 @@ VALUES(2,5);
 
 
 INSERT INTO points("userIduser",pointlimit,cantpoint)
-VALUES(4,0,0);
-INSERT INTO points("userIduser",pointlimit,cantpoint)
-VALUES(5,0,0);
-INSERT INTO points("userIduser",pointlimit,cantpoint)
-VALUES(6,0,0);
-INSERT INTO points("userIduser",pointlimit,cantpoint)
-VALUES(7,0,0);
-INSERT INTO points("userIduser",pointlimit,cantpoint)
 VALUES(9,0,0);
+INSERT INTO points("userIduser",pointlimit,cantpoint)
+VALUES(10,0,0);

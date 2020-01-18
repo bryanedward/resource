@@ -8,33 +8,29 @@ const router = Router();
 
 import {  createUser, getOneUser,
   deleteUser, updateUser,
-  getImage, login, test, getDataUser } from '../controllers/User.controller';
-
-
+  getImage, login, getPoints, getDataUser } from '../controllers/User.controller';
 
 
 router.post('/login',login);
 
-
 router.post('/create',multipartMiddleware, createUser);
-
 
 router.get('/image/:photoUser', getImage);
 
-
-
-
-
-router.post('/test', multipartMiddleware, test);
-
-
 router.get('/dataUser',authToken, getDataUser);
+
+router.get('/getPoints', authToken, getPoints);
+
+
+
+
+
+
+
+
 
 
 router.get('/:id', getOneUser);
-
-
-
 
 
 router.delete('/:id', deleteUser);
