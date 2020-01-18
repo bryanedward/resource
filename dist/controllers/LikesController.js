@@ -73,16 +73,6 @@ function createLikes(req, res) {
 
         case 4:
           findLikes = _context2.sent;
-          // if (Object.entries(findLikes).length === 0) {
-          //   //comrpobar si un objeto esta vacio
-          //   await Likes.create({
-          //     messageIdmessage : messageId,
-          //     userIduser : req.user.id
-          //   },{
-          //     fields:['messageIdmessage','userIduser']
-          //   });
-          //   res.json({message:"creado"});
-          // }else{
           pass = true;
           _iteratorNormalCompletion = true;
           _didIteratorError = false;
@@ -161,7 +151,7 @@ function createLikes(req, res) {
           _context2.next = 34;
           return regeneratorRuntime.awrap(_PointsModels["default"].findOne({
             where: {
-              iduser: dataUpdate.userIduser
+              userIduser: dataUpdate.userIduser
             }
           }));
 
@@ -181,7 +171,7 @@ function createLikes(req, res) {
             cantpoint: pointcant
           }, {
             where: {
-              iduser: tablePoints.iduser
+              userIduser: tablePoints.userIduser
             }
           }));
 

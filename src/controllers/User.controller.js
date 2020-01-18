@@ -103,11 +103,11 @@ export async function createUser(req, res) {
 
               console.log(newUser.iduser);
               await Points.create({
-                iduser: newUser.iduser,
+                userIduser: newUser.iduser,
                 pointlimit: 0,
                 cantpoint: 0
               },{
-                fields:['iduser','pointlimit','cantpoint']
+                fields:['userIduser','pointlimit','cantpoint']
               });
 
 
@@ -159,8 +159,11 @@ export async function getOneUser(req, res) {
 
 export async function getDataUser(req,res){
 
+  User.hasMany(Points);
   const infoUser = await User.findOne({
-    attributes:['iduser','roleuser','nameuser','emailuser','photouser'],
+    include:[Points],
+    attributes:['iduser','roleuser','nameuser',
+    'emailuser','photouser'],
     where:{
       iduser: req.user.id
     }

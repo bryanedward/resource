@@ -185,11 +185,11 @@ function createUser(req, res) {
           console.log(newUser.iduser);
           _context3.next = 29;
           return regeneratorRuntime.awrap(_PointsModels["default"].create({
-            iduser: newUser.iduser,
+            userIduser: newUser.iduser,
             pointlimit: 0,
             cantpoint: 0
           }, {
-            fields: ['iduser', 'pointlimit', 'cantpoint']
+            fields: ['userIduser', 'pointlimit', 'cantpoint']
           }));
 
         case 29:
@@ -279,19 +279,22 @@ function getDataUser(req, res) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          _context5.next = 2;
+          _UserModels["default"].hasMany(_PointsModels["default"]);
+
+          _context5.next = 3;
           return regeneratorRuntime.awrap(_UserModels["default"].findOne({
+            include: [_PointsModels["default"]],
             attributes: ['iduser', 'roleuser', 'nameuser', 'emailuser', 'photouser'],
             where: {
               iduser: req.user.id
             }
           }));
 
-        case 2:
+        case 3:
           infoUser = _context5.sent;
           res.json(infoUser);
 
-        case 4:
+        case 5:
         case "end":
           return _context5.stop();
       }

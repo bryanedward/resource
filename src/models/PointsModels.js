@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import { sequelize } from '../database/databaseLocal';
 
 const Points = sequelize.define('points',{
-  iduser:{
+  userIduser:{
     type: Sequelize.INTEGER,
     primaryKey: true
   },

@@ -12,7 +12,7 @@ var _databaseLocal = require("../database/databaseLocal");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var Points = _databaseLocal.sequelize.define('points', {
-  iduser: {
+  userIduser: {
     type: _sequelize["default"].INTEGER,
     primaryKey: true
   },

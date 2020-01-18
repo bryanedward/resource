@@ -27,16 +27,7 @@ export async function createLikes(req,res){
       where:{userIduser : req.user.id}
     });
 
-    // if (Object.entries(findLikes).length === 0) {
-    //   //comrpobar si un objeto esta vacio
-    //   await Likes.create({
-    //     messageIdmessage : messageId,
-    //     userIduser : req.user.id
-    //   },{
-    //     fields:['messageIdmessage','userIduser']
-    //   });
-    //   res.json({message:"creado"});
-    // }else{
+
     var pass = true;
       for (var variable of findLikes) {
 
@@ -63,7 +54,7 @@ export async function createLikes(req,res){
 
 
          const tablePoints = await Points.findOne({
-           where:{iduser: dataUpdate.userIduser}
+           where:{userIduser: dataUpdate.userIduser}
          });
          var limitpoint = 1 + tablePoints.pointlimit;
          var pointcant = tablePoints.cantpoint;
@@ -77,7 +68,7 @@ export async function createLikes(req,res){
            cantpoint: pointcant
          },{
            where:{
-             iduser: tablePoints.iduser}
+             userIduser: tablePoints.userIduser}
          });
 
 
@@ -89,7 +80,7 @@ export async function createLikes(req,res){
         });
         res.json({message:"gracias por su like"});
       }
-    //}
+
   } catch (e) {
   //  console.log(e);
   }

@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS complemeints(
 
 
 CREATE TABLE IF NOT EXISTS points(
-  iduser INTEGER,
+  "userIduser" INTEGER REFERENCES users(iduser),
   pointlimit INTEGER,
   cantpoint INTEGER
 );
@@ -73,5 +73,13 @@ INSERT INTO complemeints(messageid,userid)
 VALUES(2,5);
 
 
-INSERT INTO points(iduser,pointlimit,cantpoint)
+INSERT INTO points("userIduser",pointlimit,cantpoint)
+VALUES(4,0,0);
+INSERT INTO points("userIduser",pointlimit,cantpoint)
+VALUES(5,0,0);
+INSERT INTO points("userIduser",pointlimit,cantpoint)
 VALUES(6,0,0);
+INSERT INTO points("userIduser",pointlimit,cantpoint)
+VALUES(7,0,0);
+INSERT INTO points("userIduser",pointlimit,cantpoint)
+VALUES(9,0,0);
