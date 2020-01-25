@@ -174,7 +174,33 @@ export async function getLikesByUser(req,res){
       message: 0
     })
   }
+}
 
 
+export async function lockAccount (req,res){
 
+  const {permiss, iduser} = req.body;
+
+  if (permiss != true) {
+      lock(permiss, iduser, res);
+  }else {
+    lock(permiss, iduser, res);
+  }
+
+}
+
+
+function lock(permiss, iduser, res){
+   User.update({
+    permiss: permiss
+  },{
+    where:{
+      iduser : iduser
+    }
+  })
+  if (permiss !=true) {
+    res.json({message:"la cuenta fue bloqueada!!"})
+  }else {
+    res.json({message:"la cuenta fue desbloqueda!!"})
+  }
 }

@@ -90,7 +90,7 @@ function login(req, res) {
 
           res.json({
             pass: user.permiss,
-            message: "cuenta bloqueada por mal uso nos contactaremos por su correo " + user.nameuser
+            message: "Cuenta bloqueada por mal uso nos contactaremos por su correo " + user.nameuser
           });
           _context2.next = 16;
           break;
@@ -192,9 +192,10 @@ function createUser(req, res) {
             emailuser: _emailUser,
             roleuser: roleUser,
             passuser: bcryptPassword,
-            photouser: photoUser
+            photouser: photoUser,
+            permiss: true
           }, {
-            fields: ['nameuser', 'emailuser', 'passuser', 'roleuser', 'photouser']
+            fields: ['nameuser', 'emailuser', 'passuser', 'roleuser', 'photouser', 'permiss']
           }));
 
         case 25:

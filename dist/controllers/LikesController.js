@@ -8,6 +8,7 @@ exports.createLikes = createLikes;
 exports.createComplemeint = createComplemeint;
 exports.getComplemeint = getComplemeint;
 exports.getLikesByUser = getLikesByUser;
+exports.lockAccount = lockAccount;
 
 var _LikesModels = _interopRequireDefault(require("../models/LikesModels"));
 
@@ -397,4 +398,47 @@ function getLikesByUser(req, res) {
       }
     }
   });
+}
+
+function lockAccount(req, res) {
+  var _req$body, permiss, iduser;
+
+  return regeneratorRuntime.async(function lockAccount$(_context6) {
+    while (1) {
+      switch (_context6.prev = _context6.next) {
+        case 0:
+          _req$body = req.body, permiss = _req$body.permiss, iduser = _req$body.iduser;
+
+          if (permiss != true) {
+            lock(permiss, iduser, res);
+          } else {
+            lock(permiss, iduser, res);
+          }
+
+        case 2:
+        case "end":
+          return _context6.stop();
+      }
+    }
+  });
+}
+
+function lock(permiss, iduser, res) {
+  _UserModels["default"].update({
+    permiss: permiss
+  }, {
+    where: {
+      iduser: iduser
+    }
+  });
+
+  if (permiss != true) {
+    res.json({
+      message: "la cuenta fue bloqueada!!"
+    });
+  } else {
+    res.json({
+      message: "la cuenta fue desbloqueda!!"
+    });
+  }
 }

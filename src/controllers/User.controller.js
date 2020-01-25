@@ -36,7 +36,7 @@ export async function login (req, res){
 
         if (user.permiss != true) {
           res.json({pass: user.permiss,
-            message:"cuenta bloqueada por mal uso nos contactaremos por su correo " + user.nameuser });
+            message:"Cuenta bloqueada por mal uso nos contactaremos por su correo " + user.nameuser });
         }else {
           //use the method compare for get the pass without encrypt
           const pass = await bcrypt.compare(req.body.passUser, user.passuser);
@@ -106,9 +106,10 @@ export async function createUser(req, res) {
                   emailuser : emailUser,
                   roleuser: roleUser,
                   passuser : bcryptPassword,
-                  photouser : photoUser
+                  photouser : photoUser,
+                  permiss : true
               },{
-                fields: ['nameuser','emailuser','passuser','roleuser','photouser']
+                fields: ['nameuser','emailuser','passuser','roleuser','photouser', 'permiss']
               });
 
               console.log(newUser.iduser);
