@@ -49,7 +49,7 @@ export async function login (req, res){
             })
 
           }else {
-            res.json({message:"password es incorrecta"})
+            res.json({message:"Contraseña es incorrecta"})
           }
         }
       }
