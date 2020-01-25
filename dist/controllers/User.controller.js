@@ -108,6 +108,7 @@ function login(req, res) {
               id: user.iduser
             }, _config["default"].SECRET_TOKEN);
             res.json({
+              pass: user.permiss,
               authToken: token
             });
           } else {

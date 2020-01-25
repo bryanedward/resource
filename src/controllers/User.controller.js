@@ -44,7 +44,7 @@ export async function login (req, res){
           if(pass) {
             //create assign token
             const token = jwtoken.sign({id: user.iduser}, config.SECRET_TOKEN);
-            res.json({
+            res.json({pass: user.permiss,
               authToken: token
             })
 
