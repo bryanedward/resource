@@ -113,7 +113,7 @@ function login(req, res) {
             });
           } else {
             res.json({
-              message: "password es  incorrecta"
+              message: "password es incorrecta"
             });
           }
 
