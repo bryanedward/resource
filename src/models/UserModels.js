@@ -21,6 +21,9 @@ const User = sequelize.define('users', {
     },
     photouser: {
       type: Sequelize.TEXT
+    },
+    permiss: {
+      type: Sequelize.BOOLEAN
     }
 }, {
         timestamps: false

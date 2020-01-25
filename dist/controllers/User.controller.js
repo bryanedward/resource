@@ -61,31 +61,45 @@ function login(req, res) {
         case 0:
           //login of user and the password
           email = req.body.emailUser;
-          console.log(email);
-          _context2.next = 4;
+          _context2.next = 3;
           return regeneratorRuntime.awrap(_UserModels["default"].findOne({
             where: {
               emailuser: email
             }
           }));
 
-        case 4:
+        case 3:
           user = _context2.sent;
 
           if (user) {
-            _context2.next = 9;
+            _context2.next = 8;
             break;
           }
 
-          res.json('este correo no existe');
-          _context2.next = 13;
+          res.json({
+            message: "este correo no existe"
+          });
+          _context2.next = 16;
           break;
 
-        case 9:
-          _context2.next = 11;
+        case 8:
+          if (!(user.permiss != true)) {
+            _context2.next = 12;
+            break;
+          }
+
+          res.json({
+            pass: user.permiss,
+            message: "cuenta bloqueada por mal uso nos contactaremos por su correo " + user.nameuser
+          });
+          _context2.next = 16;
+          break;
+
+        case 12:
+          _context2.next = 14;
           return regeneratorRuntime.awrap(_bcryptjs["default"].compare(req.body.passUser, user.passuser));
 
-        case 11:
+        case 14:
           pass = _context2.sent;
 
           if (pass) {
@@ -95,12 +109,14 @@ function login(req, res) {
             }, _config["default"].SECRET_TOKEN);
             res.json({
               authToken: token
-            }); //res.header('auto-token', token).send(token);
+            });
           } else {
-            res.json('password es  incorrecta');
+            res.json({
+              message: "password es  incorrecta"
+            });
           }
 
-        case 13:
+        case 16:
         case "end":
           return _context2.stop();
       }

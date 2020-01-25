@@ -32,6 +32,9 @@ var User = _databaseLocal.sequelize.define('users', {
   },
   photouser: {
     type: _sequelize["default"].TEXT
+  },
+  permiss: {
+    type: _sequelize["default"].BOOLEAN
   }
 }, {
   timestamps: false

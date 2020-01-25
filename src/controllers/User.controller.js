@@ -23,29 +23,39 @@ export async function getImage(req, res){
 export async function login (req, res){
     //login of user and the password
     const email = req.body.emailUser;
-    console.log(email);
+
       const user = await User.findOne({
           where:{
               emailuser : email
           },
       });
-      if(!user){
-       res.json('este correo no existe');
-      }else {
-        //use the method compare for get the pass without encrypt
-        const pass = await bcrypt.compare(req.body.passUser, user.passuser);
 
-        if(pass) {
-          //create assign token
-          const token = jwtoken.sign({id: user.iduser}, config.SECRET_TOKEN);
-          res.json({
-            authToken: token
-          })
-          //res.header('auto-token', token).send(token);
+      if(!user){
+       res.json({message:"este correo no existe"});
+      }else {
+
+        if (user.permiss != true) {
+          res.json({pass: user.permiss,
+            message:"cuenta bloqueada por mal uso nos contactaremos por su correo " + user.nameuser });
         }else {
-          res.json('password es  incorrecta')
+          //use the method compare for get the pass without encrypt
+          const pass = await bcrypt.compare(req.body.passUser, user.passuser);
+
+          if(pass) {
+            //create assign token
+            const token = jwtoken.sign({id: user.iduser}, config.SECRET_TOKEN);
+            res.json({
+              authToken: token
+            })
+
+          }else {
+            res.json({message:"password es  incorrecta"})
+          }
         }
       }
+
+
+
 }
 
 
@@ -174,7 +184,7 @@ export async function getDataUser(req,res){
 
 
 export async function getPoints(req,res){
-  // TODO: obtener los puntos del usuario 
+  // TODO: obtener los puntos del usuario
   const points = await Points.findOne({
     where:{
       userIduser: req.user.id
