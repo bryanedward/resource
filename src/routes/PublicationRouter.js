@@ -14,7 +14,7 @@ import { createPublication, getPublications,
 
 router.get('/home',getPublications);
 
-router.post('/create',authToken,multipartMiddleware,createPublication);
+router.post('/create',multipartMiddleware,createPublication);
 
 router.post('/updatePublication', updatePublication);
 

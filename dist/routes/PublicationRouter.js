@@ -20,7 +20,7 @@ var multipartMiddleware = (0, _connectMultiparty["default"])({
 });
 var router = (0, _express.Router)();
 router.get('/home', _Publication.getPublications);
-router.post('/create', _VerifyTokenController.authToken, multipartMiddleware, _Publication.createPublication);
+router.post('/create', multipartMiddleware, _Publication.createPublication);
 router.post('/updatePublication', _Publication.updatePublication);
 router.get('/:levelsubject', _Publication.getOnePublication);
 router.get('/image/:photopublt', _Publication.getImage);

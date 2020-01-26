@@ -70,7 +70,7 @@ function getImage(req, res) {
 }
 
 function createPublication(req, res) {
-  var photo, urlPhotoPublications, reqUrl, userid, _req$body, namePublication, descriptPublication, levelSubject, level, imgSplit, fileName, extImg, extName, reqUrlSplit;
+  var photo, urlPhotoPublications, reqUrl, _req$body, namePublication, descriptPublication, levelSubject, iduser, userid, level, imgSplit, fileName, extImg, extName, reqUrlSplit;
 
   return regeneratorRuntime.async(function createPublication$(_context3) {
     while (1) {
@@ -85,8 +85,8 @@ function createPublication(req, res) {
             host: req.get('host'),
             pathname: req.originalUrl
           });
-          userid = req.user.id;
-          _req$body = req.body, namePublication = _req$body.namePublication, descriptPublication = _req$body.descriptPublication, levelSubject = _req$body.levelSubject;
+          _req$body = req.body, namePublication = _req$body.namePublication, descriptPublication = _req$body.descriptPublication, levelSubject = _req$body.levelSubject, iduser = _req$body.iduser;
+          userid = parseInt(iduser);
           level = parseInt(levelSubject);
 
           if (urlPhotoPublications == null) {
