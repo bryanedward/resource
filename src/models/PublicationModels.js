@@ -18,6 +18,9 @@ const Publication = sequelize.define('publications', {
     },
     userIduser: {
         type: Sequelize.INTEGER
+    },
+    photopublt:{
+      type: Sequelize.TEXT
     }
 }, {
         timestamps: false

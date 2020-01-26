@@ -1,5 +1,7 @@
 import Publication from '../models/PublicationModels';
 import User from '../models/UserModels';
+import url from 'url';
+import fs from 'fs';
 
 
 
@@ -11,24 +13,73 @@ export async function getPublications(req, res) {
 }
 
 
+export async function getImage(req, res){
+  // TODO: especificar el tipo de dato en este caso es una imagen/jpg
+  res.writeHead(200,{'content-type':'image/jpg'});
+  fs.createReadStream('src/publications/'+req.params.photopublt).pipe(res);
+
+}
+
 
 export async function createPublication(req, res) {
     // TODO: crear una publicacion con el jwt para identificarse
+    // TODO: url donde seguardo la foto
+    var photo;
+    const urlPhotoPublications = req.files.photo;
+
+    const reqUrl = url.format({
+      // TODO: ------ se obtiene la url del metodo createUser-----
+      protocol: req.protocol,
+      host: req.get('host'),
+      pathname: req.originalUrl
+    });
+
+
+
+    var userid =  req.user.id;
     const { namePublication, descriptPublication, levelSubject} = req.body;
 
-    await Publication.create({
-      namepublication : namePublication,
-      descriptpublication : descriptPublication,
-      levelsubject : levelSubject,
-      userIduser : req.user.id
-    },{
-      fields: ['namepublication', 'descriptpublication',
-       'levelsubject', 'userIduser']
-    });
-    res.json({
-        message: 'publicacion creada con exito'
-    });
+
+    if (urlPhotoPublications == null) {
+      photo = null;
+
+      createPost(namePublication, descriptPublication, levelSubject, photo, userid, res);
+    }else {
+      photo = urlPhotoPublications.path;
+
+      //const imgSplit = photo.split('\\');
+      const imgSplit = photo.split('\/');
+      const fileName = imgSplit[2];
+      const extImg = fileName.split('\.');
+      const extName = extImg[1];
+
+      const reqUrlSplit = reqUrl.split('\/');
+      photo = reqUrlSplit[0]+'//'+reqUrlSplit[1]+''
+      +reqUrlSplit[2]+'/'+reqUrlSplit[3]+'/'+reqUrlSplit[4]+'/image/'+fileName;
+      createPost(namePublication, descriptPublication, levelSubject, photo, userid, res);
+    }
 }
+
+
+
+function createPost(namePublication, descriptPublication, levelSubject, photo, userid, res){
+
+   Publication.create({
+    namepublication : namePublication,
+    descriptpublication : descriptPublication,
+    levelsubject : levelSubject,
+    photopublt : photo,
+    userIduser : userid
+  },{
+    fields: ['namepublication', 'descriptpublication',
+     'levelsubject', 'userIduser', 'photopublt']
+  });
+  res.json({
+      message: 'publicacion creada con exito'
+  });
+}
+
+
 
 
 export async function updatePublication(req, res) {

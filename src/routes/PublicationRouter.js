@@ -1,20 +1,26 @@
 import { Router } from 'express';
+import multipart from 'connect-multiparty';
+
+const multipartMiddleware = multipart({uploadDir: './src/publications'});
+
 const router = Router();
 
 import {authToken} from '../auth/VerifyTokenController';
 import { createPublication, getPublications,
     deletePublication, updatePublication, getOnePublication ,
-    getPublicationByUserid , getUser, getUserDouble, getUpdate  } from '../controllers/Publication.controller';
+    getPublicationByUserid , getUser, getUserDouble, getUpdate, getImage  } from '../controllers/Publication.controller';
 
 
 
 router.get('/home',getPublications);
 
-router.post('/create', authToken ,createPublication);
+router.post('/create',authToken,multipartMiddleware,createPublication);
 
 router.post('/updatePublication', updatePublication);
 
 router.get('/:levelsubject', getOnePublication);
+
+router.get('/image/:photopublt', getImage);
 
 
 

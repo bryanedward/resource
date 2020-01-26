@@ -35,6 +35,9 @@ var Publication = _databaseLocal.sequelize.define('publications', {
   },
   userIduser: {
     type: _sequelize["default"].INTEGER
+  },
+  photopublt: {
+    type: _sequelize["default"].TEXT
   }
 }, {
   timestamps: false
