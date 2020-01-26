@@ -87,8 +87,8 @@ function createPublication(req, res) {
             pathname: req.originalUrl
           });
           _req$body = req.body, namePublication = _req$body.namePublication, descriptPublication = _req$body.descriptPublication, levelSubject = _req$body.levelSubject, iduser = _req$body.iduser;
-          userid = Number(iduser);
-          level = Number(levelSubject);
+          userid = iduser;
+          level = levelSubject;
           console.log(userid);
           console.log(level);
 
