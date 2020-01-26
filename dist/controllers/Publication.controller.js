@@ -89,8 +89,8 @@ function createPublication(req, res) {
           _req$body = req.body, namePublication = _req$body.namePublication, descriptPublication = _req$body.descriptPublication, levelSubject = _req$body.levelSubject, iduser = _req$body.iduser;
           userid = iduser;
           level = levelSubject;
-          console.log(userid);
-          console.log(level);
+          console.log(iduser);
+          console.log(levelSubject);
 
           if (urlPhotoPublications == null) {
             photo = null;
