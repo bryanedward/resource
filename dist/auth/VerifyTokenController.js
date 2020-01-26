@@ -34,7 +34,9 @@ function authToken(req, res, next) {
             req.user = verified;
             next();
           } catch (error) {
-            res.json('el token es invalido');
+            res.json({
+              message: "el token es invalido"
+            });
           }
 
         case 4:
