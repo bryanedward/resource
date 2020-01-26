@@ -79,6 +79,7 @@ function createPublication(req, res) {
           // TODO: crear una publicacion con el jwt para identificarse
           // TODO: url donde seguardo la foto
           urlPhotoPublications = req.files.photo;
+          console.log(urlPhotoPublications);
           reqUrl = _url["default"].format({
             // TODO: ------ se obtiene la url del metodo createUser-----
             protocol: req.protocol,
@@ -104,7 +105,7 @@ function createPublication(req, res) {
             createPost(namePublication, descriptPublication, level, photo, userid, res);
           }
 
-        case 6:
+        case 7:
         case "end":
           return _context3.stop();
       }

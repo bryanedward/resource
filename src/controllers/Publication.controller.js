@@ -27,6 +27,8 @@ export async function createPublication(req, res) {
     var photo;
     const urlPhotoPublications = req.files.photo;
 
+    console.log(urlPhotoPublications);
+
     const reqUrl = url.format({
       // TODO: ------ se obtiene la url del metodo createUser-----
       protocol: req.protocol,
