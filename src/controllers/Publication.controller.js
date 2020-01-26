@@ -40,8 +40,8 @@ export async function createPublication(req, res) {
 
 
     const { namePublication, descriptPublication, levelSubject, iduser} = req.body;
-    var userid = parseInt(iduser);
-    var level = parseInt(levelSubject);
+    var userid = Number(iduser);
+    var level = Number(levelSubject);
 
     console.log(userid);
     console.log(level);
