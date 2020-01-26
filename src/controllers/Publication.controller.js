@@ -43,6 +43,9 @@ export async function createPublication(req, res) {
     var userid = parseInt(iduser);
     var level = parseInt(levelSubject);
 
+    console.log(userid);
+    console.log(level);
+
     if (urlPhotoPublications == null) {
       photo = null;
 
