@@ -40,11 +40,10 @@ export async function createPublication(req, res) {
 
 
     const { namePublication, descriptPublication, levelSubject, iduser} = req.body;
-    var userid = iduser;
-    var level = levelSubject;
+    var userid = parseInt(iduser);
+    var level = parseInt(levelSubject);
 
-    console.log(iduser);
-    console.log(levelSubject);
+    
 
     if (urlPhotoPublications == null) {
       photo = null;
