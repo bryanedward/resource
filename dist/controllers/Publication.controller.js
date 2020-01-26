@@ -70,7 +70,7 @@ function getImage(req, res) {
 }
 
 function createPublication(req, res) {
-  var photo, urlPhotoPublications, reqUrl, userid, _req$body, namePublication, descriptPublication, levelSubject, imgSplit, fileName, extImg, extName, reqUrlSplit;
+  var photo, urlPhotoPublications, reqUrl, userid, _req$body, namePublication, descriptPublication, levelSubject, level, imgSplit, fileName, extImg, extName, reqUrlSplit;
 
   return regeneratorRuntime.async(function createPublication$(_context3) {
     while (1) {
@@ -87,10 +87,11 @@ function createPublication(req, res) {
           });
           userid = req.user.id;
           _req$body = req.body, namePublication = _req$body.namePublication, descriptPublication = _req$body.descriptPublication, levelSubject = _req$body.levelSubject;
+          level = parseInt(levelSubject);
 
           if (urlPhotoPublications == null) {
             photo = null;
-            createPost(namePublication, descriptPublication, levelSubject, photo, userid, res);
+            createPost(namePublication, descriptPublication, level, photo, userid, res);
           } else {
             photo = urlPhotoPublications.path; //const imgSplit = photo.split('\\');
 
@@ -100,10 +101,10 @@ function createPublication(req, res) {
             extName = extImg[1];
             reqUrlSplit = reqUrl.split('\/');
             photo = reqUrlSplit[0] + '//' + reqUrlSplit[1] + '' + reqUrlSplit[2] + '/' + reqUrlSplit[3] + '/' + reqUrlSplit[4] + '/image/' + fileName;
-            createPost(namePublication, descriptPublication, levelSubject, photo, userid, res);
+            createPost(namePublication, descriptPublication, level, photo, userid, res);
           }
 
-        case 5:
+        case 6:
         case "end":
           return _context3.stop();
       }
@@ -111,11 +112,11 @@ function createPublication(req, res) {
   });
 }
 
-function createPost(namePublication, descriptPublication, levelSubject, photo, userid, res) {
+function createPost(namePublication, descriptPublication, level, photo, userid, res) {
   _PublicationModels["default"].create({
     namepublication: namePublication,
     descriptpublication: descriptPublication,
-    levelsubject: levelSubject,
+    levelsubject: level,
     photopublt: photo,
     userIduser: userid
   }, {

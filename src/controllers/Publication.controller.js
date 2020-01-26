@@ -39,11 +39,12 @@ export async function createPublication(req, res) {
     var userid =  req.user.id;
     const { namePublication, descriptPublication, levelSubject} = req.body;
 
+    var level = parseInt(levelSubject);
 
     if (urlPhotoPublications == null) {
       photo = null;
 
-      createPost(namePublication, descriptPublication, levelSubject, photo, userid, res);
+      createPost(namePublication, descriptPublication, level, photo, userid, res);
     }else {
       photo = urlPhotoPublications.path;
 
@@ -56,18 +57,18 @@ export async function createPublication(req, res) {
       const reqUrlSplit = reqUrl.split('\/');
       photo = reqUrlSplit[0]+'//'+reqUrlSplit[1]+''
       +reqUrlSplit[2]+'/'+reqUrlSplit[3]+'/'+reqUrlSplit[4]+'/image/'+fileName;
-      createPost(namePublication, descriptPublication, levelSubject, photo, userid, res);
+      createPost(namePublication, descriptPublication, level, photo, userid, res);
     }
 }
 
 
 
-function createPost(namePublication, descriptPublication, levelSubject, photo, userid, res){
+function createPost(namePublication, descriptPublication, level, photo, userid, res){
 
    Publication.create({
     namepublication : namePublication,
     descriptpublication : descriptPublication,
-    levelsubject : levelSubject,
+    levelsubject : level,
     photopublt : photo,
     userIduser : userid
   },{
