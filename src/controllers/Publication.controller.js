@@ -39,23 +39,18 @@ export async function createPublication(req, res) {
 
 
 
-    const { namePublication, descriptPublication, levelSubject, iduser} = req.body;
+    const { namePublication, descriptPublication, levelSubject, day, iduser} = req.body;
     var userid = parseInt(iduser);
     var level = parseInt(levelSubject);
 
-    let time = new Date();
-    let date = ("0" + time.getDate()).slice(-2);
-    let month = ("0" + (time.getMonth() + 1)).slice(-2);
-    let year = time.getFullYear();
 
-    let timeactual = month + "-" + date + "-" + year;
 
 
 
     if (urlPhotoPublications == null) {
       photo = null;
 
-      createPost(namePublication, descriptPublication, level, photo, timeactual, userid, res);
+      createPost(namePublication, descriptPublication, level, photo, day, userid, res);
     }else {
       photo = urlPhotoPublications.path;
 
@@ -68,20 +63,20 @@ export async function createPublication(req, res) {
       const reqUrlSplit = reqUrl.split('\/');
       photo = reqUrlSplit[0]+'//'+reqUrlSplit[1]+''
       +reqUrlSplit[2]+'/'+reqUrlSplit[3]+'/'+reqUrlSplit[4]+'/image/'+fileName;
-      createPost(namePublication, descriptPublication, level, photo, timeactual, userid, res);
+      createPost(namePublication, descriptPublication, level, photo, day, userid, res);
     }
 }
 
 
 
-function createPost(namePublication, descriptPublication, level, photo, timeactual, userid, res){
+function createPost(namePublication, descriptPublication, level, photo, day, userid, res){
 
    Publication.create({
     namepublication : namePublication,
     descriptpublication : descriptPublication,
     levelsubject : level,
     photopublt : photo,
-    date : timeactual,
+    date : day,
     userIduser : userid
   },{
     fields: ['namepublication', 'descriptpublication',
