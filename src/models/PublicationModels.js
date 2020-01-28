@@ -21,6 +21,9 @@ const Publication = sequelize.define('publications', {
     },
     photopublt:{
       type: Sequelize.TEXT
+    },
+    date:{
+        type: Sequelize.TEXT
     }
 }, {
         timestamps: false

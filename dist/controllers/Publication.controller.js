@@ -70,7 +70,7 @@ function getImage(req, res) {
 }
 
 function createPublication(req, res) {
-  var photo, urlPhotoPublications, reqUrl, _req$body, namePublication, descriptPublication, levelSubject, iduser, userid, level, imgSplit, fileName, extImg, extName, reqUrlSplit;
+  var photo, urlPhotoPublications, reqUrl, _req$body, namePublication, descriptPublication, levelSubject, iduser, userid, level, time, date, month, year, timeactual, imgSplit, fileName, extImg, extName, reqUrlSplit;
 
   return regeneratorRuntime.async(function createPublication$(_context3) {
     while (1) {
@@ -79,7 +79,6 @@ function createPublication(req, res) {
           // TODO: crear una publicacion con el jwt para identificarse
           // TODO: url donde seguardo la foto
           urlPhotoPublications = req.files.photo;
-          console.log(urlPhotoPublications);
           reqUrl = _url["default"].format({
             // TODO: ------ se obtiene la url del metodo createUser-----
             protocol: req.protocol,
@@ -89,14 +88,15 @@ function createPublication(req, res) {
           _req$body = req.body, namePublication = _req$body.namePublication, descriptPublication = _req$body.descriptPublication, levelSubject = _req$body.levelSubject, iduser = _req$body.iduser;
           userid = parseInt(iduser);
           level = parseInt(levelSubject);
-          console.log(levelSubject);
-          console.log(iduser);
-          console.log(userid);
-          console.log(level);
+          time = new Date();
+          date = ("0" + time.getDate()).slice(-2);
+          month = ("0" + (time.getMonth() + 1)).slice(-2);
+          year = time.getFullYear();
+          timeactual = month + "-" + date + "-" + year;
 
           if (urlPhotoPublications == null) {
             photo = null;
-            createPost(namePublication, descriptPublication, level, photo, userid, res);
+            createPost(namePublication, descriptPublication, level, photo, timeactual, userid, res);
           } else {
             photo = urlPhotoPublications.path; //const imgSplit = photo.split('\\');
 
@@ -106,7 +106,7 @@ function createPublication(req, res) {
             extName = extImg[1];
             reqUrlSplit = reqUrl.split('\/');
             photo = reqUrlSplit[0] + '//' + reqUrlSplit[1] + '' + reqUrlSplit[2] + '/' + reqUrlSplit[3] + '/' + reqUrlSplit[4] + '/image/' + fileName;
-            createPost(namePublication, descriptPublication, level, photo, userid, res);
+            createPost(namePublication, descriptPublication, level, photo, timeactual, userid, res);
           }
 
         case 11:
@@ -117,15 +117,16 @@ function createPublication(req, res) {
   });
 }
 
-function createPost(namePublication, descriptPublication, level, photo, userid, res) {
+function createPost(namePublication, descriptPublication, level, photo, timeactual, userid, res) {
   _PublicationModels["default"].create({
     namepublication: namePublication,
     descriptpublication: descriptPublication,
     levelsubject: level,
     photopublt: photo,
+    date: timeactual,
     userIduser: userid
   }, {
-    fields: ['namepublication', 'descriptpublication', 'levelsubject', 'userIduser', 'photopublt']
+    fields: ['namepublication', 'descriptpublication', 'levelsubject', 'userIduser', 'photopublt', 'date']
   });
 
   res.json({

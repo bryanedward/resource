@@ -38,6 +38,9 @@ var Publication = _databaseLocal.sequelize.define('publications', {
   },
   photopublt: {
     type: _sequelize["default"].TEXT
+  },
+  date: {
+    type: _sequelize["default"].TEXT
   }
 }, {
   timestamps: false

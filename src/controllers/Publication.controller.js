@@ -27,7 +27,7 @@ export async function createPublication(req, res) {
     var photo;
     const urlPhotoPublications = req.files.photo;
 
-    console.log(urlPhotoPublications);
+
 
     const reqUrl = url.format({
       // TODO: ------ se obtiene la url del metodo createUser-----
@@ -43,15 +43,19 @@ export async function createPublication(req, res) {
     var userid = parseInt(iduser);
     var level = parseInt(levelSubject);
 
-    console.log(levelSubject);
-    console.log(iduser);
-    console.log(userid);
-    console.log(level);
+    let time = new Date();
+    let date = ("0" + time.getDate()).slice(-2);
+    let month = ("0" + (time.getMonth() + 1)).slice(-2);
+    let year = time.getFullYear();
+
+    let timeactual = month + "-" + date + "-" + year;
+
+
 
     if (urlPhotoPublications == null) {
       photo = null;
 
-      createPost(namePublication, descriptPublication, level, photo, userid, res);
+      createPost(namePublication, descriptPublication, level, photo, timeactual, userid, res);
     }else {
       photo = urlPhotoPublications.path;
 
@@ -64,23 +68,24 @@ export async function createPublication(req, res) {
       const reqUrlSplit = reqUrl.split('\/');
       photo = reqUrlSplit[0]+'//'+reqUrlSplit[1]+''
       +reqUrlSplit[2]+'/'+reqUrlSplit[3]+'/'+reqUrlSplit[4]+'/image/'+fileName;
-      createPost(namePublication, descriptPublication, level, photo, userid, res);
+      createPost(namePublication, descriptPublication, level, photo, timeactual, userid, res);
     }
 }
 
 
 
-function createPost(namePublication, descriptPublication, level, photo, userid, res){
+function createPost(namePublication, descriptPublication, level, photo, timeactual, userid, res){
 
    Publication.create({
     namepublication : namePublication,
     descriptpublication : descriptPublication,
     levelsubject : level,
     photopublt : photo,
+    date : timeactual,
     userIduser : userid
   },{
     fields: ['namepublication', 'descriptpublication',
-     'levelsubject', 'userIduser', 'photopublt']
+     'levelsubject', 'userIduser', 'photopublt', 'date']
   });
   res.json({
       message: 'publicacion creada con exito'
