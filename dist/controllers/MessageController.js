@@ -33,7 +33,7 @@ function getMessagePublications(req, res) {
           _context.next = 4;
           return regeneratorRuntime.awrap(_MessagesModels["default"].findAll({
             include: [_UserModels["default"]],
-            order: [['idmessage', 'DESC']],
+            order: [['idmessage', 'ASC']],
             where: {
               'publicationid': idpublication
             }

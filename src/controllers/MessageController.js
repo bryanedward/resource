@@ -10,7 +10,7 @@ export async function getMessagePublications(req,res){
   Message.belongsTo(User);
   const messages = await Message.findAll({
     include:[User],
-    order:[['idmessage','DESC']],
+    order:[['idmessage','ASC']],
     where:{ 'publicationid': idpublication}
   })
   res.json({messages});
